@@ -1,0 +1,336 @@
+<title>Neev Course Blueprint</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Figtree:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap">
+
+<style>
+  :root{
+    --ground:#F1F4EF;--surface:#FFFFFF;--surface-2:#F7F9F5;
+    --ink:#16221E;--ink-soft:#48554D;--ink-faint:#7C877F;
+    --line:#E3E8DF;--line-strong:#D3DACF;
+    --accent:#0E8C6B;--accent-deep:#0A6E54;--accent-wash:#E5F2EC;
+    --gold:#C77E1A;--gold-wash:#FAEED6;
+    --warn:#C0492F;--warn-wash:#FBE8E3;
+    --shadow:0 1px 2px rgba(20,34,30,.05),0 14px 34px -20px rgba(20,34,30,.4);
+    --shadow-soft:0 1px 2px rgba(20,34,30,.04),0 6px 16px -14px rgba(20,34,30,.3);
+  }
+  :root:not([data-theme="light"]){@media(prefers-color-scheme:dark){
+    --ground:#0D1310;--surface:#161F1B;--surface-2:#1C2621;
+    --ink:#EAF0EC;--ink-soft:#AEB9B2;--ink-faint:#7E8A83;
+    --line:#28332D;--line-strong:#374339;
+    --accent:#37C098;--accent-deep:#2AA680;--accent-wash:#16302A;
+    --gold:#EDB459;--gold-wash:#2C2413;
+    --warn:#E9806F;--warn-wash:#331D19;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 40px -22px rgba(0,0,0,.75);
+    --shadow-soft:0 1px 2px rgba(0,0,0,.3),0 8px 18px -16px rgba(0,0,0,.55);
+  }}
+  :root[data-theme="dark"]{
+    --ground:#0D1310;--surface:#161F1B;--surface-2:#1C2621;
+    --ink:#EAF0EC;--ink-soft:#AEB9B2;--ink-faint:#7E8A83;
+    --line:#28332D;--line-strong:#374339;
+    --accent:#37C098;--accent-deep:#2AA680;--accent-wash:#16302A;
+    --gold:#EDB459;--gold-wash:#2C2413;
+    --warn:#E9806F;--warn-wash:#331D19;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 40px -22px rgba(0,0,0,.75);
+    --shadow-soft:0 1px 2px rgba(0,0,0,.3),0 8px 18px -16px rgba(0,0,0,.55);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink);
+    font-family:"Figtree",system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:820px;margin:0 auto;padding:44px 20px 80px}
+  a{color:inherit}
+
+  /* header */
+  .brandrow{display:flex;align-items:center;gap:11px}
+  .logo{width:32px;height:32px;border-radius:9px;background:var(--accent);display:grid;place-items:center;color:#fff}
+  .logo svg{width:18px;height:18px}
+  .brand{font-family:"Fraunces",serif;font-weight:600;font-size:1.25rem}
+  .brand span{color:var(--accent)}
+  .vchip{margin-left:auto;font-family:"Space Mono",monospace;font-size:.62rem;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-faint);border:1px solid var(--line);border-radius:99px;padding:5px 11px}
+  h1{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(1.8rem,5vw,2.7rem);
+    letter-spacing:-.025em;line-height:1.08;margin:26px 0 12px;text-wrap:balance;max-width:18ch}
+  .dek{font-size:1.08rem;color:var(--ink-soft);max-width:60ch;margin:0}
+  .dek b{color:var(--ink);font-weight:600}
+
+  .sectag{font-family:"Space Mono",monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent);font-weight:700;display:flex;align-items:center;gap:10px;margin:52px 0 18px}
+  .sectag::after{content:"";flex:1;height:1px;background:var(--line)}
+  h2{font-family:"Fraunces",serif;font-weight:600;font-size:1.55rem;letter-spacing:-.02em;margin:0 0 6px;text-wrap:balance}
+
+  /* lesson template */
+  .tmpl{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:8px;
+    box-shadow:var(--shadow-soft);display:grid;gap:6px}
+  .beat{display:grid;grid-template-columns:132px 1fr;gap:14px;padding:14px 16px;border-radius:13px;align-items:start}
+  .beat:nth-child(odd){background:var(--surface-2)}
+  .beat .bl{font-family:"Space Mono",monospace;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;
+    font-weight:700;padding-top:2px}
+  .beat .bd{font-size:.92rem;color:var(--ink-soft)}
+  .b-sit .bl{color:var(--gold)} .b-trap .bl{color:var(--warn)} .b-q .bl{color:var(--accent)}
+  .b-fw .bl{color:var(--ink)} .b-call .bl{color:var(--accent-deep)} .b-do .bl{color:var(--accent)}
+  .b-do{background:var(--accent-wash)!important}
+  @media(max-width:560px){.beat{grid-template-columns:1fr;gap:4px}.beat .bl{padding-top:0}}
+
+  /* course map */
+  .modcard{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px 20px 8px;
+    margin-bottom:14px;box-shadow:var(--shadow-soft)}
+  .modtop{display:flex;gap:14px;align-items:flex-start;margin-bottom:12px}
+  .modnum{width:42px;height:42px;flex:none;border-radius:12px;background:var(--accent-wash);color:var(--accent-deep);
+    display:grid;place-items:center;font-family:"Space Mono",monospace;font-weight:700;font-size:1.05rem}
+  .modcap.cap7 .modnum{background:var(--gold-wash);color:var(--gold)}
+  .modttl{font-family:"Fraunces",serif;font-weight:600;font-size:1.22rem;letter-spacing:-.01em;line-height:1.15}
+  .modthm{font-size:.86rem;color:var(--ink-faint);margin-top:2px}
+  .llist{list-style:none;margin:0;padding:0}
+  .llist li{display:flex;gap:11px;padding:9px 2px;border-top:1px dashed var(--line);font-size:.9rem}
+  .llist li .ln{font-family:"Space Mono",monospace;color:var(--accent);font-weight:700;flex:none;font-size:.8rem;padding-top:1px}
+  .llist li .lt{color:var(--ink)}
+  .llist li .lt b{font-weight:600}
+  .llist li .lt i{color:var(--ink-soft);font-style:normal;display:block;font-size:.82rem;margin-top:1px}
+
+  /* module 1 full lessons */
+  details.les{background:var(--surface);border:1px solid var(--line);border-radius:18px;margin-bottom:12px;
+    box-shadow:var(--shadow-soft);overflow:hidden}
+  details.les[open]{border-color:var(--accent)}
+  summary{list-style:none;cursor:pointer;padding:18px 20px;display:flex;gap:14px;align-items:center}
+  summary::-webkit-details-marker{display:none}
+  .lesnum{width:34px;height:34px;flex:none;border-radius:10px;background:var(--accent);color:#fff;
+    display:grid;place-items:center;font-family:"Space Mono",monospace;font-weight:700}
+  .lesh{flex:1}
+  .lesh .lt{font-family:"Fraunces",serif;font-weight:600;font-size:1.08rem;line-height:1.2}
+  .lesh .ls{font-size:.8rem;color:var(--ink-faint);margin-top:1px}
+  .caret{color:var(--ink-faint);transition:transform .2s}
+  details[open] .caret{transform:rotate(90deg)}
+  .lesbody{padding:0 20px 20px}
+  .terms{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 2px}
+  .term{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:8px 11px;font-size:.8rem}
+  .term b{color:var(--accent-deep)}
+  .taxn{margin-top:12px;font-size:.8rem;color:var(--ink-soft);background:var(--gold-wash);border-radius:11px;padding:11px 13px}
+  .taxn .v{font-family:"Space Mono",monospace;font-size:.72rem;color:var(--gold)}
+  .taxn b{color:var(--gold)}
+
+  .foot{margin-top:50px;padding-top:20px;border-top:1px solid var(--line);color:var(--ink-faint);font-size:.85rem}
+  .foot b{color:var(--ink)}
+  @media(prefers-reduced-motion:reduce){.caret{transition:none}}
+</style>
+
+<div class="wrap">
+  <div class="brandrow">
+    <span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c0-6 0-9-4-12"/><path d="M12 13c0-4 3-7 8-7 0 5-3 8-8 8Z"/><path d="M12 21c0-4 2-6 6-6"/></svg></span>
+    <span class="brand">Neev<span>.</span></span>
+    <span class="vchip">Content prototype v1 · text-first</span>
+  </div>
+
+  <h1>Learn by the situation you're actually in.</h1>
+  <p class="dek">Every lesson opens with a scene from real Indian money life — <b>"₹10,000 aa gaye, ab kya?"</b> — shows the reflex most people follow, then hands you the framework to reason it out. It never tells you <b>where</b> to put the money. It trains you to recognise your own situation and make the call yourself. That's the whole app in one line: <b>situation → the right way to decide.</b></p>
+
+  <!-- LESSON TEMPLATE -->
+  <div class="sectag">How every lesson is shaped</div>
+  <h2 style="margin-bottom:16px">The six-beat story</h2>
+  <div class="tmpl">
+    <div class="beat b-sit"><span class="bl">The situation</span><span class="bd">A specific scene you could genuinely be in this week — a bonus lands, a phone cracks, a friend forwards a "tip."</span></div>
+    <div class="beat b-trap"><span class="bl">The reflex</span><span class="bd">The tempting move most people make on autopilot — spend it, panic-sell, chase the tip. Named honestly, without shaming.</span></div>
+    <div class="beat b-q"><span class="bl">The real question</span><span class="bd">The one question the scene is actually forcing — almost never "which fund," almost always "when do I need this / can I bear this."</span></div>
+    <div class="beat b-fw"><span class="bl">The framework</span><span class="bd">The concept that answers it, taught plainly with one Indian example. Max two new terms, each defined in a sentence.</span></div>
+    <div class="beat b-call"><span class="bl">Your call</span><span class="bd">The redirect: the right answer depends on <i>your</i> horizon, liquidity need and risk capacity — so here's how to decide, never a named instrument.</span></div>
+    <div class="beat b-do"><span class="bl">Your move today</span><span class="bd">One action with virtual money on real market data, plus a reflection question. This is what earns the streak.</span></div>
+  </div>
+
+  <!-- COURSE MAP -->
+  <div class="sectag">The full arc · 7 modules</div>
+  <h2>A learner's journey, not a syllabus</h2>
+  <p class="dek" style="margin:6px 0 22px">The modules follow the order money problems actually arrive: <b>get money → understand options → gauge your risk → make a plan → dodge the costly mistakes → handle tax &amp; paperwork → run it yourself.</b></p>
+
+  <!-- M1 -->
+  <div class="modcard modcap">
+    <div class="modtop"><span class="modnum">1</span><div><div class="modttl">Paisa aaya — ab kya?</div><div class="modthm">You suddenly have money. Should it even be invested — and what forces act on it?</div></div></div>
+    <ul class="llist">
+      <li><span class="ln">1</span><span class="lt"><b>₹10,000 aaye — kharch, bachao, ya badhao?</b><i>Bonus hits your account. The spend / save / invest fork.</i></span></li>
+      <li><span class="ln">2</span><span class="lt"><b>Jab zindagi curveball fenke</b><i>Phone cracks on a Saturday night. Why an emergency fund comes before investing.</i></span></li>
+      <li><span class="ln">3</span><span class="lt"><b>Drawer mein pada paisa chhota ho raha hai</b><i>Dadi's ₹50,000 sat "safe" for 5 years. Inflation, the silent shrink.</i></span></li>
+      <li><span class="ln">4</span><span class="lt"><b>₹200 ko ₹400 kaun banata hai — time</b><i>Two friends, one started at 22. Compounding is back-loaded.</i></span></li>
+      <li><span class="ln">5</span><span class="lt"><b>Shaadi 8 mahine mein, retirement 25 saal door</b><i>Same ₹1 lakh, two goals. Time horizon changes everything.</i></span></li>
+      <li><span class="ln">6</span><span class="lt"><b>"Yeh double kar dega" — ab kya?</b><i>A WhatsApp tip promises high returns, no risk. The risk-return smell test.</i></span></li>
+    </ul>
+  </div>
+
+  <!-- M2 -->
+  <div class="modcard modcap">
+    <div class="modtop"><span class="modnum">2</span><div><div class="modttl">Kahaan rakhein? Options samjho</div><div class="modthm">You've decided to invest. What <i>types</i> of buckets even exist — taught as ideas, no products named.</div></div></div>
+    <ul class="llist">
+      <li><span class="ln">1</span><span class="lt"><b>Maalik banna vs paisa udhaar dena</b><i>The two core ideas: equity (ownership) vs debt (lending).</i></span></li>
+      <li><span class="ln">2</span><span class="lt"><b>Akela stock vs sab ka basket</b><i>Holding one name vs a whole basket — the fund/index idea.</i></span></li>
+      <li><span class="ln">3</span><span class="lt"><b>Gold: sirf shaadi ke liye?</b><i>Gold as an asset that often moves differently from stocks.</i></span></li>
+      <li><span class="ln">4</span><span class="lt"><b>FD-jaisa vs market-jaisa</b><i>Fixed-return vs market-linked behaviour — the trade you're choosing.</i></span></li>
+      <li><span class="ln">5</span><span class="lt"><b>Khud chunna vs kisi ko chunne dena</b><i>Direct vs pooled/managed vehicles, as a concept.</i></span></li>
+      <li><span class="ln">6</span><span class="lt"><b>Kaunsa dabba kis goal ke liye</b><i>Matching an instrument-type to a goal by its horizon — framework, no picks.</i></span></li>
+    </ul>
+  </div>
+
+  <!-- M3 -->
+  <div class="modcard modcap">
+    <div class="modtop"><span class="modnum">3</span><div><div class="modttl">Kitna risk theek hai — tumhaare liye?</div><div class="modthm">Bumpiness isn't the enemy. Learn to measure how much of it <i>your</i> situation can carry.</div></div></div>
+    <ul class="llist">
+      <li><span class="ln">1</span><span class="lt"><b>Graph laal ho gaya — bechna hai?</b><i>Volatility &amp; drawdowns; why a red screen isn't a loss until you sell.</i></span></li>
+      <li><span class="ln">2</span><span class="lt"><b>Kitna gir sakta hai vs kitna aap seh sakte ho</b><i>Risk capacity (financial) vs risk tolerance (emotional).</i></span></li>
+      <li><span class="ln">3</span><span class="lt"><b>Saare ande ek tokri mein</b><i>Diversification — the closest thing to a free lunch.</i></span></li>
+      <li><span class="ln">4</span><span class="lt"><b>Salary bhi wahin, savings bhi wahin</b><i>Concentration risk, including betting on your own employer.</i></span></li>
+      <li><span class="ln">5</span><span class="lt"><b>10 saal ka paisa, 10 din ki tension</b><i>Matching how bumpy you go to how long you have.</i></span></li>
+      <li><span class="ln">6</span><span class="lt"><b>Neend test</b><i>A personal gut-check: what swing would cost you sleep?</i></span></li>
+    </ul>
+  </div>
+
+  <!-- M4 -->
+  <div class="modcard modcap">
+    <div class="modtop"><span class="modnum">4</span><div><div class="modttl">Ab plan banao</div><div class="modthm">Turn vague goals into a structure you can actually follow.</div></div></div>
+    <ul class="llist">
+      <li><span class="ln">1</span><span class="lt"><b>Sapne ko number aur date do</b><i>Goal-based investing: amount + deadline makes it real.</i></span></li>
+      <li><span class="ln">2</span><span class="lt"><b>Ek saath daalun ya thoda-thoda?</b><i>Lumpsum vs SIP, and why it depends on the money's source.</i></span></li>
+      <li><span class="ln">3</span><span class="lt"><b>Kitna equity, kitna safe?</b><i>Asset allocation by horizon — a framework, not a fixed ratio.</i></span></li>
+      <li><span class="ln">4</span><span class="lt"><b>Har saal thoda badhao</b><i>Step-up: growing contributions as income grows.</i></span></li>
+      <li><span class="ln">5</span><span class="lt"><b>Portfolio bigad gaya — theek kaise?</b><i>Rebalancing back to your intended mix.</i></span></li>
+      <li><span class="ln">6</span><span class="lt"><b>Auto-pilot vs dhyaan</b><i>Automation and a sane review cadence.</i></span></li>
+    </ul>
+  </div>
+
+  <!-- M5 -->
+  <div class="modcard modcap">
+    <div class="modtop"><span class="modnum">5</span><div><div class="modttl">Galtiyan jo mehngi padti hain</div><div class="modthm">The behaviour traps — taught as the moment you're about to fall in, so you catch yourself.</div></div></div>
+    <ul class="llist">
+      <li><span class="ln">1</span><span class="lt"><b>Pichhle saal ka topper — ab usmein?</b><i>Return-chasing &amp; recency bias.</i></span></li>
+      <li><span class="ln">2</span><span class="lt"><b>Market gir raha hai, ruk jaun?</b><i>Why timing the market beats almost no one.</i></span></li>
+      <li><span class="ln">3</span><span class="lt"><b>Sab kama rahe hain, main peeche?</b><i>FOMO and herd behaviour.</i></span></li>
+      <li><span class="ln">4</span><span class="lt"><b>Din mein 10 baar app kholna</b><i>Over-monitoring and the anxiety tax.</i></span></li>
+      <li><span class="ln">5</span><span class="lt"><b>"Guaranteed double in 6 months"</b><i>Ponzi &amp; scam red flags you can name instantly.</i></span></li>
+      <li><span class="ln">6</span><span class="lt"><b>Panic bech diya — phir kya?</b><i>Locking losses, and the recovery mindset.</i></span></li>
+    </ul>
+  </div>
+
+  <!-- M6 -->
+  <div class="modcard modcap">
+    <div class="modtop"><span class="modnum">6</span><div><div class="modttl">Tax, Fees aur Paperwork</div><div class="modthm">The quiet leaks — keeping more of what you make. India-specific, always with a verify flag.</div></div></div>
+    <ul class="llist">
+      <li><span class="ln">1</span><span class="lt"><b>Bech ke profit hua — tax kitna?</b><i>Capital gains: long-term vs short-term, equity vs debt.</i></span></li>
+      <li><span class="ln">2</span><span class="lt"><b>Chhoti fee, badi chot</b><i>Expense ratio, exit load, brokerage — costs compound too.</i></span></li>
+      <li><span class="ln">3</span><span class="lt"><b>KYC, demat, folio — yeh sab kya?</b><i>The account plumbing, demystified.</i></span></li>
+      <li><span class="ln">4</span><span class="lt"><b>Nominee nahi bhara? bada risk</b><i>Nomination &amp; succession basics.</i></span></li>
+      <li><span class="ln">5</span><span class="lt"><b>Tax bachane ke naam pe galat choice</b><i>How tax-saving should inform, not distort, a decision.</i></span></li>
+      <li><span class="ln">6</span><span class="lt"><b>Statement kaise padhein</b><i>Reading a portfolio / CAS statement without fear.</i></span></li>
+    </ul>
+  </div>
+
+  <!-- M7 -->
+  <div class="modcard modcap cap7">
+    <div class="modtop"><span class="modnum">7</span><div><div class="modttl">Sab jodo: apna portfolio chalao</div><div class="modthm">Capstone — run a full virtual plan end to end, and time-compress years into minutes.</div></div></div>
+    <ul class="llist">
+      <li><span class="ln">1</span><span class="lt"><b>Apna pehla plan likho</b><i>Assemble goals into buckets with horizons.</i></span></li>
+      <li><span class="ln">2</span><span class="lt"><b>Peeche chala ke dekho</b><i>Historical backtest — feel a decade in 30 seconds.</i></span></li>
+      <li><span class="ln">3</span><span class="lt"><b>Bura daur simulate karo</b><i>Stress-test your plan through a crash.</i></span></li>
+      <li><span class="ln">4</span><span class="lt"><b>Har 6 mahine ka review</b><i>A review rhythm you'll actually keep.</i></span></li>
+      <li><span class="ln">5</span><span class="lt"><b>Squad se compare</b><i>Friendly accountability with your first cohort.</i></span></li>
+      <li><span class="ln">6</span><span class="lt"><b>Graduation: ab decisions tumhare</b><i>Every framework recapped — you now reason unaided.</i></span></li>
+    </ul>
+  </div>
+
+  <!-- MODULE 1 IN FULL -->
+  <div class="sectag">Module 1, written in full</div>
+  <h2>Paisa aaya — ab kya?</h2>
+  <p class="dek" style="margin:6px 0 20px">Tap any lesson to read the six beats. This is exactly the reading a user sees under the (later) video.</p>
+
+  <details class="les" open>
+    <summary><span class="lesnum">1</span><span class="lesh"><span class="lt">₹10,000 aaye — kharch, bachao, ya badhao?</span><span class="ls">Lesson 1 · 3 min · the spend / save / invest fork</span></span><span class="caret">▸</span></summary>
+    <div class="lesbody">
+      <div class="tmpl" style="box-shadow:none;border:none;padding:0;background:transparent">
+        <div class="beat b-sit"><span class="bl">Situation</span><span class="bd">Account mein achanak <b>₹10,000</b> aaye — bonus, gift, ya freelance ka payment. Dil khush. Uparse ek sale ka notification aur ek dost ka message: "yaar isme daal de, badhiya chal raha hai."</span></div>
+        <div class="beat b-trap"><span class="bl">The reflex</span><span class="bd">Do common autopilots: (1) turant kharch kar do jab tak hai, ya (2) "invest karna hai" soch ke bina soche kahin bhi daal do — kisi ke kehne pe.</span></div>
+        <div class="beat b-q"><span class="bl">Real question</span><span class="bd">Sabse pehla sawaal <i>"kahan invest karun"</i> nahi hai. Woh hai: <b>is paise ko mujhe kab chahiye?</b> Baaki sab uske baad aata hai.</span></div>
+        <div class="beat b-fw"><span class="bl">Framework</span><span class="bd">Har rupee ko teen mein se ek dabbe mein socho. <b>(a) Jald zaroorat / emergency</b> — safe aur turant reachable rehna chahiye. <b>(b) 1–3 saal ka goal</b> — thoda alag treatment, bumpiness afford nahi. <b>(c) 5+ saal tak nahi chahiye</b> — yahan "grow karun?" ka sawaal banta hai. Order important hai: cushion pehle, growth baad mein.</span></div>
+        <div class="beat b-call"><span class="bl">Your call</span><span class="bd">₹10,000 kahan jaaye yeh aapki situation pe depend karta hai — aapka existing emergency cushion, agle kuch mahine ki zarooratein, aur horizon. "Kya achha chal raha hai" is the wrong compass. Hum koi jagah name nahi karenge — sirf yeh ki kaise choose karein.</span></div>
+        <div class="beat b-do"><span class="bl">Aaj ka kaam</span><span class="bd">App mein virtual ₹10,000 ko teen dabbon mein baanto — <i>Jald / Mid / Long</i> — jo ratio aaj sahi lage. App aapke "Jald" dabbe pe ek real savings rate dikhayega.</span></div>
+      </div>
+      <div class="terms"><span class="term"><b>Emergency cushion:</b> safe, reachable money kept only for the unexpected.</span><span class="term"><b>Time horizon:</b> how long until you actually need a given rupee.</span></div>
+      <div class="taxn"><b>How tax touches this:</b> savings interest is taxable income in India, with a limited deduction possible — a detail, not a reason to act today. <span class="v">(verify current rate before relying on this)</span></div>
+    </div>
+  </details>
+
+  <details class="les">
+    <summary><span class="lesnum">2</span><span class="lesh"><span class="lt">Jab zindagi curveball fenke</span><span class="ls">Lesson 2 · 3 min · why emergency fund comes first</span></span><span class="caret">▸</span></summary>
+    <div class="lesbody">
+      <div class="tmpl" style="box-shadow:none;border:none;padding:0;background:transparent">
+        <div class="beat b-sit"><span class="bl">Situation</span><span class="bd">Saturday raat. Phone haath se gira, screen chaknachoor — ya ghar mein achanak medical bill. <b>₹15,000 chahiye, abhi.</b></span></div>
+        <div class="beat b-trap"><span class="bl">The reflex</span><span class="bd">Ya toh invested paisa nikaalo (jo shayad us din neeche ho), ya credit card / udhaar pe chala jao — dono mehnge pad sakte hain.</span></div>
+        <div class="beat b-q"><span class="bl">Real question</span><span class="bd">Kya aapke paas aisa paisa hai jo <b>bina loss, bina paperwork, bina wait</b> — aaj mil jaaye?</span></div>
+        <div class="beat b-fw"><span class="bl">Framework</span><span class="bd">Emergency fund = kuch mahine ke essential kharche, alag rakhe hue, safe aur liquid, aur kisi aur cheez ke liye touch nahi. Yeh growth ke liye nahi — <b>peace</b> ke liye hai. Isiliye investing iske baad shuru hoti hai: warna pehla jhatka aapko galat waqt pe bechne pe majboor karega.</span></div>
+        <div class="beat b-call"><span class="bl">Your call</span><span class="bd">Kitne mahine ka cushion — 3, 6, ya zyada — yeh aapki income kitni stable hai, kitne log aap pe depend karte hain, aur health pe depend karta hai. Aapki call.</span></div>
+        <div class="beat b-do"><span class="bl">Aaj ka kaam</span><span class="bd">Apna asli monthly essential kharcha estimate karke app mein daalo. App 3 aur 6 mahine ka cushion size karega; virtual paise se woh dabba bharo.</span></div>
+      </div>
+      <div class="terms"><span class="term"><b>Emergency fund:</b> a safe, liquid pot sized in months of essential spending.</span><span class="term"><b>Liquidity:</b> how fast you can reach cash without a loss.</span></div>
+    </div>
+  </details>
+
+  <details class="les">
+    <summary><span class="lesnum">3</span><span class="lesh"><span class="lt">Drawer mein pada paisa chhota ho raha hai</span><span class="ls">Lesson 3 · 3 min · inflation, the silent shrink</span></span><span class="caret">▸</span></summary>
+    <div class="lesbody">
+      <div class="tmpl" style="box-shadow:none;border:none;padding:0;background:transparent">
+        <div class="beat b-sit"><span class="bl">Situation</span><span class="bd">Dadi ne <b>₹50,000</b> ghar pe rakhe — "safe" samajh ke — 5 saal se. Note ginti wahi hai. Unhe lagta hai paisa bacha hua hai.</span></div>
+        <div class="beat b-trap"><span class="bl">The reflex</span><span class="bd">Yeh maan lena ki idle cash = safe cash, aur untouched paisa apne aap surakshit hai.</span></div>
+        <div class="beat b-q"><span class="bl">Real question</span><span class="bd">5 saal baad us ₹50,000 se aap <b>utna hi khareed paoge</b> jitna aaj?</span></div>
+        <div class="beat b-fw"><span class="bl">Framework</span><span class="bd">Inflation — daam dheere-dheere upar jaate hain, toh same rupees se kam milta hai. Idle "safe" paisa chup-chaap apni <b>buying power</b> khota hai. Volatility se safety aur inflation se safety — do alag cheezein hain.</span></div>
+        <div class="beat b-call"><span class="bl">Your call</span><span class="bd">Emergency ke liye idle cash sahi hai. Par barso tak idle pada long-term paisa ek quiet cost carry karta hai. Kitna idle rakhna — zaroorat se decide karo, dar se nahi.</span></div>
+        <div class="beat b-do"><span class="bl">Aaj ka kaam</span><span class="bd">App mein virtual ₹50,000 pe latest real inflation figure apply karke 5 saal aage ki buying power dekho.</span></div>
+      </div>
+      <div class="terms"><span class="term"><b>Inflation:</b> the general rise in prices, so the same rupees buy a little less each year.</span><span class="term"><b>Purchasing power:</b> what your money can actually buy, not the rupee count.</span></div>
+    </div>
+  </details>
+
+  <details class="les">
+    <summary><span class="lesnum">4</span><span class="lesh"><span class="lt">₹200 ko ₹400 kaun banata hai — aap nahi, time</span><span class="ls">Lesson 4 · 3 min · compounding, back-loaded</span></span><span class="caret">▸</span></summary>
+    <div class="lesbody">
+      <div class="tmpl" style="box-shadow:none;border:none;padding:0;background:transparent">
+        <div class="beat b-sit"><span class="bl">Situation</span><span class="bd">Do dost. Ek ne 22 ki umar se chhota-chhota daalna shuru kiya, phir bhool gaya. Doosre ne 32 se <b>double</b> amount daala, disciplined ho ke.</span></div>
+        <div class="beat b-trap"><span class="bl">The reflex</span><span class="bd">"Abhi toh kam kamaata hoon — baad mein zyada kama ke, ek saath bada invest kar dunga."</span></div>
+        <div class="beat b-q"><span class="bl">Real question</span><span class="bd">Aage kaun nikla — jisne <b>zyada</b> daala, ya jisne <b>jaldi</b> shuru kiya?</span></div>
+        <div class="beat b-fw"><span class="bl">Framework</span><span class="bd">Compounding — return on return. Shuru mein flat lagta hai, asli kamaal baad ke saalon mein (back-loaded). Heavy lifting <b>time</b> karta hai, amount nahi. Jaldi shuru = zyada cycles of returns-on-returns.</span></div>
+        <div class="beat b-call"><span class="bl">Your call</span><span class="bd">Jo abhi de sakte ho, usse aaj shuru karo — chhota bhi chalega. Kahan point karna hai woh alag, baad ka decision hai (horizon, liquidity, risk pe).</span></div>
+        <div class="beat b-do"><span class="bl">Aaj ka kaam</span><span class="bd">Simulator mein ₹500 ko 5, 15 aur 25 saal aage chala ke woh saal dhoondo jahan curve flat se steep hota hai.</span></div>
+      </div>
+      <div class="terms"><span class="term"><b>Compounding:</b> earning returns on both your money and the returns it already earned.</span><span class="term"><b>Time horizon:</b> how long the money stays invested before you need it.</span></div>
+      <div class="taxn"><b>How tax touches this:</b> frequent buying &amp; selling triggers taxes/charges that interrupt compounding; in India equity held over 1 year is taxed differently from under 1 year. <span class="v">(verify current rate before relying on this)</span></div>
+    </div>
+  </details>
+
+  <details class="les">
+    <summary><span class="lesnum">5</span><span class="lesh"><span class="lt">Shaadi 8 mahine mein, retirement 25 saal door</span><span class="ls">Lesson 5 · 3 min · time horizon decides treatment</span></span><span class="caret">▸</span></summary>
+    <div class="lesbody">
+      <div class="tmpl" style="box-shadow:none;border:none;padding:0;background:transparent">
+        <div class="beat b-sit"><span class="bl">Situation</span><span class="bd">Aapke paas do goals hain, dono ke liye <b>₹1 lakh</b>: ek behen ki shaadi 8 mahine mein, doosra apni retirement 25 saal door.</span></div>
+        <div class="beat b-trap"><span class="bl">The reflex</span><span class="bd">Dono ₹1 lakh ko ek jaisa treat karna — same jagah, same soch — kyunki amount same hai.</span></div>
+        <div class="beat b-q"><span class="bl">Real question</span><span class="bd">Kya near-term aur far-term paisa ek jagah, ek tarah hona chahiye — sirf isliye ki number same hai?</span></div>
+        <div class="beat b-fw"><span class="bl">Framework</span><span class="bd">Time horizon treatment decide karta hai. <b>Short</b> → safe &amp; reachable (bumpiness galat waqt pe chot degi). <b>Long</b> → bumps ride kar sakta hai, time hai recover aur compound hone ka. Isko goal bucketing kehte hain.</span></div>
+        <div class="beat b-call"><span class="bl">Your call</span><span class="bd">Har goal ko uski date ke hisaab se bucket karo; har bucket kahan baithe woh uske horizon + liquidity + risk se decide hota hai — aapke haath mein.</span></div>
+        <div class="beat b-do"><span class="bl">Aaj ka kaam</span><span class="bd">Apne asli goals dates ke saath likho; app aaj ki date se horizon nikaalega; virtual paise ko <i>"under 3 years"</i> aur <i>"over 7 years"</i> buckets mein daalo.</span></div>
+      </div>
+      <div class="terms"><span class="term"><b>Time horizon:</b> years until you actually need a specific pot.</span><span class="term"><b>Goal bucketing:</b> separating money by goal, each with its own horizon.</span></div>
+    </div>
+  </details>
+
+  <details class="les">
+    <summary><span class="lesnum">6</span><span class="lesh"><span class="lt">"Yeh double kar dega" — ab kya?</span><span class="ls">Lesson 6 · 3 min · the risk-return smell test</span></span><span class="caret">▸</span></summary>
+    <div class="lesbody">
+      <div class="tmpl" style="box-shadow:none;border:none;padding:0;background:transparent">
+        <div class="beat b-sit"><span class="bl">Situation</span><span class="bd">WhatsApp pe ek forward — ya ek dost confidently bolta hai: <b>"isme daal, 6 mahine mein double, risk zero, guaranteed."</b> Aur "jaldi karo, offer close ho raha hai."</span></div>
+        <div class="beat b-trap"><span class="bl">The reflex</span><span class="bd">FOMO — "sab kama rahe honge, main peeche na reh jaun" — aur bina soche kood jaana.</span></div>
+        <div class="beat b-q"><span class="bl">Real question</span><span class="bd">High return <b>+</b> zero risk <b>+</b> urgency — kya yeh combination real duniya mein possible hai?</span></div>
+        <div class="beat b-fw"><span class="bl">Framework</span><span class="bd">Risk–return trade-off: jahan zyada return ka mauka, wahan zyada ups-and-downs. "Guaranteed high, zero risk" ek classic red flag hai — aur urgency aapko sochne se rokne ke liye lagayi jaati hai. Yeh sabak aage ke risk module ka darwaza hai.</span></div>
+        <div class="beat b-call"><span class="bl">Your call</span><span class="bd">Ruko. Kisi bhi cheez ko apne horizon, risk capacity aur diversification ke lens se judge karo — tip ke basis pe nahi, aur urgency pe kabhi nahi.</span></div>
+        <div class="beat b-do"><span class="bl">Aaj ka kaam</span><span class="bd">App mein ek broad index ki pichhle 1 saal ki bumpy chaal ko ek fixed rate ke saath rakh ke dekho (real data) — trade-off ko aankhon se mehsoos karo.</span></div>
+      </div>
+      <div class="terms"><span class="term"><b>Risk-return trade-off:</b> higher potential return almost always comes with more ups and downs.</span><span class="term"><b>Red flag:</b> a promise of high return with no risk and time pressure — treat with suspicion.</span></div>
+    </div>
+  </details>
+
+  <div class="foot">
+    <b>What's here:</b> the situation-led pedagogy, all 7 modules mapped with each lesson's opening scene, and Module 1 written in full. No video — this is the text-first content prototype you asked for.<br><br>
+    <b>Next up when you're ready:</b> write Module 2 in full · or pressure-test Module 1's framing with your friends first · or fold this style back into the machine-readable <code>lessons.json</code> so the app can parse it.
+  </div>
+</div>

@@ -1,0 +1,336 @@
+<title>Neev Compounding Simulator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Figtree:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap">
+
+<style>
+  :root{
+    --ground:#F2F4F0; --surface:#FFFFFF; --surface-2:#F7F9F5;
+    --ink:#16221E; --ink-soft:#4A574F; --ink-faint:#7C877F;
+    --line:#E2E7DE; --line-strong:#D2D9CE;
+    --accent:#0E8C6B; --accent-deep:#0A6E54; --accent-wash:#E4F2EC;
+    --gold:#D9922B; --gold-wash:#FBEFD8; --gold-deep:#B87519;
+    --principal:#C3D2C6;
+    --shadow:0 1px 2px rgba(20,34,30,.05),0 14px 38px -20px rgba(20,34,30,.4);
+    --shadow-soft:0 1px 2px rgba(20,34,30,.04),0 8px 20px -16px rgba(20,34,30,.3);
+  }
+  :root:not([data-theme="light"]){ @media (prefers-color-scheme:dark){
+    --ground:#0E1512; --surface:#17211D; --surface-2:#1D2823;
+    --ink:#EAF0EC; --ink-soft:#AEB9B2; --ink-faint:#7E8A83;
+    --line:#2A3630; --line-strong:#38453E;
+    --accent:#33BE93; --accent-deep:#2AA680; --accent-wash:#173029;
+    --gold:#EDB459; --gold-wash:#2E2515; --gold-deep:#EDB459;
+    --principal:#3A4A40;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 44px -22px rgba(0,0,0,.75);
+    --shadow-soft:0 1px 2px rgba(0,0,0,.3),0 10px 24px -18px rgba(0,0,0,.6);
+  }}
+  :root[data-theme="dark"]{
+    --ground:#0E1512; --surface:#17211D; --surface-2:#1D2823;
+    --ink:#EAF0EC; --ink-soft:#AEB9B2; --ink-faint:#7E8A83;
+    --line:#2A3630; --line-strong:#38453E;
+    --accent:#33BE93; --accent-deep:#2AA680; --accent-wash:#173029;
+    --gold:#EDB459; --gold-wash:#2E2515; --gold-deep:#EDB459;
+    --principal:#3A4A40;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 44px -22px rgba(0,0,0,.75);
+    --shadow-soft:0 1px 2px rgba(0,0,0,.3),0 10px 24px -18px rgba(0,0,0,.6);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink);
+    font-family:"Figtree",system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:34px 18px 64px}
+
+  .head{display:flex;align-items:center;gap:11px;margin-bottom:4px}
+  .logo{width:30px;height:30px;border-radius:9px;background:var(--accent);display:grid;place-items:center;color:#fff}
+  .logo svg{width:17px;height:17px}
+  .brand{font-family:"Fraunces",serif;font-weight:600;font-size:1.15rem}
+  .brand span{color:var(--accent)}
+  .tagchip{margin-left:auto;font-family:"Space Mono",monospace;font-size:.62rem;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-faint)}
+  h1{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(1.5rem,4vw,2rem);
+    letter-spacing:-.02em;line-height:1.12;margin:16px 0 6px;text-wrap:balance}
+  .intro{color:var(--ink-soft);max-width:60ch;margin:0 0 22px;font-size:.98rem}
+  .intro b{color:var(--ink);font-weight:600}
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:20px;
+    box-shadow:var(--shadow-soft);padding:20px;margin-bottom:18px}
+
+  /* controls */
+  .modes{display:flex;gap:6px;background:var(--surface-2);border:1px solid var(--line);
+    border-radius:12px;padding:4px;margin-bottom:20px}
+  .modes button{flex:1;border:none;background:transparent;font-family:inherit;font-weight:600;
+    font-size:.88rem;color:var(--ink-soft);padding:9px;border-radius:9px;cursor:pointer}
+  .modes button.on{background:var(--surface);color:var(--accent-deep);box-shadow:var(--shadow-soft)}
+
+  .field{margin-bottom:18px}
+  .field:last-child{margin-bottom:0}
+  .flabel{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:9px}
+  .flabel .l{font-weight:600;font-size:.85rem}
+  .flabel .v{font-family:"Space Mono",monospace;font-weight:700;color:var(--accent-deep);
+    font-size:.95rem;font-variant-numeric:tabular-nums}
+  .flabel .v small{color:var(--ink-faint);font-weight:400}
+  .chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:11px}
+  .chip{border:1px solid var(--line-strong);background:var(--surface);border-radius:99px;
+    padding:6px 13px;font-family:inherit;font-size:.8rem;font-weight:600;color:var(--ink-soft);cursor:pointer}
+  .chip.on{background:var(--accent);color:#fff;border-color:transparent}
+
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:99px;
+    background:var(--line-strong);outline:none;margin:4px 0}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;
+    background:var(--accent);cursor:pointer;border:3px solid var(--surface);box-shadow:var(--shadow-soft)}
+  input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--accent);
+    cursor:pointer;border:3px solid var(--surface);box-shadow:var(--shadow-soft)}
+  input[type=range]:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .rangenote{font-size:.72rem;color:var(--ink-faint);margin-top:5px}
+  .rangenote b{color:var(--gold-deep)}
+
+  /* results */
+  .results{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
+    border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+  .res{background:var(--surface);padding:15px 14px}
+  .res .k{font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);
+    font-weight:700;margin-bottom:5px}
+  .res .n{font-family:"Space Mono",monospace;font-weight:700;font-size:clamp(1.05rem,3.4vw,1.4rem);
+    letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .res.total .n{color:var(--accent-deep)}
+  .res.gain .n{color:var(--gold-deep)}
+  .res .sub{font-size:.68rem;color:var(--ink-faint);margin-top:3px}
+
+  /* chart */
+  .chartwrap{position:relative;margin-top:4px}
+  canvas{width:100%;height:auto;display:block}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:.78rem;color:var(--ink-soft)}
+  .legend span{display:flex;align-items:center;gap:6px}
+  .swatch{width:11px;height:11px;border-radius:3px;flex:none}
+  .bendcall{margin-top:14px;background:var(--gold-wash);border-radius:12px;padding:11px 13px;
+    font-size:.82rem;color:var(--ink-soft);display:flex;gap:9px;align-items:flex-start}
+  .bendcall svg{width:15px;height:15px;color:var(--gold-deep);flex:none;margin-top:2px}
+  .bendcall b{color:var(--gold-deep)}
+
+  /* compare */
+  .cmpgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .cmp{background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:13px;text-align:center}
+  .cmp .yr{font-family:"Space Mono",monospace;font-weight:700;font-size:.78rem;color:var(--accent);margin-bottom:6px}
+  .cmp .amt{font-family:"Space Mono",monospace;font-weight:700;font-size:1rem;font-variant-numeric:tabular-nums}
+  .cmp .x{font-size:.7rem;color:var(--ink-faint);margin-top:3px}
+  .sechead{font-family:"Space Mono",monospace;font-size:.64rem;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--accent);font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .sechead::after{content:"";flex:1;height:1px;background:var(--line)}
+
+  .reflect{background:var(--accent-wash);border-radius:14px;padding:15px 16px;margin-top:6px}
+  .reflect .q{font-family:"Fraunces",serif;font-size:1.02rem;font-weight:600;margin-bottom:3px}
+  .reflect .s{font-size:.83rem;color:var(--ink-soft)}
+  .disc{font-size:.74rem;color:var(--ink-faint);margin-top:20px;text-align:center;max-width:62ch;margin-left:auto;margin-right:auto}
+  @media (max-width:520px){ .results{grid-template-columns:1fr;} .cmpgrid{gap:8px} }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <div class="head">
+    <span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c0-6 0-9-4-12"/><path d="M12 13c0-4 3-7 8-7 0 5-3 8-8 8Z"/><path d="M12 21c0-4 2-6 6-6"/></svg></span>
+    <span class="brand">Neev<span>.</span></span>
+    <span class="tagchip">Lesson 3 · Practical Action</span>
+  </div>
+
+  <h1>Watch the curve stop being flat.</h1>
+  <p class="intro">This is the tool Lesson 3's action opens. Run a small amount — a <b>weekend's spend</b> — forward in time and find the year the line stops crawling and starts climbing. That climb is compounding. <b>No instrument is named</b>; you're feeling the force, not picking where to point it.</p>
+
+  <!-- CONTROLS -->
+  <div class="card">
+    <div class="modes" role="tablist">
+      <button id="mLump" class="on">One-time amount</button>
+      <button id="mSip">Every month (SIP)</button>
+    </div>
+
+    <div class="field">
+      <div class="flabel"><span class="l" id="amtLabel">Amount invested once</span><span class="v">₹<span id="amtVal">500</span></span></div>
+      <div class="chips" id="amtChips"></div>
+      <input type="range" id="amt" min="100" max="50000" step="100" value="500">
+    </div>
+
+    <div class="field">
+      <div class="flabel"><span class="l">Years invested</span><span class="v"><span id="yrVal">15</span> <small>yrs</small></span></div>
+      <input type="range" id="yr" min="1" max="30" step="1" value="15">
+    </div>
+
+    <div class="field">
+      <div class="flabel"><span class="l">Assumed annual return</span><span class="v"><span id="rVal">11</span><small>%</small></span></div>
+      <input type="range" id="r" min="4" max="15" step="0.5" value="11">
+      <div class="rangenote">In the real app this slider is replaced by an <b>actual historical index return series</b> — no made-up flat rate. Here it's a dial so you can feel the shape.</div>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="card">
+    <div class="results">
+      <div class="res"><div class="k">You put in</div><div class="n" id="rInv">—</div><div class="sub" id="rInvSub">&nbsp;</div></div>
+      <div class="res total"><div class="k">Grows to</div><div class="n" id="rTot">—</div><div class="sub">estimated value</div></div>
+      <div class="res gain"><div class="k">Pure growth</div><div class="n" id="rGain">—</div><div class="sub" id="rGainSub">&nbsp;</div></div>
+    </div>
+
+    <div class="chartwrap" style="margin-top:20px">
+      <canvas id="chart" width="700" height="380" aria-label="Compounding growth curve"></canvas>
+    </div>
+    <div class="legend">
+      <span><span class="swatch" style="background:var(--principal)"></span>What you put in</span>
+      <span><span class="swatch" style="background:var(--accent)"></span>Total value</span>
+      <span><span class="swatch" style="background:var(--gold)"></span>The bend — growth pulls ahead</span>
+    </div>
+    <div class="bendcall">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2s5 4 5 9a5 5 0 0 1-10 0c0-1 .3-2 .8-2.8C8 10 9 11 9 11s-.5-4 3-9Z"/></svg>
+      <div>Around <b>year <span id="bendYr">—</span></b>, your growth (gold band) grows bigger than everything you'd put in by then. That's the snowball tipping over — and it happens <b>later</b>, which is exactly why staying invested matters.</div>
+    </div>
+  </div>
+
+  <!-- COMPARE -->
+  <div class="card">
+    <div class="sechead">The lesson's ask · 5 vs 15 vs 25 years</div>
+    <div class="cmpgrid" id="cmp"></div>
+  </div>
+
+  <!-- REFLECT -->
+  <div class="card" style="padding:0;border:none;background:transparent;box-shadow:none;margin-bottom:0">
+    <div class="reflect">
+      <div class="q">At which year did growth stop feeling "flat"?</div>
+      <div class="s">Answer it after you've dragged the years slider around. No advice here — just notice, and notice whether it surprised you.</div>
+    </div>
+  </div>
+
+  <p class="disc">Illustrative only, using an assumed return you set — not a prediction, not advice, and no specific fund or stock. Returns vary and can be negative in any given year. Verify all figures and current tax rules before relying on them.</p>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const inr=n=>"₹"+Math.round(n).toLocaleString("en-IN");
+const inrShort=n=>{
+  if(n>=1e7)return "₹"+(n/1e7).toFixed(n>=1e8?0:2)+" Cr";
+  if(n>=1e5)return "₹"+(n/1e5).toFixed(n>=1e6?1:2)+" L";
+  if(n>=1e3)return "₹"+(n/1e3).toFixed(0)+"k";
+  return "₹"+Math.round(n);
+};
+
+let mode="lump"; // 'lump' | 'sip'
+const chipSets={
+  lump:[["₹500",500],["₹2,000",2000],["₹10,000",10000],["₹25,000",25000]],
+  sip:[["₹500",500],["₹1,000",1000],["₹2,500",2500],["₹5,000",5000]]
+};
+
+function seriesLump(P,Y,r){const a=[];for(let y=0;y<=Y;y++)a.push({y,inv:P,val:P*Math.pow(1+r,y)});return a;}
+function seriesSip(M,Y,r){const i=r/12;const a=[];for(let y=0;y<=Y;y++){const n=y*12;
+  const val=i===0?M*n:M*((Math.pow(1+i,n)-1)/i)*(1+i);a.push({y,inv:M*n,val});}return a;}
+function build(P,Y,r){return mode==="lump"?seriesLump(P,Y,r):seriesSip(P,Y,r);}
+
+function bendYear(s){ // first year total gains exceed total invested
+  for(const p of s){ if(p.y>0 && (p.val-p.inv) >= p.inv) return p.y; }
+  return null;
+}
+
+const cv=$("chart"),cx=cv.getContext("2d");
+function css(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim();}
+function drawChart(s){
+  const dpr=Math.min(window.devicePixelRatio||1,2);
+  const W=cv.clientWidth||700, H=380;
+  cv.width=W*dpr; cv.height=H*dpr; cv.style.height=H+"px";
+  cx.setTransform(dpr,0,0,dpr,0,0); cx.clearRect(0,0,W,H);
+  const padL=8,padR=8,padT=14,padB=26;
+  const x0=padL,x1=W-padR,y0=padT,y1=H-padB;
+  const Y=s[s.length-1].y, maxV=s[s.length-1].val||1;
+  const px=v=>x0+(x1-x0)*(v/Y);
+  const py=v=>y1-(y1-y0)*(v/maxV);
+
+  // gridlines
+  cx.strokeStyle=css("--line"); cx.lineWidth=1; cx.font="11px 'Space Mono',monospace";
+  cx.fillStyle=css("--ink-faint"); cx.textAlign="left";
+  for(let g=0;g<=4;g++){const gy=y0+(y1-y0)*g/4;cx.globalAlpha=.7;
+    cx.beginPath();cx.moveTo(x0,gy);cx.lineTo(x1,gy);cx.stroke();cx.globalAlpha=1;}
+
+  const line=(key,color,fillTo)=>{
+    cx.beginPath();
+    s.forEach((p,idx)=>{const X=px(p.y),Yv=py(p[key]);idx?cx.lineTo(X,Yv):cx.moveTo(X,Yv);});
+    if(fillTo!==undefined){
+      for(let idx=s.length-1;idx>=0;idx--){cx.lineTo(px(s[idx].y),py(fillTo(s[idx])));}
+      cx.closePath();cx.fillStyle=color;cx.fill();
+    }else{cx.strokeStyle=color;cx.lineWidth=2.6;cx.lineJoin="round";cx.stroke();}
+  };
+
+  // principal band (0..inv)
+  line("inv",css("--principal"),()=>0);
+  // gains band (inv..val) in accent wash
+  cx.beginPath();
+  s.forEach((p,idx)=>{const X=px(p.y),Yv=py(p.val);idx?cx.lineTo(X,Yv):cx.moveTo(X,Yv);});
+  for(let idx=s.length-1;idx>=0;idx--){cx.lineTo(px(s[idx].y),py(s[idx].inv));}
+  cx.closePath();cx.fillStyle=css("--accent-wash");cx.fill();
+
+  // total value line
+  line("val",undefined);
+  // invested line (dashed)
+  cx.setLineDash([4,4]);cx.beginPath();
+  s.forEach((p,idx)=>{const X=px(p.y),Yv=py(p.inv);idx?cx.lineTo(X,Yv):cx.moveTo(X,Yv);});
+  cx.strokeStyle=css("--ink-faint");cx.lineWidth=1.6;cx.stroke();cx.setLineDash([]);
+
+  // bend marker
+  const by=bendYear(s);
+  if(by){const p=s.find(q=>q.y===by);const X=px(by),Yv=py(p.val);
+    cx.strokeStyle=css("--gold");cx.lineWidth=1.4;cx.setLineDash([3,3]);
+    cx.beginPath();cx.moveTo(X,y0);cx.lineTo(X,y1);cx.stroke();cx.setLineDash([]);
+    cx.fillStyle=css("--gold");cx.beginPath();cx.arc(X,Yv,5,0,7);cx.fill();
+    cx.strokeStyle=css("--surface");cx.lineWidth=2;cx.stroke();}
+
+  // x labels
+  cx.fillStyle=css("--ink-faint");cx.textAlign="center";
+  [0,Math.round(Y/2),Y].forEach(yy=>{cx.fillText("yr "+yy,px(yy),H-8);});
+  // endpoint value label
+  cx.textAlign="right";cx.fillStyle=css("--accent-deep");cx.font="bold 12px 'Space Mono',monospace";
+  cx.fillText(inrShort(maxV),x1-2,py(maxV)-8>y0+12?py(maxV)-8:y0+12);
+}
+
+function renderChips(){
+  const box=$("amtChips");box.innerHTML="";
+  chipSets[mode].forEach(([lab,val])=>{
+    const b=document.createElement("button");b.className="chip";b.textContent=lab;
+    b.onclick=()=>{$("amt").value=val;update();};
+    box.appendChild(b);
+  });
+}
+
+function update(){
+  const P=+$("amt").value, Y=+$("yr").value, r=+$("r").value/100;
+  $("amtVal").textContent=P.toLocaleString("en-IN");
+  $("yrVal").textContent=Y; $("rVal").textContent=(+$("r").value).toString();
+  // highlight matching chip
+  [...$("amtChips").children].forEach((c,idx)=>c.classList.toggle("on",chipSets[mode][idx][1]===P));
+
+  const s=build(P,Y,r);
+  const last=s[s.length-1];
+  const invested=last.inv, total=last.val, gain=total-invested;
+  $("rInv").textContent=inrShort(invested);
+  $("rInvSub").textContent = mode==="sip" ? inr(P)+"/mo × "+(Y*12)+" mo" : "one-time";
+  $("rTot").textContent=inrShort(total);
+  $("rGain").textContent=inrShort(gain);
+  $("rGainSub").textContent = invested>0 ? (gain/invested*100).toFixed(0)+"% of what you put in" : "";
+
+  const by=bendYear(s);
+  $("bendYr").textContent = by ? by : "beyond "+Y;
+
+  drawChart(s);
+
+  // 5/15/25 compare (cap at slider max for series but compute independently)
+  const box=$("cmp");box.innerHTML="";
+  [5,15,25].forEach(yy=>{
+    const sc=build(P,yy,r);const l=sc[sc.length-1];
+    const mult=l.inv>0?(l.val/l.inv):0;
+    const el=document.createElement("div");el.className="cmp";
+    el.innerHTML=`<div class="yr">${yy} YEARS</div><div class="amt">${inrShort(l.val)}</div><div class="x">${mult.toFixed(1)}× your money</div>`;
+    box.appendChild(el);
+  });
+}
+
+$("mLump").onclick=()=>{mode="lump";$("mLump").classList.add("on");$("mSip").classList.remove("on");
+  $("amtLabel").textContent="Amount invested once";$("amt").value=500;renderChips();update();};
+$("mSip").onclick=()=>{mode="sip";$("mSip").classList.add("on");$("mLump").classList.remove("on");
+  $("amtLabel").textContent="Amount every month";$("amt").value=2000;renderChips();update();};
+
+["amt","yr","r"].forEach(id=>$(id).addEventListener("input",update));
+window.addEventListener("resize",update);
+renderChips();update();
+</script>

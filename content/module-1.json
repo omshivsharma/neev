@@ -1,0 +1,148 @@
+{
+  "module": "Paisa aaya — ab kya?",
+  "module_number": 1,
+  "theme": "You suddenly have money. Should it even be invested — and what forces act on it?",
+  "pedagogy": "situation-led · 7-beat story",
+  "beats_order": ["situation", "myth", "reflex", "real_question", "framework", "your_call", "your_move"],
+  "content_rules_applied": [
+    "No specific instrument, fund, or stock is ever named or recommended.",
+    "All tax/fee/regulatory points reflect Indian rules and carry 'verify current rate before relying on this'.",
+    "Max 2 technical terms per lesson, each defined in one plain sentence.",
+    "Every lesson ends in a practical action tied to a REAL fetchable data point.",
+    "No invented statistics, no fear-based language."
+  ],
+  "lessons": [
+    {
+      "day": 1,
+      "title": "₹10,000 aaye — kharch, bachao, ya badhao?",
+      "subtitle": "The spend / save / invest fork",
+      "reading_time_minutes": 3,
+      "situation": "Account mein achanak ₹10,000 aaye — bonus ya freelance ka payment. Dil khush, aur saamne ek sale ka notification.",
+      "myth": {"lie": "Paisa aate hi turant 'invest' kar dena hi samajhdari hai.", "truth": "Pehla sawaal 'kahan' nahi — 'kab chahiye' hai. Cushion pehle, growth baad mein."},
+      "reflex": "Ya toh turant kharch kar do, ya kisi dost ke kehne pe bina soche kahin daal do.",
+      "real_question": "Is paise ko mujhe kab chahiye?",
+      "framework": "Har rupee ko teen dabbon mein socho — (a) jald/emergency → safe & reachable, (b) 1–3 saal goal → alag treatment, (c) 5+ saal → yahan 'grow karun?' banta hai. Order matters: cushion pehle.",
+      "your_call": "₹10k kahan jaaye = aapka cushion + upcoming needs + horizon. 'Kya achha chal raha hai' galat compass hai. Hum jagah name nahi karte — sirf kaise choose karein.",
+      "key_terms": [
+        {"term": "Emergency cushion", "definition": "Safe, reachable money kept only for the unexpected."},
+        {"term": "Time horizon", "definition": "How long until you actually need a given rupee."}
+      ],
+      "quiz": [
+        {"question": "Paise ke baare mein sabse pehla sawaal kya hai?", "options": ["Kaunse fund mein daalun", "Kitna return milega", "Mujhe yeh kab chahiye", "Dost kahan daal raha hai"], "correct_index": 2, "why": "Kab chahiye — yeh baaki sab decide karta hai: reachability aur growth-focus."},
+        {"question": "Investing shuru karne se pehle kya hona chahiye?", "options": ["Ek emergency cushion", "Sabse zyada return wala fund", "Ek stock tip", "Sirf demat account"], "correct_index": 0, "why": "Cushion bina, pehla jhatka aapko galat waqt pe bechne pe majboor karega."}
+      ],
+      "practical_action": {"instruction": "Virtual ₹10,000 ko Jald / Mid / Long buckets mein daalo — jo ratio aaj sahi lage.", "data_needed": "A real savings-account interest rate for the 'Jald' bucket.", "reflection_prompt": "Kaun sa bucket sabse bada rakha — aur kyun?"},
+      "tax_or_fee_note": "Savings interest is taxable income in India, with a limited deduction possible. A detail, not a reason to act today. (verify current rate before relying on this)"
+    },
+    {
+      "day": 2,
+      "title": "Jab zindagi curveball fenke",
+      "subtitle": "Why an emergency fund comes first",
+      "reading_time_minutes": 3,
+      "situation": "Saturday raat. Phone haath se gira, screen chaknachoor — ya ghar mein achanak medical bill. ₹15,000 chahiye, abhi.",
+      "myth": {"lie": "Saara paisa invested ho toh main 'aage' hoon.", "truth": "Bina emergency fund, pehla jhatka hi aapko galat waqt pe bechne pe majboor karega."},
+      "reflex": "Invested paisa nikaalo (jo us din neeche ho), ya credit card / udhaar pe chale jao.",
+      "real_question": "Kya aisa paisa hai jo bina loss, bina wait — aaj mil jaaye?",
+      "framework": "Emergency fund = kuch mahine ke essential kharche, alag, safe & liquid, untouched. Yeh growth ke liye nahi — peace ke liye. Investing iske baad shuru hoti hai.",
+      "your_call": "3, 6, ya zyada mahine — income stability, dependents, aur health pe depend karta hai. Aapki call.",
+      "key_terms": [
+        {"term": "Emergency fund", "definition": "A safe, liquid pot sized in months of essential spending."},
+        {"term": "Liquidity", "definition": "How fast you can reach cash without a loss."}
+      ],
+      "quiz": [
+        {"question": "Kaunsa paisa sabse zyada liquid rehna chahiye?", "options": ["30 saal door retirement", "Emergency fund", "Jo kabhi touch nahi karoge", "15 saal ka goal"], "correct_index": 1, "why": "Emergency ko cash aaj chahiye — reachable & penalty-free."},
+        {"question": "Emergency fund ka asli maqsad kya hai?", "options": ["Sabse zyada growth", "Tax bachana", "Bura waqt bina bechne ke sambhaalna", "Dost se aage nikalna"], "correct_index": 2, "why": "Yeh peace ke liye hai — taaki jhatke pe aapko investments galat waqt na bechne pade."}
+      ],
+      "practical_action": {"instruction": "Apna asli monthly essential kharcha daalo; app 3 aur 6 mahine ka cushion size karega.", "data_needed": "User-entered monthly essential spend (real).", "reflection_prompt": "Aaj emergency aaye toh 24 ghante mein kitna reach kar sakte ho?"},
+      "tax_or_fee_note": null
+    },
+    {
+      "day": 3,
+      "title": "Drawer mein pada paisa chhota ho raha hai",
+      "subtitle": "Inflation, the silent shrink",
+      "reading_time_minutes": 3,
+      "situation": "Dadi ne ₹50,000 ghar pe 'safe' samajh ke 5 saal se rakhe. Note wahi, ginti wahi.",
+      "myth": {"lie": "Cash ghar/idle mein rakhna = fully safe.", "truth": "Volatility se safety aur inflation se safety — do bilkul alag baatein hain."},
+      "reflex": "Idle cash ko permanently safe maan lena.",
+      "real_question": "5 saal baad us ₹50,000 se aap utna hi khareed paoge?",
+      "framework": "Inflation daam dheere-dheere badhata hai; toh same rupees se kam milta hai. Idle 'safe' paisa chup-chaap apni buying power khota hai.",
+      "your_call": "Emergency ke liye idle cash sahi; par barso idle pada long-term paisa ek quiet cost carry karta hai. Kitna idle — zaroorat se decide karo, dar se nahi.",
+      "key_terms": [
+        {"term": "Inflation", "definition": "The general rise in prices, so the same rupees buy a little less each year."},
+        {"term": "Purchasing power", "definition": "What your money can actually buy, not the rupee count."}
+      ],
+      "quiz": [
+        {"question": "Idle 'safe' cash ke saath quietly kya hota hai?", "options": ["Rupee ginti girti hai", "Buying power girti hai", "Bank use le leta hai", "Kuch nahi"], "correct_index": 1, "why": "Number wahi, par prices badhne se woh kam khareed paata hai."},
+        {"question": "Volatility se safe hona kis se safe hone jaisa NAHI hai?", "options": ["Chori", "Inflation", "Fees", "Tax"], "correct_index": 1, "why": "Bumpiness se bachna alag; inflation se buying power ka bachaav alag cheez hai."}
+      ],
+      "practical_action": {"instruction": "Virtual ₹50,000 pe latest real inflation apply karke 5 saal aage ki buying power dekho.", "data_needed": "Latest official India CPI / retail inflation print (real).", "reflection_prompt": "Kitna cash aapka 'zaroori reachable' hai vs 'bas pada hua'?"},
+      "tax_or_fee_note": null
+    },
+    {
+      "day": 4,
+      "title": "₹200 ko ₹400 kaun banata hai — time",
+      "subtitle": "Compounding is back-loaded",
+      "reading_time_minutes": 3,
+      "situation": "Do dost. Ek ne 22 ki umar se chhota-chhota daala aur bhool gaya. Doosre ne 32 se double amount daala.",
+      "myth": {"lie": "Investing tabhi matlab rakhta hai jab bada amount ho.", "truth": "Time amount se bada lever hai — jaldi shuru karna > baad mein zyada daalna."},
+      "reflex": "'Abhi kam hai — baad mein zyada kama ke ek saath bada invest karunga.'",
+      "real_question": "Aage kaun nikla — jisne zyada daala, ya jisne jaldi shuru kiya?",
+      "framework": "Compounding = return on return. Shuru mein flat lagta hai, asli kamaal baad ke saalon mein (back-loaded). Heavy lifting time karta hai, amount nahi.",
+      "your_call": "Jo abhi de sako, usse aaj shuru karo — chhota bhi chalega. Kahan point karna hai woh alag, baad ka decision.",
+      "key_terms": [
+        {"term": "Compounding", "definition": "Earning returns on both your money and the returns it already earned."},
+        {"term": "Time horizon", "definition": "How long the money stays invested before you need it."}
+      ],
+      "quiz": [
+        {"question": "Compounding ke early saal flat kyun lagte hain?", "options": ["Return shuru mein sabse zyada", "Snowball abhi chhota hai", "Inflation sab kha jaata hai", "Tax nahi diya"], "correct_index": 1, "why": "Back-loaded — returns-on-returns ka snowball baad mein bada hota hai."},
+        {"question": "Same monthly amount — kaun aage, 25 se shuru ya 35 se?", "options": ["35 se", "25 se", "Dono barabar", "Keh nahi sakte"], "correct_index": 1, "why": "Zyada time = zyada cycles — time compounding ka sabse bada lever."}
+      ],
+      "practical_action": {"instruction": "Simulator mein ₹500 ko 5, 15 aur 25 saal aage chala ke woh saal dhoondo jahan curve flat se steep hota hai.", "data_needed": "A real historical index return series drives the curve (not a flat rate).", "reflection_prompt": "Bend kis saal aaya — surprise hua?"},
+      "tax_or_fee_note": "Baar-baar bechne se tax/charges compounding todte hain. India mein equity 1 saal se zyada rakha (long-term) alag taxed hota hai. (verify current rate before relying on this)"
+    },
+    {
+      "day": 5,
+      "title": "Shaadi 8 mahine mein, retirement 25 saal door",
+      "subtitle": "Time horizon decides treatment",
+      "reading_time_minutes": 3,
+      "situation": "Aapke paas do goals, dono ke liye ₹1 lakh: behen ki shaadi 8 mahine mein, apni retirement 25 saal door.",
+      "myth": {"lie": "Amount same hai toh treatment bhi same hona chahiye.", "truth": "Horizon treatment decide karta hai — amount nahi."},
+      "reflex": "Dono ₹1 lakh ko ek jagah, ek soch se rakhna.",
+      "real_question": "Near aur far paisa same hona chahiye sirf isliye ki number same hai?",
+      "framework": "Short horizon → safe & reachable (bumpiness galat waqt pe chot degi). Long horizon → bumps ride kar sakta hai, recover aur compound hone ka time hai. Isko goal bucketing kehte hain.",
+      "your_call": "Har goal ko date ke hisaab se bucket karo; kahan baithe = horizon + liquidity + risk. Aapke haath mein.",
+      "key_terms": [
+        {"term": "Time horizon", "definition": "Years until you actually need a specific pot."},
+        {"term": "Goal bucketing", "definition": "Separating money by goal, each with its own horizon."}
+      ],
+      "quiz": [
+        {"question": "Short-horizon paise ke liye bumpiness bada problem kyun?", "options": ["Woh tez badhta hai", "Neeche ho toh bechna pad sakta hai", "Tax zyada", "Bank charge zyada"], "correct_index": 1, "why": "Kam time mein dip aaya toh recover ka mauka nahi — low pe bechna padta hai."},
+        {"question": "Wrong-horizon ka example kaunsa hai?", "options": ["Emergency cash reachable", "Agle mahine ka paisa lock karna", "25-saal paisa bumps ride", "Goals date se bucket"], "correct_index": 1, "why": "Jald chahiye paisa lock karna horizon mismatch hai."}
+      ],
+      "practical_action": {"instruction": "Apne asli goals dates ke saath likho; app horizon nikaalega; virtual paise ko 'under 3 yrs' / 'over 7 yrs' mein daalo.", "data_needed": "Today's date + the user's goal dates (real) to compute exact horizons.", "reflection_prompt": "Kaun sa goal aap galat horizon pe treat kar rahe ho?"},
+      "tax_or_fee_note": null
+    },
+    {
+      "day": 6,
+      "title": "\"Yeh double kar dega\" — ab kya?",
+      "subtitle": "The risk-return smell test",
+      "reading_time_minutes": 3,
+      "situation": "WhatsApp forward — ya dost confidently: '6 mahine mein double, risk zero, guaranteed. Jaldi karo, offer close ho raha hai.'",
+      "myth": {"lie": "High return aur zero risk ek saath mil sakte hain.", "truth": "Zyada return ka mauka = zyada ups-and-downs. Guaranteed-high + no-risk = classic red flag."},
+      "reflex": "FOMO — 'sab kama rahe honge' — aur bina soche kood jaana.",
+      "real_question": "High return + zero risk + urgency — kya yeh combination real ho sakta hai?",
+      "framework": "Risk–return trade-off: jahan zyada return ka mauka, wahan zyada bumpiness. Urgency aapko sochne se rokne ke liye lagayi jaati hai. Yeh sabak risk module ka darwaza hai.",
+      "your_call": "Ruko. Kisi bhi cheez ko horizon, risk capacity aur diversification ke lens se judge karo — tip pe nahi, urgency pe kabhi nahi.",
+      "key_terms": [
+        {"term": "Risk-return trade-off", "definition": "Higher potential return almost always comes with more ups and downs."},
+        {"term": "Red flag", "definition": "A promise of high return, no risk, and urgency — treat with suspicion."}
+      ],
+      "quiz": [
+        {"question": "'Guaranteed high return, zero risk, jaldi karo' — sahi reaction?", "options": ["Sab kuch daal do", "Shak karo", "Udhaar le ke aur daalo", "Maan lo legal hai"], "correct_index": 1, "why": "High return + zero risk ek red flag hai; urgency aapko sochne se rokti hai."},
+        {"question": "Kisi option ko judge kaise karein?", "options": ["Dost ke confidence se", "Urgency se", "Apne horizon/risk/diversification se", "Pichhle saal ke return se"], "correct_index": 2, "why": "Decision aapki situation se — tip ya urgency se nahi."}
+      ],
+      "practical_action": {"instruction": "App mein ek broad index ki 1-saal bumpy chaal ko ek fixed rate ke saath rakh ke dekho (real data).", "data_needed": "A real 1-year index price series + a current fixed-return rate.", "reflection_prompt": "Kabhi FOMO mein koi financial decision liya? kya hua?"},
+      "tax_or_fee_note": null
+    }
+  ]
+}

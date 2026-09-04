@@ -1,0 +1,432 @@
+<title>Neev Investing Lessons</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Figtree:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap">
+
+<style>
+  :root{
+    --ground:#F2F4F0;
+    --surface:#FFFFFF;
+    --surface-2:#F7F9F5;
+    --ink:#16221E;
+    --ink-soft:#4A574F;
+    --ink-faint:#7C877F;
+    --line:#E2E7DE;
+    --line-strong:#D2D9CE;
+    --accent:#0E8C6B;
+    --accent-deep:#0A6E54;
+    --accent-wash:#E4F2EC;
+    --gold:#D9922B;
+    --gold-wash:#FBEFD8;
+    --wrong:#CC4636;
+    --wrong-wash:#FBE8E5;
+    --shadow:0 1px 2px rgba(20,34,30,.05),0 12px 34px -18px rgba(20,34,30,.35);
+    --shadow-soft:0 1px 2px rgba(20,34,30,.04),0 8px 20px -16px rgba(20,34,30,.3);
+  }
+  :root:not([data-theme="light"]){
+    @media (prefers-color-scheme:dark){
+      --ground:#0E1512;
+      --surface:#17211D;
+      --surface-2:#1D2823;
+      --ink:#EAF0EC;
+      --ink-soft:#AEB9B2;
+      --ink-faint:#7E8A83;
+      --line:#2A3630;
+      --line-strong:#38453E;
+      --accent:#33BE93;
+      --accent-deep:#2AA680;
+      --accent-wash:#173029;
+      --gold:#EDB459;
+      --gold-wash:#2E2515;
+      --wrong:#E77163;
+      --wrong-wash:#331E1B;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 16px 40px -20px rgba(0,0,0,.7);
+      --shadow-soft:0 1px 2px rgba(0,0,0,.3),0 10px 24px -18px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#0E1512;
+    --surface:#17211D;
+    --surface-2:#1D2823;
+    --ink:#EAF0EC;
+    --ink-soft:#AEB9B2;
+    --ink-faint:#7E8A83;
+    --line:#2A3630;
+    --line-strong:#38453E;
+    --accent:#33BE93;
+    --accent-deep:#2AA680;
+    --accent-wash:#173029;
+    --gold:#EDB459;
+    --gold-wash:#2E2515;
+    --wrong:#E77163;
+    --wrong-wash:#331E1B;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 16px 40px -20px rgba(0,0,0,.7);
+    --shadow-soft:0 1px 2px rgba(0,0,0,.3),0 10px 24px -18px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--ground);color:var(--ink);
+    font-family:"Figtree",system-ui,sans-serif;line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:44px 22px 72px}
+
+  /* ---- page head ---- */
+  .brandrow{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  .logo{width:34px;height:34px;border-radius:10px;background:var(--accent);
+    display:grid;place-items:center;color:#fff;box-shadow:var(--shadow-soft)}
+  .logo svg{width:19px;height:19px}
+  .brandname{font-family:"Fraunces",serif;font-weight:600;font-size:1.45rem;letter-spacing:-.01em}
+  .brandname span{color:var(--accent)}
+  .kicker{font-family:"Space Mono",monospace;font-size:.72rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--ink-faint)}
+  .lead{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(1.5rem,3.6vw,2.15rem);
+    line-height:1.15;letter-spacing:-.02em;text-wrap:balance;margin:14px 0 8px;max-width:24ch}
+  .sub{color:var(--ink-soft);max-width:60ch;font-size:1.02rem}
+  .sub b{color:var(--ink);font-weight:600}
+
+  .stage{display:flex;gap:34px;flex-wrap:wrap;justify-content:center;margin-top:40px}
+  .col{flex:1 1 330px;max-width:390px;display:flex;flex-direction:column;align-items:center}
+  .caption{font-family:"Space Mono",monospace;font-size:.7rem;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-faint);margin-bottom:14px;text-align:center}
+  .caption b{color:var(--accent)}
+
+  /* ---- phone ---- */
+  .phone{width:100%;max-width:378px;background:var(--surface);border-radius:36px;
+    border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden;
+    display:flex;flex-direction:column;height:760px}
+  .status{display:flex;justify-content:space-between;align-items:center;
+    padding:12px 22px 4px;font-size:.74rem;font-weight:600;color:var(--ink-soft)}
+  .status .dots{display:flex;gap:4px;align-items:center}
+  .status .dots i{width:5px;height:5px;border-radius:50%;background:var(--ink-faint);display:block}
+
+  .appbar{display:flex;align-items:center;gap:10px;padding:8px 18px 14px}
+  .appbar .back{color:var(--ink-soft);font-size:1.2rem;width:26px}
+  .appbar .mod{font-family:"Space Mono",monospace;font-size:.66rem;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-faint)}
+  .streak{margin-left:auto;display:flex;align-items:center;gap:5px;background:var(--gold-wash);
+    color:var(--gold);border-radius:999px;padding:5px 11px;font-weight:700;font-size:.8rem;
+    font-family:"Space Mono",monospace}
+  .streak svg{width:13px;height:13px}
+
+  .screen{flex:1;overflow-y:auto;padding:0 18px 22px}
+  .screen::-webkit-scrollbar{width:0}
+
+  /* ---- module map screen ---- */
+  .maphead{padding:6px 2px 18px}
+  .maphead h1{font-family:"Fraunces",serif;font-weight:600;font-size:1.6rem;
+    letter-spacing:-.02em;margin:0 0 4px}
+  .maphead p{margin:0;color:var(--ink-soft);font-size:.9rem}
+  .prog{margin-top:16px;background:var(--surface-2);border:1px solid var(--line);
+    border-radius:16px;padding:14px 16px}
+  .prog .top{display:flex;justify-content:space-between;font-size:.78rem;
+    color:var(--ink-soft);font-weight:600;margin-bottom:9px}
+  .prog .top b{color:var(--ink)}
+  .bar{height:7px;border-radius:99px;background:var(--line-strong);overflow:hidden}
+  .bar i{display:block;height:100%;width:31%;background:linear-gradient(90deg,var(--accent),var(--accent-deep))}
+
+  .llist{display:flex;flex-direction:column;gap:9px;margin-top:16px}
+  .lrow{display:flex;align-items:center;gap:13px;padding:13px 14px;border-radius:15px;
+    border:1px solid var(--line);background:var(--surface);text-align:left}
+  .lrow.done{opacity:.9}
+  .lrow.active{border-color:var(--accent);background:var(--accent-wash);box-shadow:var(--shadow-soft)}
+  .lrow.lock{opacity:.55}
+  .lnum{width:30px;height:30px;border-radius:9px;flex:none;display:grid;place-items:center;
+    font-family:"Space Mono",monospace;font-weight:700;font-size:.82rem;
+    background:var(--surface-2);color:var(--ink-faint);border:1px solid var(--line)}
+  .lrow.done .lnum{background:var(--accent);color:#fff;border-color:transparent}
+  .lrow.active .lnum{background:var(--accent);color:#fff;border-color:transparent}
+  .ltxt{flex:1;min-width:0}
+  .ltxt .t{font-weight:600;font-size:.92rem;line-height:1.25}
+  .ltxt .m{font-size:.74rem;color:var(--ink-faint);margin-top:2px}
+  .lrow.active .ltxt .m{color:var(--accent-deep)}
+  .chev{color:var(--ink-faint);font-size:1rem}
+  .pill{font-family:"Space Mono",monospace;font-size:.6rem;letter-spacing:.08em;
+    text-transform:uppercase;padding:3px 7px;border-radius:6px;background:var(--surface);
+    border:1px solid var(--line-strong);color:var(--ink-faint)}
+  .lrow.active .pill{background:var(--accent);color:#fff;border-color:transparent}
+
+  /* ---- lesson screen ---- */
+  .video{position:relative;border-radius:20px;overflow:hidden;margin-top:4px;
+    background:linear-gradient(150deg,#0A6E54,#0E8C6B 55%,#12A87E);aspect-ratio:16/10;
+    display:flex;flex-direction:column;justify-content:flex-end;color:#fff}
+  .video .grain{position:absolute;inset:0;opacity:.5;
+    background:radial-gradient(120% 80% at 78% 12%,rgba(255,255,255,.22),transparent 60%)}
+  .video .curve{position:absolute;inset:0;width:100%;height:100%}
+  .video .badge{position:absolute;top:12px;left:12px;font-family:"Space Mono",monospace;
+    font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;background:rgba(0,0,0,.28);
+    padding:4px 9px;border-radius:999px;backdrop-filter:blur(4px)}
+  .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.92);
+    display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+  .play svg{width:22px;height:22px;color:var(--accent-deep);margin-left:3px}
+  .vmeta{position:relative;padding:12px 14px;background:linear-gradient(0deg,rgba(0,0,0,.4),transparent)}
+  .vmeta .vt{font-family:"Fraunces",serif;font-weight:600;font-size:1.02rem}
+  .vscrub{margin-top:8px;position:relative;height:5px;border-radius:99px;background:rgba(255,255,255,.28)}
+  .vscrub i{position:absolute;left:0;top:0;bottom:0;width:70%;border-radius:99px;background:#fff}
+  .vscrub .mark{position:absolute;left:70%;top:-5px;bottom:-5px;width:2px;background:var(--gold)}
+  .vhint{display:flex;align-items:center;gap:6px;margin-top:9px;font-size:.72rem;color:var(--gold);font-weight:600}
+  .vhint svg{width:12px;height:12px}
+
+  .section{margin-top:22px}
+  .eyebrow{font-family:"Space Mono",monospace;font-size:.64rem;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:9px;
+    display:flex;align-items:center;gap:7px}
+  .eyebrow::after{content:"";flex:1;height:1px;background:var(--line)}
+  h2.ltitle{font-family:"Fraunces",serif;font-weight:600;font-size:1.4rem;letter-spacing:-.02em;
+    line-height:1.15;margin:0 0 4px;text-wrap:balance}
+  .rtime{font-size:.76rem;color:var(--ink-faint);margin-bottom:12px}
+  .body p{font-size:.93rem;color:var(--ink-soft);margin:0 0 11px}
+  .body p b{color:var(--ink);font-weight:600}
+
+  .terms{display:flex;flex-direction:column;gap:8px}
+  .term{background:var(--surface-2);border:1px solid var(--line);border-radius:13px;padding:11px 13px}
+  .term .k{font-weight:700;font-size:.85rem;color:var(--accent-deep);display:flex;align-items:center;gap:6px}
+  .term .k svg{width:13px;height:13px}
+  .term .d{font-size:.82rem;color:var(--ink-soft);margin-top:2px}
+
+  .quiz{display:flex;flex-direction:column;gap:8px}
+  .q{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:14px}
+  .q .qq{font-weight:600;font-size:.9rem;margin-bottom:11px;line-height:1.35}
+  .q .qn{font-family:"Space Mono",monospace;color:var(--accent);margin-right:6px}
+  .opts{display:flex;flex-direction:column;gap:7px}
+  .opt{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:11px;
+    border:1px solid var(--line-strong);background:var(--surface);cursor:pointer;
+    font-size:.86rem;color:var(--ink);transition:.15s;text-align:left;width:100%;font-family:inherit}
+  .opt:hover{border-color:var(--accent)}
+  .opt .key{width:22px;height:22px;border-radius:7px;flex:none;display:grid;place-items:center;
+    font-family:"Space Mono",monospace;font-size:.74rem;font-weight:700;
+    background:var(--surface-2);color:var(--ink-faint);border:1px solid var(--line)}
+  .opt.right{border-color:var(--accent);background:var(--accent-wash)}
+  .opt.right .key{background:var(--accent);color:#fff;border-color:transparent}
+  .opt.wrong{border-color:var(--wrong);background:var(--wrong-wash)}
+  .opt.wrong .key{background:var(--wrong);color:#fff;border-color:transparent}
+  .opt:disabled{cursor:default}
+  .why{margin-top:10px;font-size:.8rem;color:var(--ink-soft);background:var(--accent-wash);
+    border-radius:10px;padding:9px 11px;display:none}
+  .why.show{display:block}
+  .why b{color:var(--accent-deep)}
+
+  .action{background:var(--surface-2);border:1px solid var(--accent);border-radius:17px;
+    padding:16px;position:relative;overflow:hidden}
+  .action .tag{font-family:"Space Mono",monospace;font-size:.62rem;letter-spacing:.1em;
+    text-transform:uppercase;color:#fff;background:var(--accent);padding:4px 9px;border-radius:999px;
+    display:inline-flex;align-items:center;gap:5px}
+  .action .tag svg{width:11px;height:11px}
+  .action h3{font-family:"Fraunces",serif;font-weight:600;font-size:1.06rem;margin:11px 0 6px}
+  .action p{font-size:.86rem;color:var(--ink-soft);margin:0 0 9px}
+  .datachip{display:flex;align-items:center;gap:8px;font-size:.78rem;background:var(--surface);
+    border:1px dashed var(--line-strong);border-radius:10px;padding:9px 11px;color:var(--ink-soft)}
+  .datachip b{color:var(--ink);font-weight:600}
+  .datachip .live{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none;
+    box-shadow:0 0 0 3px var(--accent-wash)}
+  .cta{margin-top:13px;width:100%;border:none;border-radius:12px;padding:13px;
+    background:var(--accent);color:#fff;font-family:inherit;font-weight:700;font-size:.92rem;
+    cursor:pointer;box-shadow:var(--shadow-soft)}
+  .reflect{margin-top:11px;font-size:.8rem;color:var(--ink-soft);font-style:italic;
+    border-left:2px solid var(--accent);padding-left:11px}
+
+  .taxnote{margin-top:16px;font-size:.77rem;color:var(--ink-soft);background:var(--gold-wash);
+    border-radius:12px;padding:12px 13px}
+  .taxnote .h{font-weight:700;color:var(--gold);display:flex;align-items:center;gap:6px;margin-bottom:4px}
+  .taxnote .h svg{width:13px;height:13px}
+  .taxnote .verify{font-family:"Space Mono",monospace;font-size:.7rem;color:var(--gold)}
+
+  /* ---- bottom nav + fab ---- */
+  .nav{display:flex;justify-content:space-around;padding:9px 8px 12px;border-top:1px solid var(--line);
+    background:var(--surface)}
+  .nav a{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:.62rem;
+    color:var(--ink-faint);font-weight:600}
+  .nav a.on{color:var(--accent)}
+  .nav svg{width:20px;height:20px}
+  .fab{position:absolute;right:16px;bottom:74px;display:flex;align-items:center;gap:7px;
+    background:var(--ink);color:var(--ground);border-radius:999px;padding:10px 15px;
+    font-weight:700;font-size:.8rem;box-shadow:var(--shadow)}
+  .fab svg{width:15px;height:15px}
+  .phone{position:relative}
+
+  .foot{margin-top:52px;text-align:center;color:var(--ink-faint);font-size:.8rem}
+  .foot b{color:var(--ink)}
+
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <div class="brandrow">
+    <span class="logo" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c0-6 0-9-4-12"/><path d="M12 13c0-4 3-7 8-7 0 5-3 8-8 8Z"/><path d="M12 21c0-4 2-6 6-6"/></svg>
+    </span>
+    <span class="brandname">Neev<span>.</span></span>
+    <span class="kicker" style="margin-left:auto">Module 1 · Concept Preview</span>
+  </div>
+
+  <h1 class="lead">One lesson, front to back — the way a user actually sees it.</h1>
+  <p class="sub">Left is the <b>module map</b>: eight beginner lessons, gated so people move in sequence. Right is <b>Lesson 3 opened</b> — video up top, a skimmable write-up, a 3-question check, then the one thing that makes this app different: a <b>practical action on today's real market data</b>. Tap the quiz options to try it.</p>
+
+  <div class="stage">
+    <!-- ============ SCREEN 1: MODULE MAP ============ -->
+    <div class="col">
+      <div class="caption">Screen 1 · <b>Module map</b></div>
+      <div class="phone">
+        <div class="status"><span>9:41</span><span class="dots"><i></i><i></i><i></i> Neev</span></div>
+        <div class="appbar">
+          <span class="mod">Course</span>
+          <span class="streak"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2s5 4 5 9a5 5 0 0 1-10 0c0-1 .3-2 .8-2.8C8 10 9 11 9 11s-.5-4 3-9Z"/></svg> 6</span>
+        </div>
+        <div class="screen">
+          <div class="maphead">
+            <h1>Foundations</h1>
+            <p>Why money grows — and what actually drives it. No stock picks, just the forces.</p>
+            <div class="prog">
+              <div class="top"><span>Module 1 progress</span><span><b>2</b> / 8 lessons</span></div>
+              <div class="bar"><i></i></div>
+            </div>
+          </div>
+          <div class="llist">
+            <button class="lrow done"><span class="lnum">✓</span><span class="ltxt"><span class="t">Saving vs investing</span><span class="m">Why idle cash quietly shrinks</span></span><span class="chev">›</span></button>
+            <button class="lrow done"><span class="lnum">✓</span><span class="ltxt"><span class="t">Inflation, the silent tax</span><span class="m">What ₹100 buys in 10 years</span></span><span class="chev">›</span></button>
+            <button class="lrow active"><span class="lnum">3</span><span class="ltxt"><span class="t">Return on your returns</span><span class="m">Compounding · 3 min</span></span><span class="pill">Today</span></button>
+            <button class="lrow lock"><span class="lnum">4</span><span class="ltxt"><span class="t">Risk &amp; return: no free lunch</span><span class="m">Unlocks after Lesson 3</span></span><span class="chev">🔒</span></button>
+            <button class="lrow lock"><span class="lnum">5</span><span class="ltxt"><span class="t">Time horizon decides all</span><span class="m">Locked</span></span><span class="chev">🔒</span></button>
+            <button class="lrow lock"><span class="lnum">6</span><span class="ltxt"><span class="t">Liquidity: reachable vs locked</span><span class="m">Locked</span></span><span class="chev">🔒</span></button>
+            <button class="lrow lock"><span class="lnum">7</span><span class="ltxt"><span class="t">Don't crowd one basket</span><span class="m">Locked</span></span><span class="chev">🔒</span></button>
+            <button class="lrow lock"><span class="lnum">8</span><span class="ltxt"><span class="t">Asset classes, at a glance</span><span class="m">Locked</span></span><span class="chev">🔒</span></button>
+          </div>
+        </div>
+        <div class="nav">
+          <a class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V6a2 2 0 0 1 2-2h9l5 4v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><path d="M9 8h4M9 12h6"/></svg>Learn</a>
+          <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18V9M9 18V5M14 18v-6M19 18v-9"/></svg>Portfolio</a>
+          <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 20v-4M12 20V8M18 20v-8"/><circle cx="12" cy="4" r="2"/></svg>Squad</a>
+          <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>You</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ SCREEN 2: LESSON ============ -->
+    <div class="col">
+      <div class="caption">Screen 2 · <b>Lesson opened</b></div>
+      <div class="phone">
+        <div class="status"><span>9:41</span><span class="dots"><i></i><i></i><i></i> Neev</span></div>
+        <div class="appbar">
+          <span class="back">‹</span>
+          <span class="mod">Module 1 · Lesson 3</span>
+          <span class="streak"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2s5 4 5 9a5 5 0 0 1-10 0c0-1 .3-2 .8-2.8C8 10 9 11 9 11s-.5-4 3-9Z"/></svg> 6</span>
+        </div>
+        <div class="screen">
+          <!-- VIDEO -->
+          <div class="video">
+            <svg class="curve" viewBox="0 0 380 230" preserveAspectRatio="none" fill="none">
+              <path d="M0 210 C 120 208, 210 190, 270 120 C 310 70, 340 30, 380 12" stroke="rgba(255,255,255,.85)" stroke-width="3"/>
+              <path d="M0 210 C 120 208, 210 190, 270 120 C 310 70, 340 30, 380 12 L380 230 L0 230Z" fill="rgba(255,255,255,.10)"/>
+            </svg>
+            <span class="grain"></span>
+            <span class="badge">▶ 78 sec · Hinglish VO</span>
+            <span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+            <div class="vmeta">
+              <div class="vt">How ₹100 quietly becomes ₹200</div>
+              <div class="vscrub"><i></i><span class="mark" title="70% = streak credit"></span></div>
+              <div class="vhint"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2s5 4 5 9a5 5 0 0 1-10 0c0-1 .3-2 .8-2.8C8 10 9 11 9 11s-.5-4 3-9Z"/></svg> Watch to the gold mark (70%) to earn today's streak</div>
+            </div>
+          </div>
+
+          <!-- DESCRIPTION -->
+          <div class="section">
+            <div class="eyebrow">The idea</div>
+            <h2 class="ltitle">Return on your returns</h2>
+            <div class="rtime">📖 3 min read · reference for later</div>
+            <div class="body">
+              <p>Socho aap ek <b>₹200 Swiggy order</b> jitna paisa kahin invest karte ho, aur har saal thoda return milta hai. First year, you earn on your ₹200. The quiet trick is the <b>second</b> year: you earn a return on the original ₹200 <b>and</b> on last year's earnings too. Paisa khud paisa banane lagta hai.</p>
+              <p>For a while it feels boring — the early years look almost flat and you'll think <i>"kuch ho hi nahi raha."</i> That's normal. Compounding is <b>back-loaded</b>: most of the magic shows up in the later years, once the snowball is big enough to matter.</p>
+              <p>Two things decide how strong it gets: <b>how long</b> the money stays invested, and whether you <b>resist pulling it out</b> early. Every withdrawal resets the snowball to the bottom of the hill.</p>
+              <p>So "kitna return milega" is the wrong first question. The better ones — how long can I leave this untouched, and can I avoid touching it — are the parts you actually control. We won't name a single fund or stock; compounding is just a force, and where you point it is a separate call for later.</p>
+            </div>
+          </div>
+
+          <!-- KEY TERMS -->
+          <div class="section">
+            <div class="eyebrow">Two terms, plainly</div>
+            <div class="terms">
+              <div class="term"><div class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19h16M6 15l4-4 3 3 5-6"/></svg>Compounding</div><div class="d">Earning returns on both your original money and the returns it has already earned.</div></div>
+              <div class="term"><div class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>Time horizon</div><div class="d">How long you plan to leave money invested before you actually need it.</div></div>
+            </div>
+          </div>
+
+          <!-- QUIZ -->
+          <div class="section">
+            <div class="eyebrow">Quick check · 3 questions</div>
+            <div class="quiz" id="quiz"></div>
+          </div>
+
+          <!-- PRACTICAL ACTION -->
+          <div class="section">
+            <div class="eyebrow">Do it with virtual money</div>
+            <div class="action">
+              <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Today's action</span>
+              <h3>Run one weekend's spend forward in time</h3>
+              <p>Take ₹500 — a weekend outing — and in the simulator run it forward for <b>5, 15 and 25 years</b>. Watch where the curve stops being flat and starts bending upward.</p>
+              <div class="datachip"><span class="live"></span><span><b>Live data:</b> a real historical index return series drives the curve — not a made-up flat rate.</span></div>
+              <button class="cta">Open the compounding simulator →</button>
+              <p class="reflect">After: at which year did growth stop feeling "flat" and start feeling steep — and did that surprise you?</p>
+            </div>
+          </div>
+
+          <!-- TAX NOTE -->
+          <div class="taxnote">
+            <div class="h"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4Z"/></svg>How tax touches this</div>
+            Frequent buying &amp; selling can trigger taxes and charges that interrupt compounding. In India, equity held <b>over 1 year</b> (long-term) is taxed differently from under 1 year (short-term). <span class="verify">(verify current rate before relying on this)</span>
+          </div>
+        </div>
+
+        <div class="fab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4Z"/></svg>Ask a doubt</div>
+        <div class="nav">
+          <a class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V6a2 2 0 0 1 2-2h9l5 4v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><path d="M9 8h4M9 12h6"/></svg>Learn</a>
+          <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18V9M9 18V5M14 18v-6M19 18v-9"/></svg>Portfolio</a>
+          <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 20v-4M12 20V8M18 20v-8"/><circle cx="12" cy="4" r="2"/></svg>Squad</a>
+          <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>You</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="foot">This is a clickable concept mock of <b>Neev</b> — sample content for Module 1, Lesson 3. Fonts: Fraunces + Figtree + Space Mono. Tap the quiz to try the interaction.</p>
+</div>
+
+<script>
+const QUIZ=[
+  {q:"Why do the early years of compounding often look almost flat?",
+   o:["Returns are highest right at the start","The earnings-on-earnings snowball is still small early on","Inflation eats everything in year one","You haven't paid any tax yet"],
+   a:1,why:"Compounding is back-loaded — the snowball of returns-earning-returns is tiny early and grows fastest in the later years."},
+  {q:"Two people invest the same amount monthly. One starts at 25, one at 35. Who gives compounding more to work with?",
+   o:["The one who starts at 35","The one who starts at 25","Both exactly the same","Impossible to say"],
+   a:1,why:"More time means more cycles of returns earning their own returns — time is compounding's biggest lever."},
+  {q:"Which of these do you actually control?",
+   o:["The exact return you'll earn","How long you stay invested & whether you withdraw early","Next year's market direction","The inflation rate"],
+   a:1,why:"You can't control returns or markets — but your time horizon and the discipline not to withdraw are fully yours."}
+];
+const KEYS=["A","B","C","D"];
+const wrap=document.getElementById("quiz");
+QUIZ.forEach((item,qi)=>{
+  const card=document.createElement("div");card.className="q";
+  card.innerHTML=`<div class="qq"><span class="qn">Q${qi+1}</span>${item.q}</div>`;
+  const opts=document.createElement("div");opts.className="opts";
+  item.o.forEach((txt,oi)=>{
+    const b=document.createElement("button");b.className="opt";
+    b.innerHTML=`<span class="key">${KEYS[oi]}</span><span>${txt}</span>`;
+    b.onclick=()=>{
+      if(card.dataset.done)return;card.dataset.done=1;
+      const btns=opts.querySelectorAll(".opt");
+      btns.forEach((x,xi)=>{x.disabled=true;if(xi===item.a)x.classList.add("right");});
+      if(oi!==item.a)b.classList.add("wrong");
+      card.querySelector(".why").classList.add("show");
+    };
+    opts.appendChild(b);
+  });
+  card.appendChild(opts);
+  const why=document.createElement("div");why.className="why";
+  why.innerHTML=`<b>Why:</b> ${item.why}`;
+  card.appendChild(why);
+  wrap.appendChild(card);
+});
+</script>
