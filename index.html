@@ -5,6 +5,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Figtree:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap">
 
+<!-- PWA (installable + offline; active when served over https, e.g. GitHub Pages) -->
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0E8C6B">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Neev">
+
 <style>
 :root{
   --ground:#EEF1EC;--surface:#FFFFFF;--surface-2:#F6F8F4;--surface-3:#EDF1EA;
@@ -790,6 +799,9 @@ function burstAt(el){if(reduced())return;const dev=cc.parentElement.getBoundingC
 const tb=document.getElementById("themeBtn");
 tb.onclick=()=>{const cur=document.documentElement.getAttribute("data-theme");const dark=cur==="dark"||(!cur&&matchMedia("(prefers-color-scheme:dark)").matches);document.documentElement.setAttribute("data-theme",dark?"light":"dark");try{localStorage.setItem("neev_theme",dark?"light":"dark");}catch(e){}render();};
 try{const th=localStorage.getItem("neev_theme");if(th)document.documentElement.setAttribute("data-theme",th);}catch(e){}
+
+/* PWA: register service worker (no-op on file:// or where unsupported) */
+if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("sw.js").catch(()=>{});});}
 
 /* boot */
 render();
