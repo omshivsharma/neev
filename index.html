@@ -191,6 +191,20 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .termrow{display:flex;flex-direction:column;gap:8px;margin-top:16px}
 .trm{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:.83rem}
 .trm b{color:var(--accent-deep)}
+details.deepdive{background:var(--surface-2);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:2px}
+details.deepdive summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:13px 14px;
+  font-weight:700;font-size:.85rem;color:var(--accent-deep)}
+details.deepdive summary::-webkit-details-marker{display:none}
+details.deepdive .ddi{font-size:1rem}
+details.deepdive .ddc{margin-left:auto;transition:transform .2s;color:var(--ink-faint)}
+details.deepdive[open] .ddc{transform:rotate(90deg)}
+.ddbody{padding:0 15px 14px}
+.ddbody p{font-size:.9rem;color:var(--ink-soft);margin:0 0 11px;line-height:1.6}
+.ddfaqh{font-family:"Space Mono",monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin:6px 0 8px}
+.ddfaq{border-top:1px dashed var(--line);padding:9px 0}
+.ddfaq .fq{font-weight:700;font-size:.85rem;display:flex;gap:7px}.ddfaq .fq::before{content:"Q";color:var(--accent);font-family:"Space Mono",monospace}
+.ddfaq .fa{font-size:.83rem;color:var(--ink-soft);margin-top:3px;padding-left:16px}
 
 .lfoot{flex:none;padding:14px 18px calc(14px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--surface)}
 .btn{width:100%;border-radius:14px;padding:15px;font-weight:800;font-size:.95rem;background:var(--accent);color:#fff;
@@ -337,6 +351,22 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 .themebtn{position:absolute;top:12px;right:18px;z-index:15;width:30px;height:30px;border-radius:9px;
   background:var(--surface-2);border:1px solid var(--line);display:grid;place-items:center;color:var(--ink-soft)}
 .themebtn svg{width:15px;height:15px}
+.langbtn{position:absolute;top:12px;right:56px;z-index:15;height:30px;padding:0 10px;border-radius:9px;
+  background:var(--surface-2);border:1px solid var(--line);display:flex;align-items:center;gap:5px;color:var(--ink-soft);
+  font-family:"Space Mono",monospace;font-weight:700;font-size:.66rem;letter-spacing:.04em}
+.langbtn svg{width:13px;height:13px}
+#langsheet{position:absolute;inset:0;z-index:80;display:none;align-items:flex-end;justify-content:center}
+#langsheet.open{display:flex;animation:screenIn .25s}
+#langsheet .scrim{position:absolute;inset:0;background:rgba(10,20,16,.45)}
+#langsheet .sheet{position:relative;width:100%;background:var(--surface);border-radius:22px 22px 0 0;padding:18px 18px calc(20px + env(safe-area-inset-bottom));
+  box-shadow:var(--shadow-l);animation:sheetUp .3s cubic-bezier(.2,.7,.2,1)}
+#langsheet .sh{font-family:"Fraunces",serif;font-weight:600;font-size:1.05rem;margin-bottom:12px}
+.langopt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:13px 14px;border-radius:13px;
+  border:1.5px solid var(--line-strong);background:var(--surface);margin-bottom:9px}
+.langopt.on{border-color:var(--accent);background:var(--accent-wash)}
+.langopt .em{font-size:1.3rem}
+.langopt .tx{flex:1}.langopt .tx .a{font-weight:700;font-size:.94rem}.langopt .tx .b{font-size:.76rem;color:var(--ink-faint)}
+.langopt .ck{color:var(--accent);opacity:0}.langopt.on .ck{opacity:1}
 
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
@@ -345,6 +375,14 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
   <div class="device">
     <div class="sbar"><span>9:41</span><span class="serif" style="font-weight:600">Neev</span><span class="r"><i></i><i></i><i></i></span></div>
     <button class="themebtn" id="themeBtn" title="Theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg></button>
+    <button class="langbtn" id="langBtn" title="Language"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18"/></svg><span id="langLbl">HG</span></button>
+
+    <div id="langsheet"><div class="scrim" id="langScrim"></div><div class="sheet">
+      <div class="sh" id="langSheetTitle">Choose language</div>
+      <button class="langopt" data-l="en"><span class="em">🇬🇧</span><span class="tx"><span class="a">English</span><span class="b">Full English</span></span><span class="ck">✓</span></button>
+      <button class="langopt" data-l="hi"><span class="em">🇮🇳</span><span class="tx"><span class="a">हिंदी</span><span class="b">Poori Hindi</span></span><span class="ck">✓</span></button>
+      <button class="langopt" data-l="hg"><span class="em">🌐</span><span class="tx"><span class="a">Hinglish</span><span class="b">Hindi + English mix</span></span><span class="ck">✓</span></button>
+    </div></div>
 
     <div class="view" id="view"></div>
 
@@ -369,121 +407,254 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 </div>
 
 <script>
+/* ---------------- i18n ---------------- */
+let LANG="hg";
+try{const sl=localStorage.getItem("neev_lang");if(sl)LANG=sl;}catch(e){}
+const L=(en,hi,hg)=>({en,hi,hg});
+const t=o=>o==null?"":(typeof o==="string"?o:(o[LANG]||o.hg||o.en||""));
+const LANGLBL={en:"EN",hi:"हि",hg:"HG"};
+const UI={
+  greetHi:L("Namaste 👋","नमस्ते 👋","Namaste 👋"),
+  greetSub:L("A little wiser today","आज थोड़ा और समझदार","Aaj thoda aur samajhdaar"),
+  xp:L("XP","XP","XP"), lessons:L("Lessons","पाठ","Lessons"), bestStreak:L("Best streak","बेस्ट स्ट्रीक","Best streak"),
+  startToday:L("Start today's lesson","आज का पाठ शुरू करें","Aaj ka lesson shuru karo"),
+  modLesson:L("Module","मॉड्यूल","Module"), lessonW:L("Lesson","पाठ","Lesson"),
+  m1done:L("Module 1 complete! 🎉","मॉड्यूल 1 पूरा! 🎉","Module 1 complete! 🎉"),
+  m1doneSub:L("You've laid the foundation. Module 2 coming soon.","आपने नींव रख दी। मॉड्यूल 2 जल्द।","Aapne neev rakh di. Module 2 jald."),
+  forToday:L("For today","आज के लिए","Aaj ke liye"), seeAll:L("See all →","सभी →","Sabhi →"),
+  simTitle:L("Compounding simulator","कंपाउंडिंग सिम्युलेटर","Compounding simulator"),
+  simSub:L("Run ₹500 forward 25 years","₹500 को 25 साल आगे चलाओ","₹500 ko 25 saal aage chala ke dekho"),
+  squadTitle:L("Squad challenge","स्क्वाड चैलेंज","Squad challenge"),
+  squadSub:L("Longest streak this week","इस हफ्ते सबसे लंबी स्ट्रीक","Is hafte sabse lambi streak"),
+  theCourse:L("The course","कोर्स","The course"),
+  courseTitle:L("Situation → right call","सिचुएशन → सही फैसला","Situation → sahi call"),
+  courseSub:L("Every lesson starts with a real scene — then the framework to decide yourself.","हर पाठ एक असली सीन से शुरू — फिर वो फ्रेमवर्क जिससे आप खुद तय करें।","Har lesson ek asli scene se — phir framework jisse aap khud decide karo."),
+  next:L("Next","अगला","Next"), lockedMore:L("more","और","more"),
+  unlocksProto:L("lessons · unlocks in prototype","पाठ · प्रोटोटाइप में","lessons · unlocks in prototype"),
+  toQuiz:L("Take the quiz →","क्विज़ लें →","Quiz karo →"),
+  goOn:L("Continue →","आगे बढ़ें →","Aage badho →"),
+  finishLes:L("Finish lesson ✓","पाठ पूरा करें ✓","Lesson poora karo ✓"),
+  cont:L("Continue","आगे","Continue"), done:L("Done","हो गया","Done"),
+  attemptAll:L("Attempt all questions","सभी सवाल हल करें","Sabhi sawaal attempt karo"),
+  deepDive:L("Deep dive — the full explanation","गहराई से — पूरी व्याख्या","Deep dive — poori samajh"),
+  quickCheck:L("Quick check","क्विक चेक","Quick check"),
+  checkTitle:L("Lock it in","समझ पक्की करो","Samajh pakki karo"),
+  why:L("Why:","क्यों:","Why:"),
+  doLabel:L("Do it with virtual money","वर्चुअल पैसे से करो","Do it with virtual money"),
+  todayTask:L("Today's action","आज का काम","Aaj ka kaam"),
+  liveData:L("Live data:","लाइव डेटा:","Live data:"),
+  openSim:L("Open the simulator →","सिम्युलेटर खोलो →","Simulator kholo →"),
+  reflection:L("Reflection","रिफ्लेक्शन","Reflection"),
+  reflectPh:L("In your own words… (only for you)","अपने शब्दों में… (सिर्फ आपके लिए)","Apne shabdon mein... (sirf aapke liye)"),
+  wellDone:L("Well done!","शाबाश!","Shabaash!"),
+  youGot:L("You understood","आपने समझ लिया","Aapne samajh liya"),
+  streakWord:L("streak","स्ट्रीक","streak"),
+  beatSit:L("Situation","सिचुएशन","Situation"), beatMyth:L("Myth","मिथक","Myth"),
+  beatReflex:L("The reflex","आम रिफ्लेक्स","The reflex"), beatQ:L("The real question","असली सवाल","Asli sawaal"),
+  beatFw:L("Framework","फ्रेमवर्क","Framework"), beatCall:L("Your call","आपका फैसला","Your call"),
+  taxNote:L("Tax note:","टैक्स नोट:","Tax note:"),
+  ddExample:L("Worked example","उदाहरण","Worked example"), ddFaq:L("Common questions","आम सवाल","Common questions"),
+  // sim
+  simEyebrow:L("Lesson 4 · practical action","पाठ 4 · प्रैक्टिकल","Lesson 4 · practical action"),
+  simH:L("Watch the curve stop being flat","देखो कर्व कब तेज़ होता है","Curve ko flat se steep hote dekho"),
+  simP:L("Run a small amount forward and find the year growth speeds up.","छोटी रकम आगे चलाओ और वो साल ढूंढो जहाँ ग्रोथ तेज़ होती है।","Chhota amount aage chala ke woh saal dhoondo jahan growth tez hoti hai."),
+  onetime:L("One-time","एकमुश्त","One-time"), monthly:L("Monthly (SIP)","हर महीने (SIP)","Monthly (SIP)"),
+  amtOnce:L("Amount invested once","एकमुश्त रकम","Amount invested once"), amtMonth:L("Amount every month","हर महीने की रकम","Amount every month"),
+  years:L("Years","साल","Years"), assumedRet:L("Assumed annual return","मानी गई सालाना रिटर्न","Assumed annual return"),
+  simRateNote:L("In the real app this is a real historical series — here it's a dial.","असली ऐप में यह असली ऐतिहासिक सीरीज़ से चलेगा — यहाँ डायल है।","Real app mein yeh actual historical series se chalega — yahaan dial hai."),
+  invested:L("Invested","लगाया","Daala"), growsTo:L("Grows to","बनता है","Banta hai"), growth:L("Growth","ग्रोथ","Growth"),
+  bendAround:L("Around","करीब","Around"), bendYearW:L("year","साल","year"),
+  bendMsg:L("your growth passes everything you put in — the snowball tips over.","आपकी ग्रोथ आपके लगाए से बड़ी हो जाती है — स्नोबॉल पलट जाता है।","aapki growth aapke daale hue se badi ho jaati hai — snowball tips over."),
+  // portfolio
+  pfLabel:L("Virtual portfolio","वर्चुअल पोर्टफोलियो","Virtual portfolio"), pfPractice:L("practice money","अभ्यास का पैसा","practice money"),
+  todayMkt:L("Today's market","आज का मार्केट","Aaj ka market"),
+  sampleNote:L("Sample values for the prototype — the live app fetches real AMFI/exchange data.","प्रोटोटाइप के लिए सैंपल वैल्यू — असली ऐप AMFI/एक्सचेंज डेटा लाता है।","Sample values — live app real AMFI/exchange data laata hai."),
+  yourBuckets:L("Your buckets","आपके बकेट","Aapke buckets"),
+  pfHint:L("Fill these buckets from lesson actions — like Module 1's ₹10,000 split.","इन बकेट को पाठ के एक्शन से भरो — जैसे मॉड्यूल 1 का ₹10,000 बंटवारा।","Lessons ke actions se yeh buckets bharo — jaise Lesson 1 ka ₹10,000 batwara."),
+  bkJald:L("Reach (safe)","रीच (सेफ)","Jald (safe)"), bkMid:L("Mid-term","मिड-टर्म","Mid-term"), bkLong:L("Long-term","लॉन्ग-टर्म","Long-term"),
+  ofPot:L("of pot","पॉट का","of pot"),
+  // squad
+  squad:L("Squad","स्क्वाड","Squad"), squadH:L("Learn with friends","दोस्तों के साथ सीखो","Dosto ke saath seekho"),
+  weekChallenge:L("This week's challenge","इस हफ्ते का चैलेंज","Is hafte ka challenge"),
+  longestStreak:L("Longest streak 🔥","सबसे लंबी स्ट्रीक 🔥","Sabse lambi streak 🔥"),
+  challengeP:L("One lesson a day. Whoever keeps the longest streak tops this list.","रोज़ एक पाठ। जो सबसे ज़्यादा दिन टिकेगा वो यहाँ टॉप।","Har din ek lesson. Jo sabse zyada din tikega, uska naam yahaan."),
+  youTag:L(" (you)"," (आप)"," (aap)"),
+  squadDemo:L("Friends are demo — in the real app you invite your own squad.","दोस्त डेमो हैं — असली ऐप में आप अपनी स्क्वाड बुलाओगे।","Friends demo hain — real app mein aap apni squad invite karoge."),
+  // profile
+  levelW:L("Level","लेवल","Level"), toNext:L("to","अगले","to"), maxLevel:L("max level","मैक्स लेवल","max level"),
+  current:L("Current","अभी","Current"), best:L("Best","बेस्ट","Best"),
+  achievements:L("Achievements","अचीवमेंट","Achievements"), unlocked:L("Unlocked","अनलॉक","Unlocked"),
+  conceptMastery:L("Concept mastery","कॉन्सेप्ट मास्टरी","Concept mastery"),
+  locked:L("locked","लॉक्ड","locked"),
+  resetProg:L("Reset progress","प्रोग्रेस रीसेट करें","Progress reset karo"),
+  resetConfirm:L("Reset all progress? (demo)","सारा प्रोग्रेस रीसेट? (डेमो)","Saara progress reset? (demo)"),
+  langChoose:L("Choose language","भाषा चुनें","Bhasha chuno"),
+  archNew:L("Newcomer","नया","Newcomer"), archStart:L("Just Started","शुरुआत","Just Started"),
+  archCurious:L("Curious Builder","जिज्ञासु","Curious Builder"), archThinker:L("Framework Thinker","फ्रेमवर्क थिंकर","Framework Thinker"),
+  badgeUnlocked:L("Badge unlocked:","बैज अनलॉक:","Badge unlocked:")
+};
+const NAVLBL={home:L("Home","होम","Home"),learn:L("Learn","सीखो","Learn"),portfolio:L("Portfolio","पोर्टफोलियो","Portfolio"),squad:L("Squad","स्क्वाड","Squad"),profile:L("You","आप","You")};
+const BADGENAMES={first:L("First Step","पहला कदम","Pehla Kadam"),myth3:L("Myth Buster","मिथक तोड़ू","Myth Buster"),ace:L("Quiz Ace","क्विज़ एस","Quiz Ace"),sim:L("Curve Curious","कर्व क्यूरियस","Curve Curious"),week:L("Week Warrior","वीक वॉरियर","Week Warrior"),m1:L("Foundation Laid","नींव रखी","Neev Rakhi")};
+
 /* ---------------- DATA ---------------- */
-const MODULE1={ id:"m1", n:1, title:"Paisa aaya — ab kya?", theme:"You suddenly have money. Should it even be invested?",
+const MODULE1={ id:"m1", n:1, title:L("You've got money — now what?","पैसा आया — अब क्या?","Paisa aaya — ab kya?"), theme:L("You suddenly have money. Should it even be invested?","अचानक पैसा हाथ में। क्या इसे इन्वेस्ट करना भी चाहिए?","Achanak paisa — kya isse invest karna bhi chahiye?"),
  lessons:[
- {id:"m1l1",title:"₹10,000 aaye — kharch, bachao, ya badhao?",sub:"The spend / save / invest fork",mins:3,
+ {id:"m1l1",title:L("₹10,000 landed — spend, save, or grow?","₹10,000 आए — खर्च, बचाओ, या बढ़ाओ?","₹10,000 aaye — kharch, bachao, ya badhao?"),sub:L("The spend / save / invest fork","खर्च/बचत/निवेश का चौराहा","The spend / save / invest fork"),mins:3,
   beats:{
-   sit:"Account mein achanak <b>₹10,000</b> aaye — bonus ya freelance ka payment. Dil khush, aur saamne ek sale ka notification.",
-   myth:{lie:"Paisa aate hi turant 'invest' kar dena hi samajhdari hai.",truth:"Pehla sawaal 'kahan' nahi — 'kab chahiye' hai. Cushion pehle, growth baad mein."},
-   reflex:"Ya toh turant kharch kar do, ya kisi dost ke kehne pe bina soche kahin daal do.",
-   q:"Is paise ko mujhe <b>kab</b> chahiye?",
-   fw:"Har rupee ko teen dabbon mein socho — <b>(a) jald/emergency</b> → safe & reachable, <b>(b) 1–3 saal goal</b> → alag treatment, <b>(c) 5+ saal</b> → yahan 'grow karun?' banta hai. Order matters: cushion pehle.",
-   call:"₹10k kahan jaaye = aapka cushion + upcoming needs + horizon. 'Kya achha chal raha hai' galat compass hai. Hum jagah name nahi karte — sirf kaise choose karein."
+   sit:L("<b>₹10,000</b> suddenly land in your account — a bonus, or a freelance payment. You're happy, and a sale notification is already staring at you.","आपके खाते में अचानक <b>₹10,000</b> आ गए — बोनस या फ्रीलांस पेमेंट। मन खुश, और सामने एक सेल का नोटिफिकेशन।","Account mein achanak <b>₹10,000</b> aaye — bonus ya freelance ka payment. Dil khush, aur saamne ek sale ka notification."),
+   myth:{lie:L("Investing money the moment it arrives is always the smart move.","पैसा आते ही तुरंत 'इन्वेस्ट' कर देना ही समझदारी है।","Paisa aate hi turant 'invest' kar dena hi samajhdari hai."),truth:L("The first question isn't 'where' — it's 'when do I need it'. Cushion first, growth later.","पहला सवाल 'कहाँ' नहीं — 'कब चाहिए' है। कुशन पहले, ग्रोथ बाद में।","Pehla sawaal 'kahan' nahi — 'kab chahiye' hai. Cushion pehle, growth baad mein.")},
+   reflex:L("Either spend it right away, or dump it somewhere on a friend's word without thinking.","या तो तुरंत खर्च कर दो, या किसी दोस्त के कहने पर बिना सोचे कहीं डाल दो।","Ya toh turant kharch kar do, ya kisi dost ke kehne pe bina soche kahin daal do."),
+   q:L("<b>When</b> do I need this money?","मुझे यह पैसा <b>कब</b> चाहिए?","Is paise ko mujhe <b>kab</b> chahiye?"),
+   fw:L("Sort every rupee into three boxes — <b>(a) soon / emergency</b> → safe & reachable, <b>(b) 1–3 year goal</b> → different treatment, <b>(c) 5+ years away</b> → here 'should I grow it?' applies. Order matters: cushion first.","हर रुपये को तीन डिब्बों में सोचो — <b>(a) जल्द/इमरजेंसी</b> → सेफ और रीचेबल, <b>(b) 1–3 साल का गोल</b> → अलग ट्रीटमेंट, <b>(c) 5+ साल</b> → यहाँ 'बढ़ाऊँ?' बनता है। क्रम मायने रखता है: कुशन पहले।","Har rupee ko teen dabbon mein socho — <b>(a) jald/emergency</b> → safe & reachable, <b>(b) 1–3 saal goal</b> → alag treatment, <b>(c) 5+ saal</b> → yahan 'grow karun?' banta hai. Order matters: cushion pehle."),
+   call:L("Where the ₹10k goes = your cushion + upcoming needs + horizon. 'What's doing well' is the wrong compass. We won't name a place — only how to choose.","₹10k कहाँ जाए = आपका कुशन + आने वाली ज़रूरतें + होराइज़न। 'क्या अच्छा चल रहा है' गलत कम्पास है। हम जगह नहीं बताते — सिर्फ कैसे चुनें।","₹10k kahan jaaye = aapka cushion + upcoming needs + horizon. 'Kya achha chal raha hai' galat compass hai. Hum jagah name nahi karte — sirf kaise choose karein.")
   },
-  terms:[{k:"Emergency cushion",d:"Safe, reachable money kept only for the unexpected."},{k:"Time horizon",d:"How long until you actually need a given rupee."}],
-  action:{h:"₹10,000 ko teen dabbon mein baanto",p:"Virtual ₹10,000 ko Jald / Mid / Long buckets mein daalo — jo ratio aaj sahi lage.",data:"Real savings rate for the 'Jald' bucket."},
+  dd:{ex:[
+   L("Money has no meaning until it has a job. The single question that gives it one is 'when will I need this?' — because that decides how reachable and how growth-focused it should be. A windfall feels like 'extra', which is exactly why it slips away or gets parked carelessly.","पैसे का कोई मतलब नहीं जब तक उसे कोई काम न मिले। वो काम एक सवाल से मिलता है — 'यह कब चाहिए?' — क्योंकि यही तय करता है कि पैसा कितना रीचेबल और कितना ग्रोथ-फोकस्ड हो। अचानक आया पैसा 'एक्स्ट्रा' लगता है, इसीलिए फिसल जाता है।","Paise ka koi matlab nahi jab tak use koi kaam na mile. Woh kaam ek sawaal se milta hai — 'yeh kab chahiye?' — kyunki yahi decide karta hai ki paisa kitna reachable aur kitna growth-focused ho. Achanak aaya paisa 'extra' lagta hai, isiliye fisal jaata hai."),
+   L("The three-box order is not random. First a small emergency reachable box, then near-term goals, and only what's left over for 5+ years can chase growth. Growing money you'll need in 6 months just forces you to sell at the wrong time. Fix the order and the 'where' becomes far easier.","तीन डिब्बों का क्रम बेतरतीब नहीं है। पहले छोटा इमरजेंसी रीचेबल डिब्बा, फिर नज़दीकी गोल, और जो बचे वही 5+ साल के लिए ग्रोथ का पीछा करे। 6 महीने में चाहिए पैसे को बढ़ाना आपको गलत समय पर बेचने को मजबूर करता है।","Teen dabbon ka order random nahi hai. Pehle chhota emergency reachable dabba, phir near-term goals, aur jo bache wahi 5+ saal ke liye growth chase kare. 6 mahine mein chahiye paisa badhaana aapko galat waqt pe bechne pe majboor karta hai. Order theek, toh 'kahan' aasaan.")],
+   faq:[
+    {q:L("Should I not enjoy any of it?","क्या इसमें से कुछ भी एन्जॉय न करूँ?","Kya isme se kuch enjoy na karun?"),a:L("Of course you can. Decide a small 'enjoy' slice consciously — the point is a choice, not an autopilot swipe that eats the whole amount.","बिल्कुल कर सकते हो। एक छोटा 'एन्जॉय' हिस्सा सोच-समझकर तय करो — बात choice की है, ऑटोपायलट की नहीं।","Bilkul kar sakte ho. Ek chhota 'enjoy' hissa soch ke tay karo — baat choice ki hai, autopilot ki nahi.")},
+    {q:L("What if I already have an emergency fund?","अगर मेरे पास पहले से इमरजेंसी फंड है?","Agar emergency fund pehle se hai?"),a:L("Then more of this can lean toward mid/long boxes — the framework simply shifts, it doesn't break.","तो ज़्यादा हिस्सा मिड/लॉन्ग डिब्बों की तरफ जा सकता है — फ्रेमवर्क बस शिफ्ट होता है।","Toh zyada hissa mid/long dabbon ki taraf ja sakta hai — framework bas shift hota hai.")}
+   ]},
+  terms:[{k:L("Emergency cushion","इमरजेंसी कुशन","Emergency cushion"),d:L("Safe, reachable money kept only for the unexpected.","सिर्फ अनचाही ज़रूरत के लिए रखा सेफ, रीचेबल पैसा।","Safe, reachable money kept only for the unexpected.")},{k:L("Time horizon","टाइम होराइज़न","Time horizon"),d:L("How long until you actually need a given rupee.","किसी रुपये की असल में ज़रूरत पड़ने तक का समय।","How long until you actually need a given rupee.")}],
+  action:{h:L("Split ₹10,000 into three boxes","₹10,000 को तीन डिब्बों में बाँटो","₹10,000 ko teen dabbon mein baanto"),p:L("Put virtual ₹10,000 into Reach / Mid / Long buckets — whatever ratio feels right today.","वर्चुअल ₹10,000 को रीच / मिड / लॉन्ग बकेट में डालो — जो रेशियो आज सही लगे।","Virtual ₹10,000 ko Jald / Mid / Long buckets mein daalo — jo ratio aaj sahi lage."),data:L("A real savings-account rate for the 'Reach' bucket.","'रीच' बकेट के लिए असली सेविंग्स रेट।","Real savings rate for the 'Jald' bucket.")},
   quiz:[
-   {q:"Paise ke baare mein sabse pehla sawaal kya hai?",o:["Kaunse fund mein daalun","Kitna return milega","Mujhe yeh kab chahiye","Dost kahan daal raha hai"],a:2,why:"Kab chahiye — yeh baaki sab decide karta hai: reachability aur growth-focus."},
-   {q:"Investing shuru karne se pehle kya hona chahiye?",o:["Ek emergency cushion","Sabse zyada return wala fund","Ek stock tip","Demat account sirf"],a:0,why:"Cushion bina, pehla jhatka aapko galat waqt pe bechne pe majboor karega."}
+   {q:L("What's the very first question about any money?","किसी भी पैसे पर सबसे पहला सवाल क्या है?","Paise ke baare mein sabse pehla sawaal kya hai?"),o:[L("Which fund to use","कौन से फंड में डालूँ","Kaunse fund mein daalun"),L("How much return","कितना रिटर्न मिलेगा","Kitna return milega"),L("When will I need it","मुझे यह कब चाहिए","Mujhe yeh kab chahiye"),L("Where's my friend investing","दोस्त कहाँ डाल रहा है","Dost kahan daal raha hai")],a:2,why:L("When you need it decides everything else — reachability and growth-focus.","कब चाहिए यही बाकी सब तय करता है — रीचेबिलिटी और ग्रोथ-फोकस।","Kab chahiye — yeh baaki sab decide karta hai: reachability aur growth-focus.")},
+   {q:L("What should come before investing?","इन्वेस्टिंग से पहले क्या होना चाहिए?","Investing shuru karne se pehle kya hona chahiye?"),o:[L("An emergency cushion","एक इमरजेंसी कुशन","Ek emergency cushion"),L("The highest-return fund","सबसे ज़्यादा रिटर्न वाला फंड","Sabse zyada return wala fund"),L("A stock tip","एक स्टॉक टिप","Ek stock tip"),L("Just a demat account","सिर्फ डीमैट अकाउंट","Demat account sirf")],a:0,why:L("Without a cushion, the first shock forces you to sell at the wrong time.","कुशन बिना, पहला झटका आपको गलत समय पर बेचने को मजबूर करेगा।","Cushion bina, pehla jhatka aapko galat waqt pe bechne pe majboor karega.")}
   ],
-  reflect:"Kaun sa bucket sabse bada rakha — aur kyun?"},
+  reflect:L("Which bucket did you make biggest — and why?","आपने कौन सा बकेट सबसे बड़ा रखा — और क्यों?","Kaun sa bucket sabse bada rakha — aur kyun?")},
 
- {id:"m1l2",title:"Jab zindagi curveball fenke",sub:"Why an emergency fund comes first",mins:3,
+ {id:"m1l2",title:L("When life throws a curveball","जब ज़िंदगी करवाबॉल फेंके","Jab zindagi curveball fenke"),sub:L("Why an emergency fund comes first","इमरजेंसी फंड पहले क्यों","Why an emergency fund comes first"),mins:3,
   beats:{
-   sit:"Saturday raat. Phone haath se gira, screen chaknachoor — ya ghar mein achanak medical bill. <b>₹15,000 chahiye, abhi.</b>",
-   myth:{lie:"Saara paisa invested ho toh main 'aage' hoon.",truth:"Bina emergency fund, pehla jhatka hi aapko galat waqt pe bechne pe majboor karega."},
-   reflex:"Invested paisa nikaalo (jo us din neeche ho), ya credit card / udhaar pe chale jao.",
-   q:"Kya aisa paisa hai jo <b>bina loss, bina wait</b> — aaj mil jaaye?",
-   fw:"Emergency fund = kuch mahine ke essential kharche, alag, safe & liquid, untouched. Yeh growth ke liye nahi — <b>peace</b> ke liye. Investing iske baad shuru hoti hai.",
-   call:"3, 6, ya zyada mahine — income stability, dependents, aur health pe depend karta hai. Aapki call."
+   sit:L("Saturday night. Your phone slips and the screen shatters — or a sudden medical bill at home. <b>You need ₹15,000, now.</b>","शनिवार रात। फोन गिरा, स्क्रीन चकनाचूर — या घर में अचानक मेडिकल बिल। <b>₹15,000 चाहिए, अभी।</b>","Saturday raat. Phone haath se gira, screen chaknachoor — ya ghar mein achanak medical bill. <b>₹15,000 chahiye, abhi.</b>"),
+   myth:{lie:L("If all my money is invested, I'm 'ahead'.","सारा पैसा इन्वेस्टेड हो तो मैं 'आगे' हूँ।","Saara paisa invested ho toh main 'aage' hoon."),truth:L("Without an emergency fund, the first shock forces you to sell at the wrong time.","इमरजेंसी फंड बिना, पहला झटका ही आपको गलत समय पर बेचने को मजबूर करेगा।","Bina emergency fund, pehla jhatka hi aapko galat waqt pe bechne pe majboor karega.")},
+   reflex:L("Pull out invested money (down that day), or lean on a credit card / borrowing.","इन्वेस्टेड पैसा निकालो (जो उस दिन नीचे हो), या क्रेडिट कार्ड/उधार पर चले जाओ।","Invested paisa nikaalo (jo us din neeche ho), ya credit card / udhaar pe chale jao."),
+   q:L("Is there money you can reach today — <b>no loss, no wait</b>?","क्या ऐसा पैसा है जो <b>बिना नुकसान, बिना इंतज़ार</b> — आज मिल जाए?","Kya aisa paisa hai jo <b>bina loss, bina wait</b> — aaj mil jaaye?"),
+   fw:L("Emergency fund = a few months of essential expenses, set aside, safe & liquid, untouched. Not for growth — for <b>peace</b>. Investing starts after this.","इमरजेंसी फंड = कुछ महीनों के ज़रूरी खर्चे, अलग, सेफ और लिक्विड, अनछुए। ग्रोथ के लिए नहीं — <b>शांति</b> के लिए। इन्वेस्टिंग इसके बाद।","Emergency fund = kuch mahine ke essential kharche, alag, safe & liquid, untouched. Yeh growth ke liye nahi — <b>peace</b> ke liye. Investing iske baad shuru hoti hai."),
+   call:L("3, 6, or more months — depends on income stability, dependents, and health. Your call.","3, 6 या ज़्यादा महीने — इनकम स्थिरता, आश्रितों और सेहत पर निर्भर। आपका फैसला।","3, 6, ya zyada mahine — income stability, dependents, aur health pe depend karta hai. Aapki call.")
   },
-  terms:[{k:"Emergency fund",d:"A safe, liquid pot sized in months of essential spending."},{k:"Liquidity",d:"How fast you can reach cash without a loss."}],
-  action:{h:"Apna cushion size karo",p:"Apna asli monthly essential kharcha daalo; app 3 aur 6 mahine ka cushion size karega.",data:"User-entered monthly essential spend."},
+  dd:{ex:[
+   L("An emergency fund is boring on purpose. It isn't there to grow — it's there so that a bad week doesn't blow up your long-term plan. Without it, the first unexpected bill forces you to sell investments, often when they're down, turning a temporary dip into a permanent loss.","इमरजेंसी फंड जान-बूझकर बोरिंग है। यह बढ़ने के लिए नहीं — यह इसलिए है कि एक बुरा हफ्ता आपके लॉन्ग-टर्म प्लान को उड़ा न दे। इसके बिना, पहला अनचाहा बिल आपको इन्वेस्टमेंट बेचने को मजबूर करता है, अक्सर जब वो नीचे हों।","Emergency fund jaan-boojh ke boring hai. Yeh badhne ke liye nahi — yeh isliye hai ki ek bura hafta aapke long-term plan ko uda na de. Iske bina, pehla anchaha bill aapko investments bechne pe majboor karta hai, aksar jab woh neeche hon."),
+   L("Size it in months of essential spend, not a random number. Keep it somewhere safe and instantly reachable — the whole point is speed. It sits before investing in the order for a simple reason: peace of mind is the foundation everything else is built on.","इसे ज़रूरी खर्चे के महीनों में नापो, किसी random नंबर में नहीं। इसे सेफ और तुरंत मिलने वाली जगह रखो — पूरा मकसद स्पीड है। यह इन्वेस्टिंग से पहले आता है क्योंकि मन की शांति ही नींव है।","Ise essential kharche ke mahino mein naapo, kisi random number mein nahi. Ise safe aur turant milne wali jagah rakho — poora maqsad speed hai. Yeh investing se pehle aata hai kyunki mann ki shaanti hi neev hai.")],
+   faq:[
+    {q:L("Isn't idle emergency money 'wasted'?","क्या बेकार पड़ा इमरजेंसी पैसा 'बर्बाद' नहीं?","Idle emergency paisa 'waste' nahi?"),a:L("No — its job is availability, not return. Think of it as insurance you can spend, not a missed investment.","नहीं — इसका काम उपलब्धता है, रिटर्न नहीं। इसे खर्च करने लायक बीमा समझो।","Nahi — iska kaam availability hai, return nahi. Ise kharch karne layak insurance samjho.")},
+    {q:L("3 months or 6 months?","3 महीने या 6 महीने?","3 mahine ya 6 mahine?"),a:L("More months if your income is irregular or people depend on you; fewer if it's very stable. Your situation, your call.","ज़्यादा महीने अगर इनकम अनियमित है या लोग आप पर निर्भर हैं; कम अगर बहुत स्थिर। आपकी situation।","Zyada mahine agar income irregular hai ya log aap pe depend hain; kam agar bahut stable. Aapki call.")}
+   ]},
+  terms:[{k:L("Emergency fund","इमरजेंसी फंड","Emergency fund"),d:L("A safe, liquid pot sized in months of essential spending.","ज़रूरी खर्चे के महीनों में नापा सेफ, लिक्विड फंड।","A safe, liquid pot sized in months of essential spending.")},{k:L("Liquidity","लिक्विडिटी","Liquidity"),d:L("How fast you can reach cash without a loss.","बिना नुकसान कितनी जल्दी कैश मिल जाए।","How fast you can reach cash without a loss.")}],
+  action:{h:L("Size your cushion","अपना कुशन नापो","Apna cushion size karo"),p:L("Enter your real monthly essential spend; the app sizes a 3- and 6-month cushion.","अपना असली मासिक ज़रूरी खर्च डालो; ऐप 3 और 6 महीने का कुशन नापेगा।","Apna asli monthly essential kharcha daalo; app 3 aur 6 mahine ka cushion size karega."),data:L("User-entered monthly essential spend.","यूज़र का डाला मासिक ज़रूरी खर्च।","User-entered monthly essential spend.")},
   quiz:[
-   {q:"Kaunsa paisa sabse zyada liquid rehna chahiye?",o:["30 saal door retirement","Emergency fund","Jo kabhi touch nahi karoge","15 saal ka goal"],a:1,why:"Emergency ko cash aaj chahiye — reachable & penalty-free."},
-   {q:"Emergency fund ka asli maqsad kya hai?",o:["Sabse zyada growth","Tax bachana","Bura waqt bina bechne ke sambhaalna","Dost se aage nikalna"],a:2,why:"Yeh peace ke liye hai — taaki jhatke pe aapko investments galat waqt na bechne pade."}
+   {q:L("Which money must stay most liquid?","कौन सा पैसा सबसे ज़्यादा लिक्विड रहना चाहिए?","Kaunsa paisa sabse zyada liquid rehna chahiye?"),o:[L("Retirement 30 years away","30 साल दूर रिटायरमेंट","30 saal door retirement"),L("Emergency fund","इमरजेंसी फंड","Emergency fund"),L("Money you'll never touch","जो कभी नहीं छुओगे","Jo kabhi touch nahi karoge"),L("A 15-year goal","15 साल का गोल","15 saal ka goal")],a:1,why:L("Emergencies need cash today — reachable & penalty-free.","इमरजेंसी को कैश आज चाहिए — रीचेबल और बिना पेनल्टी।","Emergency ko cash aaj chahiye — reachable & penalty-free.")},
+   {q:L("What's the real purpose of an emergency fund?","इमरजेंसी फंड का असली मकसद क्या है?","Emergency fund ka asli maqsad kya hai?"),o:[L("Maximum growth","सबसे ज़्यादा ग्रोथ","Sabse zyada growth"),L("Saving tax","टैक्स बचाना","Tax bachana"),L("Riding out bad times without selling","बुरा वक्त बिना बेचे संभालना","Bura waqt bina bechne ke sambhaalna"),L("Beating your friends","दोस्त से आगे निकलना","Dost se aage nikalna")],a:2,why:L("It's for peace — so a shock doesn't force you to sell investments at the wrong time.","यह शांति के लिए है — ताकि झटके पर आपको इन्वेस्टमेंट गलत समय बेचने न पड़ें।","Yeh peace ke liye hai — taaki jhatke pe aapko investments galat waqt na bechne pade.")}
   ],
-  reflect:"Aaj emergency aaye toh 24 ghante mein kitna reach kar sakte ho?"},
+  reflect:L("If an emergency hit today, how much could you reach in 24 hours?","अगर आज इमरजेंसी आए, 24 घंटे में कितना पहुँच सकते हो?","Aaj emergency aaye toh 24 ghante mein kitna reach kar sakte ho?")},
 
- {id:"m1l3",title:"Drawer mein pada paisa chhota ho raha hai",sub:"Inflation, the silent shrink",mins:3,
+ {id:"m1l3",title:L("Idle money is quietly shrinking","रखा हुआ पैसा चुपचाप छोटा हो रहा है","Drawer mein pada paisa chhota ho raha hai"),sub:L("Inflation, the silent shrink","इन्फ्लेशन, खामोश कटौती","Inflation, the silent shrink"),mins:3,
   beats:{
-   sit:"Dadi ne <b>₹50,000</b> ghar pe 'safe' samajh ke 5 saal se rakhe. Note wahi, ginti wahi.",
-   myth:{lie:"Cash ghar/idle mein rakhna = fully safe.",truth:"Volatility se safety aur inflation se safety — do bilkul alag baatein hain."},
-   reflex:"Idle cash ko permanently safe maan lena.",
-   q:"5 saal baad us ₹50,000 se aap <b>utna hi</b> khareed paoge?",
-   fw:"Inflation daam dheere-dheere badhata hai; toh same rupees se kam milta hai. Idle 'safe' paisa chup-chaap apni <b>buying power</b> khota hai.",
-   call:"Emergency ke liye idle cash sahi; par barso idle pada long-term paisa ek quiet cost carry karta hai. Kitna idle — zaroorat se decide karo, dar se nahi."
+   sit:L("Grandma kept <b>₹50,000</b> at home for 5 years, thinking it 'safe'. The notes are the same, the count is the same.","दादी ने <b>₹50,000</b> घर पे 'सेफ' समझकर 5 साल से रखे। नोट वही, गिनती वही।","Dadi ne <b>₹50,000</b> ghar pe 'safe' samajh ke 5 saal se rakhe. Note wahi, ginti wahi."),
+   myth:{lie:L("Cash kept idle at home is fully safe.","घर/idle में रखा कैश = पूरी तरह सेफ।","Cash ghar/idle mein rakhna = fully safe."),truth:L("Safety from volatility and safety from inflation are two completely different things.","वोलैटिलिटी से सेफ्टी और इन्फ्लेशन से सेफ्टी — दो बिल्कुल अलग बातें।","Volatility se safety aur inflation se safety — do bilkul alag baatein hain.")},
+   reflex:L("Assuming idle cash stays permanently safe.","idle कैश को हमेशा सेफ मान लेना।","Idle cash ko permanently safe maan lena."),
+   q:L("In 5 years, will that ₹50,000 buy <b>just as much</b>?","5 साल बाद उन ₹50,000 से आप <b>उतना ही</b> खरीद पाओगे?","5 saal baad us ₹50,000 se aap <b>utna hi</b> khareed paoge?"),
+   fw:L("Inflation raises prices slowly, so the same rupees buy less. Idle 'safe' money quietly loses its <b>buying power</b>.","इन्फ्लेशन दाम धीरे-धीरे बढ़ाता है; तो same रुपयों से कम मिलता है। idle 'सेफ' पैसा चुपचाप अपनी <b>बाइंग पावर</b> खोता है।","Inflation daam dheere-dheere badhata hai; toh same rupees se kam milta hai. Idle 'safe' paisa chup-chaap apni <b>buying power</b> khota hai."),
+   call:L("Idle cash is fine for emergencies; but long-term money left idle for years carries a quiet cost. How much to keep idle — decide by need, not fear.","इमरजेंसी के लिए idle कैश सही; पर सालों idle पड़ा लॉन्ग-टर्म पैसा एक खामोश कीमत रखता है। कितना idle — ज़रूरत से तय करो, डर से नहीं।","Emergency ke liye idle cash sahi; par barso idle pada long-term paisa ek quiet cost carry karta hai. Kitna idle — zaroorat se decide karo, dar se nahi.")
   },
-  terms:[{k:"Inflation",d:"The general rise in prices, so the same rupees buy a little less each year."},{k:"Purchasing power",d:"What your money can actually buy, not the rupee count."}],
-  action:{h:"Buying power girti hui dekho",p:"Virtual ₹50,000 pe latest real inflation apply karke 5 saal aage ki buying power dekho.",data:"Latest official India CPI print."},
+  dd:{ex:[
+   L("Inflation is the reason 'doing nothing' with money is not actually neutral. Prices for the things you buy — food, rent, travel — tend to drift upward, so a fixed pile of cash slowly buys less each year even though the number never changes. It's a loss you don't see on any statement.","इन्फ्लेशन ही वजह है कि पैसे के साथ 'कुछ न करना' असल में neutral नहीं है। खाना, किराया, सफर — इनके दाम ऊपर की ओर बढ़ते हैं, तो जमा कैश हर साल थोड़ा कम खरीदता है, चाहे नंबर वही रहे।","Inflation hi wajah hai ki paise ke saath 'kuch na karna' asal mein neutral nahi hai. Khaana, kiraya, safar — inke daam upar ki or badhte hain, toh jama cash har saal thoda kam khareedta hai, chahe number wahi rahe."),
+   L("This isn't an argument to never hold cash — your emergency fund must stay in cash. It's an argument against letting long-term money sit idle out of fear. Money you won't need for years has time to grow past inflation; leaving it idle is a silent, optional cost.","यह दलील नहीं कि कभी कैश न रखो — इमरजेंसी फंड कैश में ही रहे। यह दलील है कि लॉन्ग-टर्म पैसा डर से idle न पड़ा रहे। जो पैसा सालों नहीं चाहिए उसके पास इन्फ्लेशन से आगे बढ़ने का समय है।","Yeh daleel nahi ki kabhi cash na rakho — emergency fund cash mein hi rahe. Yeh daleel hai ki long-term paisa dar se idle na pada rahe. Jo paisa saalon nahi chahiye uske paas inflation se aage badhne ka time hai.")],
+   faq:[
+    {q:L("So cash is bad?","तो कैश बुरा है?","Toh cash bura hai?"),a:L("No — cash is perfect for money you need soon. It's only a quiet cost for money you won't touch for years.","नहीं — जल्द चाहिए पैसे के लिए कैश बढ़िया है। यह सिर्फ सालों न छुए जाने वाले पैसे के लिए खामोश कीमत है।","Nahi — jald chahiye paise ke liye cash badhiya hai. Yeh sirf saalon na chhue jaane wale paise ke liye khamosh cost hai.")},
+    {q:L("How do I even know the inflation rate?","इन्फ्लेशन रेट पता कैसे करूँ?","Inflation rate pata kaise karun?"),a:L("The app shows the latest official India figure. Don't memorise a number — just grasp the direction: idle money loses ground.","ऐप नवीनतम आधिकारिक भारत आँकड़ा दिखाता है। नंबर रटो मत — दिशा समझो: idle पैसा पिछड़ता है।","App latest official India figure dikhata hai. Number ratto mat — direction samjho: idle paisa pichhadta hai.")}
+   ]},
+  terms:[{k:L("Inflation","इन्फ्लेशन","Inflation"),d:L("The general rise in prices, so the same rupees buy a little less each year.","दामों का आम बढ़ना, जिससे same रुपये हर साल थोड़ा कम खरीदते हैं।","The general rise in prices, so the same rupees buy a little less each year.")},{k:L("Purchasing power","बाइंग पावर","Purchasing power"),d:L("What your money can actually buy, not the rupee count.","आपका पैसा असल में क्या खरीद सकता है, रुपयों की गिनती नहीं।","What your money can actually buy, not the rupee count.")}],
+  action:{h:L("Watch buying power fall","बाइंग पावर गिरती देखो","Buying power girti hui dekho"),p:L("Apply the latest real inflation to virtual ₹50,000 and see its buying power 5 years out.","वर्चुअल ₹50,000 पे नवीनतम असली इन्फ्लेशन लगाकर 5 साल आगे की बाइंग पावर देखो।","Virtual ₹50,000 pe latest real inflation apply karke 5 saal aage ki buying power dekho."),data:L("Latest official India CPI print.","नवीनतम आधिकारिक भारत CPI आँकड़ा।","Latest official India CPI print.")},
   quiz:[
-   {q:"Idle 'safe' cash ke saath quietly kya hota hai?",o:["Rupee ginti girti hai","Buying power girti hai","Bank use le leta hai","Kuch nahi"],a:1,why:"Number wahi, par prices badhne se woh kam khareed paata hai."},
-   {q:"Volatility se safe hona kis se safe hone jaisa NAHI hai?",o:["Chori","Inflation","Fees","Tax"],a:1,why:"Bumpiness se bachna alag; inflation se buying power ka bachaav alag cheez hai."}
+   {q:L("What quietly happens to idle 'safe' cash?","idle 'सेफ' कैश के साथ चुपचाप क्या होता है?","Idle 'safe' cash ke saath quietly kya hota hai?"),o:[L("The rupee count falls","रुपये की गिनती गिरती है","Rupee ginti girti hai"),L("Its buying power falls","बाइंग पावर गिरती है","Buying power girti hai"),L("The bank uses it","बैंक इस्तेमाल कर लेता है","Bank use le leta hai"),L("Nothing","कुछ नहीं","Kuch nahi")],a:1,why:L("The number stays, but rising prices mean it buys less.","नंबर वही, पर दाम बढ़ने से वो कम खरीद पाता है।","Number wahi, par prices badhne se woh kam khareed paata hai.")},
+   {q:L("Safety from volatility is NOT the same as safety from…","वोलैटिलिटी से सेफ होना किससे सेफ होने जैसा नहीं?","Volatility se safe hona kis se safe hone jaisa NAHI hai?"),o:[L("Theft","चोरी","Chori"),L("Inflation","इन्फ्लेशन","Inflation"),L("Fees","फीस","Fees"),L("Tax","टैक्स","Tax")],a:1,why:L("Avoiding bumpiness is one thing; protecting buying power from inflation is another.","बंपीनेस से बचना अलग; इन्फ्लेशन से बाइंग पावर बचाना अलग।","Bumpiness se bachna alag; inflation se buying power ka bachaav alag cheez hai.")}
   ],
-  reflect:"Kitna cash aapka 'zaroori reachable' hai vs 'bas pada hua'?"},
+  reflect:L("How much of your cash is 'needed reachable' vs 'just sitting'?","आपका कितना कैश 'ज़रूरी रीचेबल' है बनाम 'बस पड़ा हुआ'?","Kitna cash aapka 'zaroori reachable' hai vs 'bas pada hua'?")},
 
- {id:"m1l4",title:"₹200 ko ₹400 kaun banata hai — time",sub:"Compounding is back-loaded",mins:3,
+ {id:"m1l4",title:L("Who turns ₹200 into ₹400 — time","₹200 को ₹400 कौन बनाता है — टाइम","₹200 ko ₹400 kaun banata hai — time"),sub:L("Compounding is back-loaded","कंपाउंडिंग बैक-लोडेड है","Compounding is back-loaded"),mins:3,
   beats:{
-   sit:"Do dost. Ek ne 22 ki umar se chhota-chhota daala aur bhool gaya. Doosre ne 32 se <b>double</b> amount daala.",
-   myth:{lie:"Investing tabhi matlab rakhta hai jab bada amount ho.",truth:"Time amount se bada lever hai — jaldi shuru karna > baad mein zyada daalna."},
-   reflex:"'Abhi kam hai — baad mein zyada kama ke ek saath bada invest karunga.'",
-   q:"Aage kaun nikla — jisne <b>zyada</b> daala, ya jisne <b>jaldi</b> shuru kiya?",
-   fw:"Compounding = return on return. Shuru mein flat lagta hai, asli kamaal baad ke saalon mein (back-loaded). Heavy lifting <b>time</b> karta hai, amount nahi.",
-   call:"Jo abhi de sako, usse aaj shuru karo — chhota bhi chalega. Kahan point karna hai woh alag, baad ka decision."
+   sit:L("Two friends. One started putting in small amounts at 22 and forgot about it. The other started at 32 with <b>double</b> the amount.","दो दोस्त। एक ने 22 की उम्र से थोड़ा-थोड़ा डाला और भूल गया। दूसरे ने 32 से <b>दोगुनी</b> रकम डाली।","Do dost. Ek ne 22 ki umar se chhota-chhota daala aur bhool gaya. Doosre ne 32 se <b>double</b> amount daala."),
+   myth:{lie:L("Investing only matters once you have a big amount.","इन्वेस्टिंग तभी मायने रखती है जब बड़ी रकम हो।","Investing tabhi matlab rakhta hai jab bada amount ho."),truth:L("Time is a bigger lever than amount — starting early beats investing more later.","टाइम रकम से बड़ा लीवर है — जल्दी शुरू करना > बाद में ज़्यादा डालना।","Time amount se bada lever hai — jaldi shuru karna > baad mein zyada daalna.")},
+   reflex:L("'It's small now — later I'll earn more and invest a big lump at once.'","'अभी कम है — बाद में ज़्यादा कमाकर एक साथ बड़ा इन्वेस्ट करूँगा।'","'Abhi kam hai — baad mein zyada kama ke ek saath bada invest karunga.'"),
+   q:L("Who ended up ahead — who put in <b>more</b>, or who started <b>early</b>?","आगे कौन निकला — जिसने <b>ज़्यादा</b> डाला, या जिसने <b>जल्दी</b> शुरू किया?","Aage kaun nikla — jisne <b>zyada</b> daala, ya jisne <b>jaldi</b> shuru kiya?"),
+   fw:L("Compounding = return on return. Flat early, the real magic in later years (back-loaded). The heavy lifting is done by <b>time</b>, not the amount.","कंपाउंडिंग = रिटर्न पर रिटर्न। शुरू में फ्लैट, असली कमाल बाद के सालों में (बैक-लोडेड)। भारी काम <b>टाइम</b> करता है, रकम नहीं।","Compounding = return on return. Shuru mein flat lagta hai, asli kamaal baad ke saalon mein (back-loaded). Heavy lifting <b>time</b> karta hai, amount nahi."),
+   call:L("Start today with whatever you can — small is fine. Where to point it is a separate, later decision.","जो अभी दे सको उससे आज शुरू करो — छोटा भी चलेगा। कहाँ लगाना है वो अलग, बाद का फैसला।","Jo abhi de sako, usse aaj shuru karo — chhota bhi chalega. Kahan point karna hai woh alag, baad ka decision.")
   },
-  terms:[{k:"Compounding",d:"Earning returns on both your money and the returns it already earned."},{k:"Time horizon",d:"How long the money stays invested before you need it."}],
-  action:{h:"Bend dhoondo",p:"Simulator mein ₹500 ko 5, 15 aur 25 saal aage chala ke woh saal dhoondo jahan curve flat se steep hota hai.",data:"A real historical index return series drives the curve.",sim:true},
+  dd:{ex:[
+   L("Compounding means your returns start earning their own returns. In year one you earn on your money; in year two you earn on your money AND on last year's gains. This snowball is tiny at first, which is why early years look flat and boring — and why most people quit before it gets interesting.","कंपाउंडिंग यानी आपके रिटर्न खुद रिटर्न कमाने लगते हैं। पहले साल आप अपने पैसे पर कमाते हो; दूसरे साल अपने पैसे पर और पिछले साल के मुनाफे पर भी। यह स्नोबॉल शुरू में छोटा है, इसीलिए शुरुआती साल फ्लैट लगते हैं।","Compounding yaani aapke return khud return kamaane lagte hain. Pehle saal aap apne paise pe kamate ho; doosre saal apne paise pe AUR pichhle saal ke munaafe pe bhi. Yeh snowball shuru mein chhota hai, isiliye shuruaati saal flat lagte hain."),
+   L("Because it's back-loaded, time is the strongest lever — more than the amount. Someone who starts at 22 gives the snowball a decade more of cycles than someone at 32, and often ends ahead even with smaller contributions. The one thing fully in your control is starting, and not withdrawing.","चूँकि यह बैक-लोडेड है, टाइम सबसे बड़ा लीवर है — रकम से भी ज़्यादा। 22 से शुरू करने वाला स्नोबॉल को 32 वाले से एक दशक ज़्यादा साइकिल देता है, और अक्सर कम डालकर भी आगे रहता है। आपके हाथ में बस शुरू करना और न निकालना है।","Kyunki yeh back-loaded hai, time sabse bada lever hai — amount se bhi zyada. 22 se shuru karne wala snowball ko 32 wale se ek dashak zyada cycles deta hai, aur aksar kam daal ke bhi aage rehta hai. Aapke haath mein bas shuru karna aur na nikaalna hai.")],
+   faq:[
+    {q:L("I can only invest a tiny bit — worth it?","मैं बहुत थोड़ा ही कर सकता हूँ — फायदा है?","Main bahut thoda hi kar sakta hoon — fayda hai?"),a:L("Yes — starting early with a little usually beats starting late with a lot, because time does the work. Open the simulator and see.","हाँ — जल्दी थोड़े से शुरू करना अक्सर देर से बहुत डालने से बेहतर, क्योंकि काम टाइम करता है। सिम्युलेटर में देखो।","Haan — jaldi thode se shuru karna aksar der se bahut daalne se behtar, kyunki kaam time karta hai. Simulator mein dekho.")},
+    {q:L("What return should I assume?","कितना रिटर्न मानूँ?","Kitna return maanun?"),a:L("Don't fixate on it — you can't control it. Focus on the two things you can: time in, and not pulling out early.","इस पर मत अटको — यह आपके बस में नहीं। दो चीज़ों पर ध्यान दो जो आपके बस में हैं: समय और जल्दी न निकालना।","Ispe mat atko — yeh aapke bas mein nahi. Do cheezon pe dhyan do jo bas mein hain: time, aur jaldi na nikaalna.")}
+   ]},
+  terms:[{k:L("Compounding","कंपाउंडिंग","Compounding"),d:L("Earning returns on both your money and the returns it already earned.","अपने पैसे और पहले कमाए रिटर्न — दोनों पर रिटर्न कमाना।","Earning returns on both your money and the returns it already earned.")},{k:L("Time horizon","टाइम होराइज़न","Time horizon"),d:L("How long the money stays invested before you need it.","पैसा ज़रूरत से पहले कितने समय निवेशित रहता है।","How long the money stays invested before you need it.")}],
+  action:{h:L("Find the bend","बेंड ढूंढो","Bend dhoondo"),p:L("In the simulator, run ₹500 forward 5, 15 and 25 years and find the year the curve turns from flat to steep.","सिम्युलेटर में ₹500 को 5, 15 और 25 साल आगे चलाकर वो साल ढूंढो जहाँ कर्व फ्लैट से तेज़ होता है।","Simulator mein ₹500 ko 5, 15 aur 25 saal aage chala ke woh saal dhoondo jahan curve flat se steep hota hai."),data:L("A real historical index return series drives the curve.","असली ऐतिहासिक इंडेक्स रिटर्न सीरीज़ कर्व चलाती है।","A real historical index return series drives the curve."),sim:true},
   quiz:[
-   {q:"Compounding ke early saal flat kyun lagte hain?",o:["Return shuru mein sabse zyada","Snowball abhi chhota hai","Inflation sab kha jaata hai","Tax nahi diya"],a:1,why:"Back-loaded — returns-on-returns ka snowball baad mein bada hota hai."},
-   {q:"Same monthly amount — kaun aage, 25 se shuru ya 35 se?",o:["35 se","25 se","Dono barabar","Keh nahi sakte"],a:1,why:"Zyada time = zyada cycles — time compounding ka sabse bada lever."}
+   {q:L("Why do compounding's early years look flat?","कंपाउंडिंग के शुरुआती साल फ्लैट क्यों लगते हैं?","Compounding ke early saal flat kyun lagte hain?"),o:[L("Returns are highest at the start","रिटर्न शुरू में सबसे ज़्यादा","Return shuru mein sabse zyada"),L("The snowball is still small","स्नोबॉल अभी छोटा है","Snowball abhi chhota hai"),L("Inflation eats it all","इन्फ्लेशन सब खा जाता है","Inflation sab kha jaata hai"),L("No tax paid yet","टैक्स नहीं दिया","Tax nahi diya")],a:1,why:L("Back-loaded — the returns-on-returns snowball grows big only later.","बैक-लोडेड — रिटर्न-पर-रिटर्न स्नोबॉल बाद में बड़ा होता है।","Back-loaded — returns-on-returns ka snowball baad mein bada hota hai.")},
+   {q:L("Same monthly amount — who's ahead, starting at 25 or 35?","same मंथली रकम — कौन आगे, 25 से या 35 से?","Same monthly amount — kaun aage, 25 se shuru ya 35 se?"),o:[L("From 35","35 से","35 se"),L("From 25","25 से","25 se"),L("Both equal","दोनों बराबर","Dono barabar"),L("Can't say","कह नहीं सकते","Keh nahi sakte")],a:1,why:L("More time = more cycles — time is compounding's biggest lever.","ज़्यादा टाइम = ज़्यादा साइकिल — टाइम सबसे बड़ा लीवर।","Zyada time = zyada cycles — time compounding ka sabse bada lever.")}
   ],
-  reflect:"Bend kis saal aaya — surprise hua?",
-  tax:"Baar-baar bechne se tax/charges compounding todte hain. India mein equity 1 saal se zyada rakha (long-term) alag taxed hota hai. (verify current rate before relying on this)"},
+  reflect:L("Which year did the bend appear — did it surprise you?","बेंड किस साल आया — हैरानी हुई?","Bend kis saal aaya — surprise hua?"),
+  tax:L("Frequent selling triggers tax/charges that break compounding. In India, equity held over 1 year (long-term) is taxed differently. (verify current rate before relying on this)","बार-बार बेचने से टैक्स/चार्ज कंपाउंडिंग तोड़ते हैं। भारत में 1 साल से ज़्यादा रखी इक्विटी (लॉन्ग-टर्म) अलग taxed होती है। (verify current rate before relying on this)","Baar-baar bechne se tax/charges compounding todte hain. India mein equity 1 saal se zyada rakha (long-term) alag taxed hota hai. (verify current rate before relying on this)")},
 
- {id:"m1l5",title:"Shaadi 8 mahine mein, retirement 25 saal door",sub:"Time horizon decides treatment",mins:3,
+ {id:"m1l5",title:L("Wedding in 8 months, retirement 25 years away","शादी 8 महीने में, रिटायरमेंट 25 साल दूर","Shaadi 8 mahine mein, retirement 25 saal door"),sub:L("Time horizon decides treatment","होराइज़न ट्रीटमेंट तय करता है","Time horizon decides treatment"),mins:3,
   beats:{
-   sit:"Aapke paas do goals, dono ke liye <b>₹1 lakh</b>: behen ki shaadi 8 mahine mein, apni retirement 25 saal door.",
-   myth:{lie:"Amount same hai toh treatment bhi same hona chahiye.",truth:"Horizon treatment decide karta hai — amount nahi."},
-   reflex:"Dono ₹1 lakh ko ek jagah, ek soch se rakhna.",
-   q:"Near aur far paisa same hona chahiye sirf isliye ki number same hai?",
-   fw:"<b>Short horizon</b> → safe & reachable (bumpiness galat waqt pe chot degi). <b>Long horizon</b> → bumps ride kar sakta hai, recover aur compound hone ka time hai. Isko goal bucketing kehte hain.",
-   call:"Har goal ko date ke hisaab se bucket karo; kahan baithe = horizon + liquidity + risk. Aapke haath mein."
+   sit:L("You have two goals, <b>₹1 lakh</b> each: your sister's wedding in 8 months, your own retirement 25 years away.","आपके पास दो गोल, दोनों के लिए <b>₹1 लाख</b>: बहन की शादी 8 महीने में, अपनी रिटायरमेंट 25 साल दूर।","Aapke paas do goals, dono ke liye <b>₹1 lakh</b>: behen ki shaadi 8 mahine mein, apni retirement 25 saal door."),
+   myth:{lie:L("Same amount, so it should get the same treatment.","रकम same है तो ट्रीटमेंट भी same होना चाहिए।","Amount same hai toh treatment bhi same hona chahiye."),truth:L("Horizon decides the treatment — not the amount.","होराइज़न ट्रीटमेंट तय करता है — रकम नहीं।","Horizon treatment decide karta hai — amount nahi.")},
+   reflex:L("Keeping both ₹1 lakh in one place, with one mindset.","दोनों ₹1 लाख को एक जगह, एक सोच से रखना।","Dono ₹1 lakh ko ek jagah, ek soch se rakhna."),
+   q:L("Should near and far money be the same just because the number is?","नज़दीकी और दूर का पैसा same हो सिर्फ इसलिए कि नंबर same है?","Near aur far paisa same hona chahiye sirf isliye ki number same hai?"),
+   fw:L("<b>Short horizon</b> → safe & reachable (bumpiness will hurt at the wrong time). <b>Long horizon</b> → can ride bumps, with time to recover and compound. This is goal bucketing.","<b>छोटा होराइज़न</b> → सेफ और रीचेबल (बंपीनेस गलत समय चोट देगी)। <b>लंबा होराइज़न</b> → बंप झेल सकता है, recover और compound का समय। इसे गोल बकेटिंग कहते हैं।","<b>Short horizon</b> → safe & reachable (bumpiness galat waqt pe chot degi). <b>Long horizon</b> → bumps ride kar sakta hai, recover aur compound hone ka time hai. Isko goal bucketing kehte hain."),
+   call:L("Bucket each goal by its date; where each sits = horizon + liquidity + risk. In your hands.","हर गोल को उसकी डेट से बकेट करो; कहाँ बैठे = होराइज़न + लिक्विडिटी + रिस्क। आपके हाथ में।","Har goal ko date ke hisaab se bucket karo; kahan baithe = horizon + liquidity + risk. Aapke haath mein.")
   },
-  terms:[{k:"Time horizon",d:"Years until you actually need a specific pot."},{k:"Goal bucketing",d:"Separating money by goal, each with its own horizon."}],
-  action:{h:"Apne goals bucket karo",p:"Apne asli goals dates ke saath likho; app horizon nikaalega; virtual paise ko 'under 3 yrs' / 'over 7 yrs' mein daalo.",data:"Today's date + your goal dates."},
+  dd:{ex:[
+   L("The same rupee behaves differently depending on when you need it. Money for a goal months away can't afford a bad dip — if the market drops right when the wedding bill is due, you're forced to sell low. So near-term money stays safe and reachable, accepting low growth as the price of certainty.","एक ही रुपया इस पर निर्भर करता है कि आपको कब चाहिए। कुछ महीनों दूर के गोल का पैसा एक बुरे डिप को नहीं झेल सकता — अगर बिल के वक्त मार्केट गिरा, तो नीचे बेचना पड़ेगा। इसलिए नज़दीकी पैसा सेफ और रीचेबल रहे।","Ek hi rupaya is pe depend karta hai ki aapko kab chahiye. Kuch mahine door ke goal ka paisa ek bure dip ko nahi jhel sakta — agar bill ke waqt market gira, toh neeche bechna padega. Isliye near-term paisa safe aur reachable rahe."),
+   L("Long-term money is the opposite — it has years to recover from any dip and let compounding work, so it can afford bumps for higher growth. Bucketing by goal-date, not by amount, is how you avoid the two classic mistakes: risking money you'll need soon, and playing too safe with money you won't touch for decades.","लॉन्ग-टर्म पैसा उलटा है — उसके पास किसी डिप से उबरने और compound होने के साल हैं, तो वो ग्रोथ के लिए बंप झेल सकता है। गोल-डेट से बकेटिंग दो क्लासिक गलतियों से बचाती है।","Long-term paisa ulta hai — uske paas kisi dip se ubarne aur compound hone ke saal hain, toh woh growth ke liye bumps jhel sakta hai. Goal-date se bucketing do classic galtiyon se bachaati hai: jald chahiye paisa risk karna, aur decades door paisa over-safe rakhna.")],
+   faq:[
+    {q:L("What if a goal has no fixed date?","अगर गोल की कोई तय डेट नहीं?","Agar goal ki fixed date nahi?"),a:L("Estimate a rough window (e.g. 'about 3 years'). Even an approximate horizon changes the treatment correctly.","एक मोटा दायरा अंदाज़ो (जैसे 'लगभग 3 साल')। अनुमानित होराइज़न भी ट्रीटमेंट सही बदल देता है।","Ek mota daayra andaazo (jaise 'lagbhag 3 saal'). Anumaanit horizon bhi treatment sahi badal deta hai.")},
+    {q:L("How many buckets should I have?","कितने बकेट होने चाहिए?","Kitne buckets hone chahiye?"),a:L("As many as you have distinct goal-timeframes — often just near, medium and long is enough to start.","जितने अलग गोल-समय हैं — अक्सर बस नज़दीकी, मध्यम और लंबा शुरू के लिए काफी।","Jitne alag goal-timeframes hain — aksar bas near, medium aur long shuru ke liye kaafi.")}
+   ]},
+  terms:[{k:L("Time horizon","टाइम होराइज़न","Time horizon"),d:L("Years until you actually need a specific pot.","किसी खास पॉट की ज़रूरत पड़ने तक के साल।","Years until you actually need a specific pot.")},{k:L("Goal bucketing","गोल बकेटिंग","Goal bucketing"),d:L("Separating money by goal, each with its own horizon.","पैसे को गोल के हिसाब से बाँटना, हर एक का अपना होराइज़न।","Separating money by goal, each with its own horizon.")}],
+  action:{h:L("Bucket your goals","अपने गोल बकेट करो","Apne goals bucket karo"),p:L("Write your real goals with dates; the app computes each horizon; put virtual money into 'under 3 yrs' / 'over 7 yrs'.","अपने असली गोल डेट के साथ लिखो; ऐप होराइज़न निकालेगा; वर्चुअल पैसा 'under 3 yrs' / 'over 7 yrs' में डालो।","Apne asli goals dates ke saath likho; app horizon nikaalega; virtual paise ko 'under 3 yrs' / 'over 7 yrs' mein daalo."),data:L("Today's date + your goal dates.","आज की डेट + आपकी गोल डेट्स।","Today's date + your goal dates.")},
   quiz:[
-   {q:"Short-horizon paise ke liye bumpiness bada problem kyun?",o:["Woh tez badhta hai","Neeche ho toh bechna pad sakta hai","Tax zyada","Bank charge zyada"],a:1,why:"Kam time mein dip aaya toh recover ka mauka nahi — low pe bechna padta hai."},
-   {q:"Wrong-horizon ka example kaunsa hai?",o:["Emergency cash reachable","Agle mahine ka paisa lock karna","25-saal paisa bumps ride","Goals date se bucket"],a:1,why:"Jald chahiye paisa lock karna horizon mismatch hai."}
+   {q:L("Why is bumpiness a bigger problem for short-horizon money?","शॉर्ट-होराइज़न पैसे के लिए बंपीनेस बड़ी दिक्कत क्यों?","Short-horizon paise ke liye bumpiness bada problem kyun?"),o:[L("It grows faster","वो तेज़ बढ़ता है","Woh tez badhta hai"),L("If it's down you may be forced to sell","नीचे हो तो बेचना पड़ सकता है","Neeche ho toh bechna pad sakta hai"),L("More tax","टैक्स ज़्यादा","Tax zyada"),L("More bank charges","बैंक चार्ज ज़्यादा","Bank charge zyada")],a:1,why:L("With little time, a dip leaves no room to recover — you sell low.","कम समय में डिप से उबरने का मौका नहीं — नीचे बेचना पड़ता है।","Kam time mein dip aaya toh recover ka mauka nahi — low pe bechna padta hai.")},
+   {q:L("Which is an example of the wrong horizon?","गलत होराइज़न का उदाहरण कौन सा है?","Wrong-horizon ka example kaunsa hai?"),o:[L("Emergency cash reachable","इमरजेंसी कैश रीचेबल","Emergency cash reachable"),L("Locking next month's money","अगले महीने का पैसा लॉक करना","Agle mahine ka paisa lock karna"),L("25-year money riding bumps","25-साल का पैसा बंप झेलना","25-saal paisa bumps ride"),L("Bucketing goals by date","गोल डेट से बकेट करना","Goals date se bucket")],a:1,why:L("Locking money you need very soon is a horizon mismatch.","जल्द चाहिए पैसा लॉक करना होराइज़न मिसमैच है।","Jald chahiye paisa lock karna horizon mismatch hai.")}
   ],
-  reflect:"Kaun sa goal aap galat horizon pe treat kar rahe ho?"},
+  reflect:L("Which goal are you treating with the wrong horizon?","आप कौन सा गोल गलत होराइज़न पर ट्रीट कर रहे हो?","Kaun sa goal aap galat horizon pe treat kar rahe ho?")},
 
- {id:"m1l6",title:"“Yeh double kar dega” — ab kya?",sub:"The risk-return smell test",mins:3,
+ {id:"m1l6",title:L("“This'll double your money” — now what?","“यह डबल कर देगा” — अब क्या?","“Yeh double kar dega” — ab kya?"),sub:L("The risk-return smell test","रिस्क-रिटर्न स्मेल टेस्ट","The risk-return smell test"),mins:3,
   beats:{
-   sit:"WhatsApp forward — ya dost confidently: <b>'6 mahine mein double, risk zero, guaranteed. Jaldi karo, offer close ho raha hai.'</b>",
-   myth:{lie:"High return aur zero risk ek saath mil sakte hain.",truth:"Zyada return ka mauka = zyada ups-and-downs. Guaranteed-high + no-risk = classic red flag."},
-   reflex:"FOMO — 'sab kama rahe honge' — aur bina soche kood jaana.",
-   q:"High return + zero risk + urgency — kya yeh combination real ho sakta hai?",
-   fw:"Risk–return trade-off: jahan zyada return ka mauka, wahan zyada bumpiness. Urgency aapko <b>sochne se rokne</b> ke liye lagayi jaati hai. Yeh sabak risk module ka darwaza hai.",
-   call:"Ruko. Kisi bhi cheez ko horizon, risk capacity aur diversification ke lens se judge karo — tip pe nahi, urgency pe kabhi nahi."
+   sit:L("A WhatsApp forward — or a friend, confidently: <b>'Doubles in 6 months, zero risk, guaranteed. Hurry, the offer's closing.'</b>","WhatsApp फॉरवर्ड — या दोस्त confidently: <b>'6 महीने में डबल, रिस्क ज़ीरो, गारंटीड। जल्दी करो, ऑफर बंद हो रहा है।'</b>","WhatsApp forward — ya dost confidently: <b>'6 mahine mein double, risk zero, guaranteed. Jaldi karo, offer close ho raha hai.'</b>"),
+   myth:{lie:L("High return and zero risk can come together.","हाई रिटर्न और ज़ीरो रिस्क एक साथ मिल सकते हैं।","High return aur zero risk ek saath mil sakte hain."),truth:L("More potential return = more ups-and-downs. Guaranteed-high + no-risk = classic red flag.","ज़्यादा रिटर्न का मौका = ज़्यादा उतार-चढ़ाव। गारंटीड-हाई + नो-रिस्क = क्लासिक रेड फ्लैग।","Zyada return ka mauka = zyada ups-and-downs. Guaranteed-high + no-risk = classic red flag.")},
+   reflex:L("FOMO — 'everyone must be making money' — and jumping in without thinking.","FOMO — 'सब कमा रहे होंगे' — और बिना सोचे कूद जाना।","FOMO — 'sab kama rahe honge' — aur bina soche kood jaana."),
+   q:L("High return + zero risk + urgency — can this combination be real?","हाई रिटर्न + ज़ीरो रिस्क + अर्जेंसी — क्या यह combination real हो सकता है?","High return + zero risk + urgency — kya yeh combination real ho sakta hai?"),
+   fw:L("Risk–return trade-off: where there's more return potential, there's more bumpiness. Urgency is added to <b>stop you thinking</b>. This lesson is the doorway to the risk module.","रिस्क–रिटर्न ट्रेड-ऑफ: जहाँ ज़्यादा रिटर्न का मौका, वहाँ ज़्यादा बंपीनेस। अर्जेंसी आपको <b>सोचने से रोकने</b> के लिए है। यह रिस्क मॉड्यूल का दरवाज़ा है।","Risk–return trade-off: jahan zyada return ka mauka, wahan zyada bumpiness. Urgency aapko <b>sochne se rokne</b> ke liye lagayi jaati hai. Yeh sabak risk module ka darwaza hai."),
+   call:L("Slow down. Judge anything by horizon, risk capacity and diversification — not by a tip, and never by urgency.","रुको। किसी भी चीज़ को होराइज़न, रिस्क कैपेसिटी और डाइवर्सिफिकेशन से जज करो — टिप से नहीं, अर्जेंसी से कभी नहीं।","Ruko. Kisi bhi cheez ko horizon, risk capacity aur diversification ke lens se judge karo — tip pe nahi, urgency pe kabhi nahi.")
   },
-  terms:[{k:"Risk-return trade-off",d:"Higher potential return almost always comes with more ups and downs."},{k:"Red flag",d:"A promise of high return, no risk, and urgency — treat with suspicion."}],
-  action:{h:"Trade-off ko aankhon se dekho",p:"App mein ek broad index ki 1-saal bumpy chaal ko ek fixed rate ke saath rakh ke dekho (real data).",data:"1-yr index series + current fixed rate."},
+  dd:{ex:[
+   L("There's an iron rule in markets: return and risk travel together. Anything offering unusually high returns is, by definition, taking on more risk — even if the seller hides it. So a pitch of 'high return AND zero risk' isn't a rare opportunity; it's a warning sign that something is being concealed or is outright fake.","मार्केट में एक पक्का नियम है: रिटर्न और रिस्क साथ चलते हैं। असामान्य रूप से ऊँचा रिटर्न देने वाली कोई भी चीज़ ज़्यादा रिस्क ले रही है — चाहे बेचने वाला छुपाए। तो 'हाई रिटर्न और ज़ीरो रिस्क' दुर्लभ मौका नहीं, चेतावनी है।","Market mein ek pakka niyam hai: return aur risk saath chalte hain. Asaamaanya roop se ooncha return dene wali koi bhi cheez zyada risk le rahi hai — chahe bechne wala chhupaye. Toh 'high return AND zero risk' durlabh mauka nahi, chetaawni hai."),
+   L("Urgency is the other tell. 'Hurry, offer closing' exists to stop you from pausing and checking — because a pause would expose the flaw. The defence is simple: never decide on urgency. Run any opportunity through your own lens — horizon, how much risk you can bear, whether it's spread out — and if it can't survive a slow look, walk away.","अर्जेंसी दूसरा संकेत है। 'जल्दी करो' इसलिए है कि आप रुककर जाँच न करें — क्योंकि रुकना खामी दिखा देगा। बचाव सरल: अर्जेंसी पर फैसला कभी नहीं। हर मौके को अपने lens से देखो, और धीमी नज़र न झेले तो छोड़ दो।","Urgency doosra sanket hai. 'Jaldi karo' isliye hai ki aap ruk ke jaanch na karein — kyunki rukna khaami dikha dega. Bachaav saral: urgency pe faisla kabhi nahi. Har mauke ko apne lens se dekho, aur dheemi nazar na jhele toh chhod do.")],
+   faq:[
+    {q:L("But what if it's genuinely a good opportunity?","पर अगर सच में अच्छा मौका हो?","Par agar sach mein achha mauka ho?"),a:L("A genuine opportunity survives a slow, calm look and disclosure of its risks. If it collapses the moment you pause to check, it wasn't one.","सच्चा मौका धीमी, शांत नज़र और अपने रिस्क बताने में टिकता है। रुकते ही ढह जाए तो मौका था ही नहीं।","Sachcha mauka dheemi, shaant nazar aur apne risk bataane mein tikta hai. Rukte hi dheh jaaye toh mauka tha hi nahi.")},
+    {q:L("How do I say no to a pushy friend?","पुशी दोस्त को ना कैसे कहूँ?","Pushy dost ko na kaise kahun?"),a:L("You don't owe an instant yes. 'Let me look into it' is a complete answer — and the pressure to skip that step is itself the red flag.","आपको तुरंत हाँ नहीं कहनी। 'देख के बताता हूँ' पूरा जवाब है — और इसे छोड़ने का दबाव ही रेड फ्लैग है।","Aapko turant haan nahi kehni. 'Dekh ke bataata hoon' poora jawaab hai — aur ise chhodne ka dabaav hi red flag hai.")}
+   ]},
+  terms:[{k:L("Risk-return trade-off","रिस्क-रिटर्न ट्रेड-ऑफ","Risk-return trade-off"),d:L("Higher potential return almost always comes with more ups and downs.","ज़्यादा संभावित रिटर्न लगभग हमेशा ज़्यादा उतार-चढ़ाव के साथ आता है।","Higher potential return almost always comes with more ups and downs.")},{k:L("Red flag","रेड फ्लैग","Red flag"),d:L("A promise of high return, no risk, and urgency — treat with suspicion.","हाई रिटर्न, नो रिस्क और अर्जेंसी का वादा — शक से देखो।","A promise of high return, no risk, and urgency — treat with suspicion.")}],
+  action:{h:L("See the trade-off with your eyes","ट्रेड-ऑफ आँखों से देखो","Trade-off ko aankhon se dekho"),p:L("In the app, place a broad index's bumpy 1-year path next to a fixed rate (real data).","ऐप में एक broad index की 1-साल की बंपी चाल को एक fixed rate के साथ रखो (असली डेटा)।","App mein ek broad index ki 1-saal bumpy chaal ko ek fixed rate ke saath rakh ke dekho (real data)."),data:L("1-yr index series + current fixed rate.","1-साल इंडेक्स सीरीज़ + मौजूदा fixed rate।","1-yr index series + current fixed rate.")},
   quiz:[
-   {q:"'Guaranteed high return, zero risk, jaldi karo' — sahi reaction?",o:["Sab kuch daal do","Shak karo","Udhaar le ke aur daalo","Maan lo legal hai"],a:1,why:"High return + zero risk ek red flag hai; urgency aapko sochne se rokti hai."},
-   {q:"Kisi option ko judge kaise karein?",o:["Dost ke confidence se","Urgency se","Apne horizon/risk/diversification se","Pichhle saal ke return se"],a:2,why:"Decision aapki situation se — tip ya urgency se nahi."}
+   {q:L("'Guaranteed high return, zero risk, hurry' — the right reaction?","'गारंटीड हाई रिटर्न, ज़ीरो रिस्क, जल्दी करो' — सही रिएक्शन?","'Guaranteed high return, zero risk, jaldi karo' — sahi reaction?"),o:[L("Put everything in","सब कुछ डाल दो","Sab kuch daal do"),L("Be suspicious","शक करो","Shak karo"),L("Borrow to invest more","उधार लेकर और डालो","Udhaar le ke aur daalo"),L("Assume it's legal","मान लो legal है","Maan lo legal hai")],a:1,why:L("High return + zero risk is a red flag; urgency exists to stop you thinking.","हाई रिटर्न + ज़ीरो रिस्क रेड फ्लैग है; अर्जेंसी सोचने से रोकती है।","High return + zero risk ek red flag hai; urgency aapko sochne se rokti hai.")},
+   {q:L("How should you judge any option?","किसी भी option को कैसे जज करें?","Kisi option ko judge kaise karein?"),o:[L("By a friend's confidence","दोस्त के confidence से","Dost ke confidence se"),L("By urgency","अर्जेंसी से","Urgency se"),L("By your horizon/risk/diversification","अपने होराइज़न/रिस्क/डाइवर्सिफिकेशन से","Apne horizon/risk/diversification se"),L("By last year's return","पिछले साल के रिटर्न से","Pichhle saal ke return se")],a:2,why:L("Decisions come from your situation — not a tip or urgency.","फैसले आपकी situation से — टिप या अर्जेंसी से नहीं।","Decision aapki situation se — tip ya urgency se nahi.")}
   ],
-  reflect:"Kabhi FOMO mein koi financial decision liya? kya hua?"}
+  reflect:L("Ever made a financial decision in FOMO? What happened?","कभी FOMO में कोई फाइनेंशियल फैसला लिया? क्या हुआ?","Kabhi FOMO mein koi financial decision liya? kya hua?")}
 ]};
 
 // locked future modules
 const LOCKED=[
- {n:2,title:"Kahaan rakhein? Options samjho",l:["Maalik banna vs udhaar dena","Akela stock vs basket","Gold ki jagah","FD-jaisa vs market-jaisa","Khud vs managed","Kaunsa dabba kis goal"]},
- {n:3,title:"Kitna risk theek hai?",l:["Graph laal — bechna?","Capacity vs tolerance","Saare ande ek tokri","Concentration risk","Risk = horizon","Neend test"]},
- {n:4,title:"Ab plan banao",l:["Sapne ko number do","Lumpsum vs SIP","Kitna equity, kitna safe","Har saal badhao","Rebalancing","Auto-pilot vs dhyaan"]},
- {n:5,title:"Galtiyan jo mehngi padti hain",l:["Pichhle saal ka topper","Timing the market","FOMO & herd","Over-monitoring","Scam red flags","Panic bech diya"]},
- {n:6,title:"Tax, Fees aur Paperwork",l:["Profit pe tax kitna","Chhoti fee, badi chot","KYC, demat, folio","Nominee","Tax-saving trap","Statement padhna"]},
- {n:7,title:"Sab jodo: portfolio chalao",l:["Pehla plan likho","Peeche chala ke dekho","Bura daur simulate","6-mahine review","Squad compare","Graduation"]}
+ {n:2,title:L("Budgeting: where does it all go?","बजटिंग: पैसा कहाँ जाता है?","Budgeting: paisa kahan jaata hai?"),l:["50-30-20 rule","40-30-30 rule","Needs vs wants","Pay yourself first"]},
+ {n:3,title:L("Loans & debt: handle and close","लोन और कर्ज़: संभालो, बंद करो","Loans & debt: sambhaalo, khatam karo"),l:["Good vs bad debt","How EMI works","Credit-card trap","Avalanche vs Snowball","Prepayment","Closing to NOC"]},
+ {n:4,title:L("Where to put it? Options","कहाँ रखें? ऑप्शन","Kahaan rakhein? Options"),l:["Equity vs debt","One stock vs a basket","Gold's place","Fixed vs market-linked","Direct vs managed","Match type to goal"]},
+ {n:5,title:L("How much risk is right for you?","आपके लिए कितना रिस्क सही?","Kitna risk theek hai?"),l:["Red screen — sell?","Capacity vs tolerance","Don't crowd one basket","Concentration risk","Risk = horizon","Sleep test"]},
+ {n:6,title:L("Make a plan","प्लान बनाओ","Plan banao"),l:["Goal + number + date","Lumpsum vs SIP","How much equity","Step-up","Rebalancing","Review cadence"]},
+ {n:7,title:L("The costly mistakes","महँगी गलतियाँ","Galtiyan jo mehngi padti hain"),l:["Return chasing","Timing the market","FOMO & herd","Over-monitoring","Scam red flags","Panic selling"]},
+ {n:8,title:L("Tax, fees & paperwork","टैक्स, फीस और पेपरवर्क","Tax, fees aur paperwork"),l:["Capital gains","Fees compound too","KYC, demat, folio","Nominee","Tax-saving trap","Reading statements"]},
+ {n:9,title:L("Put it together: run it","सब जोड़ो: चलाओ","Sab jodo: chalao"),l:["Write your plan","Backtest","Stress a crash","6-month review","Squad compare","Graduation"]}
 ];
 
 const LEVELS=[{x:0,n:"Beej",e:"🌱"},{x:120,n:"Ankur",e:"🌿"},{x:300,n:"Paudha",e:"🪴"},{x:560,n:"Ped",e:"🌳"},{x:900,n:"Van",e:"🏞️"}];
@@ -527,32 +698,32 @@ function Home(){
   view.innerHTML=`<div class="screen pad">
     <div class="greet">
       <div class="avatar">O</div>
-      <div><div class="g1">Namaste 👋</div><div class="g2">Aaj thoda aur samajhdaar</div></div>
+      <div><div class="g1">${t(UI.greetHi)}</div><div class="g2">${t(UI.greetSub)}</div></div>
       <div class="streakpill"><svg class="flame-anim" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2s5 4 5 9a5 5 0 0 1-10 0c0-1 .3-2 .8-2.8C8 10 9 11 9 11s-.5-4 3-9Z"/></svg><span id="hStreak">${S.streak}</span></div>
     </div>
     ${nl?`<div class="hero"><span class="blob"></span>
-      <div class="tag">Module ${MODULE1.n} · Lesson ${MODULE1.lessons.indexOf(nl)+1}</div>
-      <h2>${nl.title}</h2><p>${nl.sub} · ${nl.mins} min</p>
-      <button class="go" onclick="openLesson('${nl.id}')">Aaj ka lesson shuru karo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <div class="tag">${t(UI.modLesson)} ${MODULE1.n} · ${t(UI.lessonW)} ${MODULE1.lessons.indexOf(nl)+1}</div>
+      <h2>${t(nl.title)}</h2><p>${t(nl.sub)} · ${nl.mins} min</p>
+      <button class="go" onclick="openLesson('${nl.id}')">${t(UI.startToday)} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       <div class="miniprog"><i style="width:${heroPct}%"></i></div>
-    </div>`:`<div class="hero"><span class="blob"></span><div class="tag">Module ${MODULE1.n}</div><h2>Module 1 complete! 🎉</h2><p>Aapne neev rakh di. Module 2 prototype mein jald.</p></div>`}
+    </div>`:`<div class="hero"><span class="blob"></span><div class="tag">${t(UI.modLesson)} ${MODULE1.n}</div><h2>${t(UI.m1done)}</h2><p>${t(UI.m1doneSub)}</p></div>`}
 
     <div class="stats3">
-      <div class="stat"><div class="n" data-count="${S.xp}">0</div><div class="l">XP</div></div>
-      <div class="stat"><div class="n" data-count="${doneN}">0</div><div class="l">Lessons</div></div>
-      <div class="stat"><div class="n" data-count="${S.longest}">0</div><div class="l">Best streak</div></div>
+      <div class="stat"><div class="n" data-count="${S.xp}">0</div><div class="l">${t(UI.xp)}</div></div>
+      <div class="stat"><div class="n" data-count="${doneN}">0</div><div class="l">${t(UI.lessons)}</div></div>
+      <div class="stat"><div class="n" data-count="${S.longest}">0</div><div class="l">${t(UI.bestStreak)}</div></div>
     </div>
 
-    <div class="sect-h"><span class="t">Aaj ke liye</span><span class="a" onclick="go('learn')">Sabhi →</span></div>
+    <div class="sect-h"><span class="t">${t(UI.forToday)}</span><span class="a" onclick="go('learn')">${t(UI.seeAll)}</span></div>
     <button class="dailycard" onclick="go('sim')">
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19h16M6 15l4-4 3 3 5-6"/></svg></span>
-      <span style="flex:1"><span class="t" style="display:block">Compounding simulator</span><span class="s">₹500 ko 25 saal aage chala ke dekho</span></span>
+      <span style="flex:1"><span class="t" style="display:block">${t(UI.simTitle)}</span><span class="s">${t(UI.simSub)}</span></span>
       <span class="chev">›</span>
     </button>
     <div style="height:9px"></div>
     <button class="dailycard" onclick="go('squad')">
       <span class="ic" style="background:var(--gold-wash);color:var(--gold)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 20v-3M12 20V9M18 20v-6"/></svg></span>
-      <span style="flex:1"><span class="t" style="display:block">Squad challenge</span><span class="s">Is hafte sabse lambi streak</span></span>
+      <span style="flex:1"><span class="t" style="display:block">${t(UI.squadTitle)}</span><span class="s">${t(UI.squadSub)}</span></span>
       <span class="chev">›</span>
     </button>
   </div>`;
@@ -564,18 +735,18 @@ function Learn(){
     const done=S.done.includes(l.id), isNext=nextLesson()&&nextLesson().id===l.id;
     return `<button class="lesscard ${done?'done':''} ${isNext?'next':''}" onclick="openLesson('${l.id}')">
       <span class="ln">${done?'✓':i+1}</span>
-      <span class="lt"><span class="a">${l.title}</span><span class="b">${l.sub}</span></span>
-      ${isNext?'<span class="badge-mini">Next</span>':'<span class="chev">›</span>'}</button>`;}).join("");
+      <span class="lt"><span class="a">${t(l.title)}</span><span class="b">${t(l.sub)}</span></span>
+      ${isNext?`<span class="badge-mini">${t(UI.next)}</span>`:'<span class="chev">›</span>'}</button>`;}).join("");
   const locked=LOCKED.map(m=>`<div class="modblock">
-    <div class="modhd locked"><span class="mn">${m.n}</span><div><div class="mt">${m.title}</div><div class="ms">${m.l.length} lessons · unlocks in prototype</div></div><span class="mp">🔒</span></div>
-    ${m.l.slice(0,3).map(t=>`<div class="lesscard locked"><span class="ln">🔒</span><span class="lt"><span class="a">${t}</span></span></div>`).join("")}
-    <div class="faint" style="font-size:.75rem;text-align:center;padding:4px">+ ${m.l.length-3} more</div>
+    <div class="modhd locked"><span class="mn">${m.n}</span><div><div class="mt">${t(m.title)}</div><div class="ms">${m.l.length} ${t(UI.unlocksProto)}</div></div><span class="mp">🔒</span></div>
+    ${m.l.slice(0,3).map(x=>`<div class="lesscard locked"><span class="ln">🔒</span><span class="lt"><span class="a">${x}</span></span></div>`).join("")}
+    <div class="faint" style="font-size:.75rem;text-align:center;padding:4px">+ ${m.l.length-3} ${t(UI.lockedMore)}</div>
   </div>`).join("");
   view.innerHTML=`<div class="screen pad">
-    <div class="eyebrow">The course</div><h1 class="h-title" style="font-size:1.7rem;margin:6px 0 4px">Situation → sahi call</h1>
-    <p class="dim" style="font-size:.9rem;margin:0 0 20px">Har lesson ek asli scene se shuru — phir framework jisse aap khud decide karo.</p>
+    <div class="eyebrow">${t(UI.theCourse)}</div><h1 class="h-title" style="font-size:1.7rem;margin:6px 0 4px">${t(UI.courseTitle)}</h1>
+    <p class="dim" style="font-size:.9rem;margin:0 0 20px">${t(UI.courseSub)}</p>
     <div class="modblock">
-      <div class="modhd"><span class="mn">${MODULE1.n}</span><div><div class="mt">${MODULE1.title}</div><div class="ms">${MODULE1.theme}</div></div><span class="mp">${S.done.length}/${MODULE1.lessons.length}</span></div>
+      <div class="modhd"><span class="mn">${MODULE1.n}</span><div><div class="mt">${t(MODULE1.title)}</div><div class="ms">${t(MODULE1.theme)}</div></div><span class="mp">${S.done.length}/${MODULE1.lessons.length}</span></div>
       ${lessons}
     </div>
     ${locked}
@@ -593,36 +764,40 @@ function setProg(){lProg.style.width=(step/maxStep*100)+"%";}
 function renderStep(){setProg();lBody.scrollTop=0;
   if(step===0)stepStory();else if(step===1)stepQuiz();else if(step===2)stepAction();else stepDone();}
 lNext.onclick=()=>{
-  if(step===1){ // require all quiz answered
-    if(Object.keys(quizState).length<CURL.quiz.length){toast("Sabhi sawaal attempt karo");return;}
-  }
+  if(step===1){ if(Object.keys(quizState).length<CURL.quiz.length){toast(t(UI.attemptAll));return;} }
   if(step<maxStep){step++;renderStep();}
   else{finishLesson();}
 };
 function beat(cls,label,html){return `<div class="beat ${cls}" style="animation-delay:${label._d||0}s"><div class="bl"><span class="dot" style="background:currentColor"></span>${label.t}</div><div class="bd">${html}</div></div>`;}
 function stepStory(){
-  const b=CURL.beats;let d=0;const D=()=>({t:"",_d:(d+=.06)});
+  const b=CURL.beats;
+  const dd=CURL.dd?`<details class="deepdive"><summary><span class="ddi">📖</span>${t(UI.deepDive)}<span class="ddc">▸</span></summary>
+     <div class="ddbody">
+       ${(CURL.dd.ex||[]).map(p=>`<p>${t(p)}</p>`).join("")}
+       ${CURL.dd.faq?`<div class="ddfaqh">${t(UI.ddFaq)}</div>${CURL.dd.faq.map(f=>`<div class="ddfaq"><div class="fq">${t(f.q)}</div><div class="fa">${t(f.a)}</div></div>`).join("")}`:""}
+     </div></details>`:"";
   lBody.innerHTML=`
-   <div class="eyebrow">Module ${MODULE1.n} · ${CURL.title}</div>
+   <div class="eyebrow">${t(UI.modLesson)} ${MODULE1.n} · ${t(CURL.title)}</div>
    <div style="height:12px"></div>
-   ${beat('c-sit',{t:'Situation',_d:.02},b.sit)}
-   <div class="beat c-myth" style="animation-delay:.1s"><div class="bl"><span class="dot" style="background:currentColor"></span>Myth</div>
-     <div class="mythbox"><div class="lie">${b.myth.lie}</div><div class="truth"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>${b.myth.truth}</span></div></div></div>
-   ${beat('c-reflex',{t:'The reflex',_d:.16},b.reflex)}
-   <div class="beat c-q" style="animation-delay:.22s"><div class="bl"><span class="dot" style="background:currentColor"></span>Asli sawaal</div><div class="q-scene">${b.q}</div></div>
-   <div class="beat c-fw" style="animation-delay:.28s"><div class="bl"><span class="dot" style="background:currentColor"></span>Framework</div><div class="fw-box bd">${b.fw}</div></div>
-   ${beat('c-call',{t:'Your call',_d:.34},b.call)}
-   <div class="termrow beat" style="animation-delay:.4s">${CURL.terms.map(t=>`<div class="trm"><b>${t.k}:</b> ${t.d}</div>`).join("")}</div>
-   ${CURL.tax?`<div class="beat" style="animation-delay:.46s"><div class="bendnote" style="margin-top:14px"><b>Tax note:</b> ${CURL.tax}</div></div>`:""}
+   ${beat('c-sit',{t:t(UI.beatSit),_d:.02},t(b.sit))}
+   <div class="beat c-myth" style="animation-delay:.1s"><div class="bl"><span class="dot" style="background:currentColor"></span>${t(UI.beatMyth)}</div>
+     <div class="mythbox"><div class="lie">${t(b.myth.lie)}</div><div class="truth"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>${t(b.myth.truth)}</span></div></div></div>
+   ${beat('c-reflex',{t:t(UI.beatReflex),_d:.16},t(b.reflex))}
+   <div class="beat c-q" style="animation-delay:.22s"><div class="bl"><span class="dot" style="background:currentColor"></span>${t(UI.beatQ)}</div><div class="q-scene">${t(b.q)}</div></div>
+   <div class="beat c-fw" style="animation-delay:.28s"><div class="bl"><span class="dot" style="background:currentColor"></span>${t(UI.beatFw)}</div><div class="fw-box bd">${t(b.fw)}</div></div>
+   ${beat('c-call',{t:t(UI.beatCall),_d:.34},t(b.call))}
+   <div class="beat" style="animation-delay:.4s">${dd}</div>
+   <div class="termrow beat" style="animation-delay:.46s">${CURL.terms.map(x=>`<div class="trm"><b>${t(x.k)}:</b> ${t(x.d)}</div>`).join("")}</div>
+   ${CURL.tax?`<div class="beat" style="animation-delay:.52s"><div class="bendnote" style="margin-top:14px"><b>${t(UI.taxNote)}</b> ${t(CURL.tax)}</div></div>`:""}
   `;
-  lNext.textContent="Quiz karo →";lNext.disabled=false;
+  lNext.textContent=t(UI.toQuiz);lNext.disabled=false;
 }
 function stepQuiz(){
-  lBody.innerHTML=`<div class="eyebrow">Quick check</div><h2 class="h-title" style="font-size:1.3rem;margin:8px 0 18px">Samajh pakki karo</h2><div class="quizwrap">${
-   CURL.quiz.map((q,qi)=>`<div class="q"><div class="qq"><span class="qn">Q${qi+1}</span>${q.q}</div>
-    <div id="opts${qi}">${q.o.map((o,oi)=>`<button class="opt" onclick="answer(${qi},${oi})"><span class="k">${"ABCD"[oi]}</span><span>${o}</span></button>`).join("")}</div>
-    <div class="why" id="why${qi}"><b>Why:</b> ${q.why}</div></div>`).join("")}</div>`;
-  lNext.textContent="Aage badho →";
+  lBody.innerHTML=`<div class="eyebrow">${t(UI.quickCheck)}</div><h2 class="h-title" style="font-size:1.3rem;margin:8px 0 18px">${t(UI.checkTitle)}</h2><div class="quizwrap">${
+   CURL.quiz.map((q,qi)=>`<div class="q"><div class="qq"><span class="qn">Q${qi+1}</span>${t(q.q)}</div>
+    <div id="opts${qi}">${q.o.map((o,oi)=>`<button class="opt" onclick="answer(${qi},${oi})"><span class="k">${"ABCD"[oi]}</span><span>${t(o)}</span></button>`).join("")}</div>
+    <div class="why" id="why${qi}"><b>${t(UI.why)}</b> ${t(q.why)}</div></div>`).join("")}</div>`;
+  lNext.textContent=t(UI.goOn);
 }
 window.answer=(qi,oi)=>{if(quizState[qi]!=null)return;const q=CURL.quiz[qi];quizState[qi]=oi;
   const opts=document.querySelectorAll(`#opts${qi} .opt`);
@@ -630,33 +805,32 @@ window.answer=(qi,oi)=>{if(quizState[qi]!=null)return;const q=CURL.quiz[qi];quiz
   if(oi!==q.a)opts[oi].classList.add("wrong");else burstAt(opts[oi]);
   document.getElementById("why"+qi).classList.add("show");};
 function stepAction(){const a=CURL.action;
-  lBody.innerHTML=`<div class="eyebrow">Do it with virtual money</div>
+  lBody.innerHTML=`<div class="eyebrow">${t(UI.doLabel)}</div>
    <div style="height:12px"></div>
-   <div class="actcard"><span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Aaj ka kaam</span>
-     <h3>${a.h}</h3><p>${a.p}</p>
-     <div class="datachip"><span class="live"></span><span><b>Live data:</b> ${a.data}</span></div>
-     ${a.sim?`<button class="btn" style="margin-top:12px" onclick="lessonEl.classList.remove('open');go('sim')">Simulator kholo →</button>`:""}
+   <div class="actcard"><span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>${t(UI.todayTask)}</span>
+     <h3>${t(a.h)}</h3><p>${t(a.p)}</p>
+     <div class="datachip"><span class="live"></span><span><b>${t(UI.liveData)}</b> ${t(a.data)}</span></div>
+     ${a.sim?`<button class="btn" style="margin-top:12px" onclick="lessonEl.classList.remove('open');go('sim')">${t(UI.openSim)}</button>`:""}
    </div>
-   <div class="reflect" style="margin-top:18px"><div class="eyebrow" style="color:var(--gold)">Reflection</div>
-     <p style="font-family:'Fraunces',serif;font-size:1.02rem;font-weight:600;margin:8px 0 10px">${CURL.reflect}</p>
-     <textarea placeholder="Apne shabdon mein... (sirf aapke liye)"></textarea></div>`;
-  lNext.textContent="Lesson poora karo ✓";
+   <div class="reflect" style="margin-top:18px"><div class="eyebrow" style="color:var(--gold)">${t(UI.reflection)}</div>
+     <p style="font-family:'Fraunces',serif;font-size:1.02rem;font-weight:600;margin:8px 0 10px">${t(CURL.reflect)}</p>
+     <textarea placeholder="${t(UI.reflectPh)}"></textarea></div>`;
+  lNext.textContent=t(UI.finishLes);
 }
 function stepDone(){
   const xpGain=CURL._xp||60;
   lBody.innerHTML=`<div class="done-hero">
     <div class="done-ring"><svg viewBox="0 0 120 120" width="120" height="120"><circle cx="60" cy="60" r="52" fill="none" stroke="var(--surface-3)" stroke-width="9"/><circle id="ringC" cx="60" cy="60" r="52" fill="none" stroke="var(--accent)" stroke-width="9" stroke-linecap="round" stroke-dasharray="327" stroke-dashoffset="327" transform="rotate(-90 60 60)"/></svg><div class="done-check">🌱</div></div>
-    <h2 class="h-title" style="font-size:1.5rem">Shabaash!</h2>
-    <p class="dim" style="margin:6px 0 0">Aapne <b>${CURL.title}</b> samajh liya.</p>
-    <div class="xppop">+${xpGain} XP · streak ${S.streak}🔥</div>
+    <h2 class="h-title" style="font-size:1.5rem">${t(UI.wellDone)}</h2>
+    <p class="dim" style="margin:6px 0 0">${t(UI.youGot)} <b>${t(CURL.title)}</b>.</p>
+    <div class="xppop">+${xpGain} XP · ${t(UI.streakWord)} ${S.streak}🔥</div>
   </div>`;
-  lNext.textContent="Done";
+  lNext.textContent=t(UI.done);
   requestAnimationFrame(()=>{const c=document.getElementById("ringC");if(c)c.style.transition="stroke-dashoffset 1s ease",c.style.strokeDashoffset="0";});
 }
 function finishLesson(){
   const firstTime=!S.done.includes(CURL.id);
-  if(firstTime){S.done.push(CURL.id);S.xp+=60;S.myths+=1;if(CURL.action.sim)S.simUsed=S.simUsed;bumpStreak();save();}
-  // badges
+  if(firstTime){S.done.push(CURL.id);S.xp+=60;S.myths+=1;bumpStreak();save();}
   let newB=[];
   if(S.done.length>=1&&award("first"))newB.push("first");
   const perfect=CURL.quiz.every((q,i)=>quizState[i]===q.a);
@@ -667,7 +841,7 @@ function finishLesson(){
   save();
   lessonEl.classList.remove("open");
   bigConfetti();
-  if(newB.length)setTimeout(()=>toast("🏅 Badge unlocked: "+BADGES.find(b=>b.id===newB[0]).n),700);
+  if(newB.length)setTimeout(()=>toast("🏅 "+t(UI.badgeUnlocked)+" "+t(BADGENAMES[newB[0]])),700);
   go(cur==="learn"?"learn":"home");
 }
 
@@ -675,24 +849,24 @@ function finishLesson(){
 let simMode="lump";const SIMCHIPS={lump:[["₹500",500],["₹2,000",2000],["₹10,000",10000],["₹25,000",25000]],sip:[["₹500",500],["₹1,000",1000],["₹2,500",2500],["₹5,000",5000]]};
 let simA=500,simY=15,simR=11;
 function Sim(){
-  if(!S.simUsed){S.simUsed=true;if(award("sim"))setTimeout(()=>toast("🏅 Badge: Curve Curious"),400);save();}
+  if(!S.simUsed){S.simUsed=true;if(award("sim"))setTimeout(()=>toast("🏅 "+t(UI.badgeUnlocked)+" "+t(BADGENAMES.sim)),400);save();}
   view.innerHTML=`<div class="screen pad">
-    <div class="eyebrow">Lesson 4 · practical action</div>
-    <h1 class="h-title" style="font-size:1.6rem;margin:6px 0 4px">Curve ko flat se steep hote dekho</h1>
-    <p class="dim" style="font-size:.88rem;margin:0 0 18px">Chhota amount aage chala ke woh saal dhoondo jahan growth tez hoti hai.</p>
+    <div class="eyebrow">${t(UI.simEyebrow)}</div>
+    <h1 class="h-title" style="font-size:1.6rem;margin:6px 0 4px">${t(UI.simH)}</h1>
+    <p class="dim" style="font-size:.88rem;margin:0 0 18px">${t(UI.simP)}</p>
     <div class="card pad simctrl">
-      <div class="modes"><button id="mL" class="${simMode==='lump'?'on':''}" onclick="setSimMode('lump')">One-time</button><button id="mS" class="${simMode==='sip'?'on':''}" onclick="setSimMode('sip')">Monthly (SIP)</button></div>
-      <div class="field"><div class="flab"><span class="l" id="amL">${simMode==='sip'?'Amount every month':'Amount invested once'}</span><span class="v">₹<span id="amV">${simA}</span></span></div>
+      <div class="modes"><button id="mL" class="${simMode==='lump'?'on':''}" onclick="setSimMode('lump')">${t(UI.onetime)}</button><button id="mS" class="${simMode==='sip'?'on':''}" onclick="setSimMode('sip')">${t(UI.monthly)}</button></div>
+      <div class="field"><div class="flab"><span class="l" id="amL">${simMode==='sip'?t(UI.amtMonth):t(UI.amtOnce)}</span><span class="v">₹<span id="amV">${simA}</span></span></div>
         <div class="chips" id="amChips"></div>
         <input type="range" id="amR" min="100" max="50000" step="100" value="${simA}"></div>
-      <div class="field"><div class="flab"><span class="l">Years</span><span class="v"><span id="yrV">${simY}</span> yrs</span></div><input type="range" id="yrR" min="1" max="30" value="${simY}"></div>
-      <div class="field" style="margin-bottom:0"><div class="flab"><span class="l">Assumed annual return</span><span class="v"><span id="rV">${simR}</span>%</span></div><input type="range" id="rR" min="4" max="15" step="0.5" value="${simR}">
-        <div class="faint" style="font-size:.72rem;margin-top:5px">Real app mein yeh <b>actual historical series</b> se chalega — yahaan dial hai.</div></div>
+      <div class="field"><div class="flab"><span class="l">${t(UI.years)}</span><span class="v"><span id="yrV">${simY}</span> ${t(UI.bendYearW)}s</span></div><input type="range" id="yrR" min="1" max="30" value="${simY}"></div>
+      <div class="field" style="margin-bottom:0"><div class="flab"><span class="l">${t(UI.assumedRet)}</span><span class="v"><span id="rV">${simR}</span>%</span></div><input type="range" id="rR" min="4" max="15" step="0.5" value="${simR}">
+        <div class="faint" style="font-size:.72rem;margin-top:5px">${t(UI.simRateNote)}</div></div>
     </div>
-    <div class="simres"><div class="r"><div class="k">Daala</div><div class="n" id="sInv">—</div></div><div class="r total"><div class="k">Banta hai</div><div class="n" id="sTot">—</div></div><div class="r gain"><div class="k">Growth</div><div class="n" id="sGain">—</div></div></div>
+    <div class="simres"><div class="r"><div class="k">${t(UI.invested)}</div><div class="n" id="sInv">—</div></div><div class="r total"><div class="k">${t(UI.growsTo)}</div><div class="n" id="sTot">—</div></div><div class="r gain"><div class="k">${t(UI.growth)}</div><div class="n" id="sGain">—</div></div></div>
     <div class="card pad"><canvas id="simCv" width="700" height="360" style="width:100%;height:auto;display:block"></canvas>
-      <div class="legend"><span><span class="sw" style="background:var(--line-strong)"></span>Daala</span><span><span class="sw" style="background:var(--accent)"></span>Total value</span><span><span class="sw" style="background:var(--gold)"></span>Bend</span></div>
-      <div class="bendnote">Around <b>year <span id="bY">—</span></b> aapki growth aapke daale hue se badi ho jaati hai — snowball tips over.</div>
+      <div class="legend"><span><span class="sw" style="background:var(--line-strong)"></span>${t(UI.invested)}</span><span><span class="sw" style="background:var(--accent)"></span>${t(UI.growsTo)}</span><span><span class="sw" style="background:var(--gold)"></span>Bend</span></div>
+      <div class="bendnote">${t(UI.bendAround)} <b>${t(UI.bendYearW)} <span id="bY">—</span></b> ${t(UI.bendMsg)}</div>
     </div>
   </div>`;
   renderSimChips();
@@ -728,18 +902,18 @@ function drawSim(s){const cv=document.getElementById("simCv");if(!cv)return;cons
 /* ---------- PORTFOLIO ---------- */
 function Portfolio(){
   const bk=S.buckets,total=bk.jald+bk.mid+bk.long;
-  const segs=[["Jald (safe)",bk.jald,"var(--accent)"],["Mid-term",bk.mid,"var(--gold)"],["Long-term",bk.long,"var(--violet)"]];
+  const segs=[[t(UI.bkJald),bk.jald,"var(--accent)"],[t(UI.bkMid),bk.mid,"var(--gold)"],[t(UI.bkLong),bk.long,"var(--violet)"]];
   let off=0;const circ=2*Math.PI*42;
   const arcs=segs.map(([n,v,c])=>{const frac=v/total,dash=`${frac*circ} ${circ}`,o=off;off-=frac*circ;return `<circle cx="60" cy="60" r="42" fill="none" stroke="${c}" stroke-width="16" stroke-dasharray="${dash}" stroke-dashoffset="${o}" transform="rotate(-90 60 60)"/>`;}).join("");
   view.innerHTML=`<div class="screen pad">
-    <div class="pf-top"><span class="blob"></span><div class="lb">Virtual portfolio</div><div class="val">${short(total)}</div><div class="chg"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 15l6-6 6 6"/></svg> practice money</div></div>
-    <div class="sect-h"><span class="t">Aaj ka market</span><span class="a">sample</span></div>
+    <div class="pf-top"><span class="blob"></span><div class="lb">${t(UI.pfLabel)}</div><div class="val">${short(total)}</div><div class="chg"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 15l6-6 6 6"/></svg> ${t(UI.pfPractice)}</div></div>
+    <div class="sect-h"><span class="t">${t(UI.todayMkt)}</span><span class="a">sample</span></div>
     <div class="mktrow">${MARKET.map(m=>`<div class="mkt"><div class="nm">${m.nm}</div><div class="pr">${m.pr}</div><div class="dl ${m.up?'up':''}">${m.dl}</div></div>`).join("")}</div>
-    <div class="sample-note">Sample values for the prototype — the live app fetches real AMFI/exchange data.</div>
-    <div class="sect-h"><span class="t">Aapke buckets</span></div>
+    <div class="sample-note">${t(UI.sampleNote)}</div>
+    <div class="sect-h"><span class="t">${t(UI.yourBuckets)}</span></div>
     <div class="card pad"><div class="donut-wrap"><svg width="120" height="120" viewBox="0 0 120 120">${arcs}<circle cx="60" cy="60" r="30" fill="var(--surface)"/></svg>
-      <div style="flex:1">${segs.map(([n,v,c])=>`<div class="bucket"><span class="sw" style="background:${c}"></span><span class="bt"><span class="a">${n}</span><span class="b">${Math.round(v/total*100)}% of pot</span></span><span class="amt">${short(v)}</span></div>`).join("")}</div></div></div>
-    <p class="faint" style="font-size:.78rem;text-align:center;margin-top:14px">Lessons ke actions se yeh buckets bharo — jaise Lesson 1 mein ₹10,000 ka batwara.</p>
+      <div style="flex:1">${segs.map(([n,v,c])=>`<div class="bucket"><span class="sw" style="background:${c}"></span><span class="bt"><span class="a">${n}</span><span class="b">${Math.round(v/total*100)}% ${t(UI.ofPot)}</span></span><span class="amt">${short(v)}</span></div>`).join("")}</div></div></div>
+    <p class="faint" style="font-size:.78rem;text-align:center;margin-top:14px">${t(UI.pfHint)}</p>
   </div>`;
 }
 
@@ -748,42 +922,42 @@ function Squad(){
   const me={n:"You",xp:S.xp,s:S.streak,c:"#0E8C6B",me:true};
   const all=[...FRIENDS,me].sort((a,b)=>b.xp-a.xp);
   view.innerHTML=`<div class="screen pad">
-    <div class="eyebrow">Squad</div><h1 class="h-title" style="font-size:1.6rem;margin:6px 0 14px">Dosto ke saath seekho</h1>
-    <div class="challenge"><span class="blob"></span><div class="tag">Is hafte ka challenge</div><h3>Sabse lambi streak 🔥</h3><p>Har din ek lesson. Jo sabse zyada din tikega, uska naam yahaan.</p></div>
-    ${all.map((p,i)=>`<div class="lbrow ${p.me?'me':''}"><span class="rank ${i===0?'top':''}">${i+1}</span><span class="lbav" style="background:${p.c}">${p.n[0]}</span><span class="nm"><span class="a">${p.n}${p.me?' (aap)':''}</span><span class="b">${p.s}🔥 streak</span></span><span class="xp">${p.xp} XP</span></div>`).join("")}
-    <p class="faint" style="font-size:.78rem;text-align:center;margin-top:14px">Friends demo hain — real app mein aap apni squad invite karoge.</p>
+    <div class="eyebrow">${t(UI.squad)}</div><h1 class="h-title" style="font-size:1.6rem;margin:6px 0 14px">${t(UI.squadH)}</h1>
+    <div class="challenge"><span class="blob"></span><div class="tag">${t(UI.weekChallenge)}</div><h3>${t(UI.longestStreak)}</h3><p>${t(UI.challengeP)}</p></div>
+    ${all.map((p,i)=>`<div class="lbrow ${p.me?'me':''}"><span class="rank ${i===0?'top':''}">${i+1}</span><span class="lbav" style="background:${p.c}">${p.n[0]}</span><span class="nm"><span class="a">${p.n}${p.me?t(UI.youTag):''}</span><span class="b">${p.s}🔥 ${t(UI.streakWord)}</span></span><span class="xp">${p.xp} XP</span></div>`).join("")}
+    <p class="faint" style="font-size:.78rem;text-align:center;margin-top:14px">${t(UI.squadDemo)}</p>
   </div>`;
 }
 
 /* ---------- PROFILE / SCORECARD ---------- */
 function Profile(){
   const lv=levelOf(S.xp),circ=2*Math.PI*54,off=circ*(1-lv.pct);
-  const arche=S.done.length>=6?"Framework Thinker":S.done.length>=3?"Curious Builder":S.done.length>=1?"Just Started":"Newcomer";
+  const arche=S.done.length>=6?t(UI.archThinker):S.done.length>=3?t(UI.archCurious):S.done.length>=1?t(UI.archStart):t(UI.archNew);
   const last7=[...Array(7)].map((_,i)=>{const d=new Date(Date.now()-(6-i)*864e5).toISOString().slice(0,10);return{on:S.days.includes(d),d:["S","M","T","W","T","F","S"][new Date(d).getDay()]};});
   const m1pct=Math.round(S.done.length/MODULE1.lessons.length*100);
   view.innerHTML=`<div class="screen pad">
     <div class="pcard">
       <div class="levelring"><svg width="130" height="130" viewBox="0 0 130 130"><circle cx="65" cy="65" r="54" fill="none" stroke="var(--surface-3)" stroke-width="10"/><circle cx="65" cy="65" r="54" fill="none" stroke="var(--accent)" stroke-width="10" stroke-linecap="round" stroke-dasharray="${circ}" stroke-dashoffset="${circ}" transform="rotate(-90 65 65)" id="lvRing"/></svg>
-        <div class="mid"><div style="font-size:1.9rem">${lv.L.e}</div><div class="lv">Level ${lv.i+1}</div><div class="nm">${lv.L.n}</div></div></div>
+        <div class="mid"><div style="font-size:1.9rem">${lv.L.e}</div><div class="lv">${t(UI.levelW)} ${lv.i+1}</div><div class="nm">${lv.L.n}</div></div></div>
       <div class="archetype">${arche}</div>
-      <div style="margin-top:10px" class="dim">${S.xp} XP ${lv.next?`· ${lv.next.x-S.xp} to ${lv.next.n}`:"· max level"}</div>
+      <div style="margin-top:10px" class="dim">${S.xp} XP ${lv.next?`· ${lv.next.x-S.xp} ${t(UI.toNext)} ${lv.next.n}`:`· ${t(UI.maxLevel)}`}</div>
       <div class="flames7">${last7.map(f=>`<div class="fd ${f.on?'on':''}">${f.on?'🔥':'·'}<span class="dn">${f.d}</span></div>`).join("")}</div>
-      <div class="faint" style="font-size:.75rem">Current ${S.streak}🔥 · Best ${S.longest}🔥</div>
+      <div class="faint" style="font-size:.75rem">${t(UI.current)} ${S.streak}🔥 · ${t(UI.best)} ${S.longest}🔥</div>
     </div>
 
-    <div class="sect-h"><span class="t">Achievements</span><span class="a">${S.badges.length}/${BADGES.length}</span></div>
-    <div class="badges">${BADGES.map(b=>{const u=S.badges.includes(b.id);return `<div class="bdg ${u?'unlocked':'locked'}"><div class="em">${b.em}</div><div class="bn">${b.n}</div><div class="bd">${u?'Unlocked':b.d}</div></div>`;}).join("")}</div>
+    <div class="sect-h"><span class="t">${t(UI.achievements)}</span><span class="a">${S.badges.length}/${BADGES.length}</span></div>
+    <div class="badges">${BADGES.map(b=>{const u=S.badges.includes(b.id);return `<div class="bdg ${u?'unlocked':'locked'}"><div class="em">${b.em}</div><div class="bn">${t(BADGENAMES[b.id])}</div><div class="bd">${u?t(UI.unlocked):b.d}</div></div>`;}).join("")}</div>
 
-    <div class="sect-h"><span class="t">Concept mastery</span></div>
+    <div class="sect-h"><span class="t">${t(UI.conceptMastery)}</span></div>
     <div class="card pad mastery">
-      <div class="mrow"><div class="top"><span>Module 1 · Foundations</span><span class="mono">${m1pct}%</span></div><div class="mbar"><i style="width:0" data-w="${m1pct}"></i></div></div>
-      <div class="mrow"><div class="top"><span class="faint">Module 2 · Options</span><span class="mono faint">locked</span></div><div class="mbar"><i style="width:0"></i></div></div>
+      <div class="mrow"><div class="top"><span>${t(MODULE1.title)}</span><span class="mono">${m1pct}%</span></div><div class="mbar"><i style="width:0" data-w="${m1pct}"></i></div></div>
+      <div class="mrow"><div class="top"><span class="faint">${t(LOCKED[0].title)}</span><span class="mono faint">${t(UI.locked)}</span></div><div class="mbar"><i style="width:0"></i></div></div>
     </div>
-    <button class="btn ghost" style="margin-top:16px" onclick="resetAll()">Progress reset karo</button>
+    <button class="btn ghost" style="margin-top:16px" onclick="resetAll()">${t(UI.resetProg)}</button>
   </div>`;
   requestAnimationFrame(()=>{const r=document.getElementById("lvRing");if(r){r.style.transition="stroke-dashoffset 1.1s ease";r.style.strokeDashoffset=off;}document.querySelectorAll(".mbar i[data-w]").forEach(i=>i.style.width=i.dataset.w+"%");});
 }
-window.resetAll=()=>{if(confirm("Saara progress reset? (demo)")){S=Object.assign({},DEFAULT);save();go("home");}};
+window.resetAll=()=>{if(confirm(t(UI.resetConfirm))){S=Object.assign({},DEFAULT);save();go("home");}};
 
 /* ---------- FX ---------- */
 function countUp(){document.querySelectorAll("[data-count]").forEach(el=>{const t=+el.dataset.count;if(t===0){el.textContent="0";return;}let c=0;const st=Math.max(1,Math.ceil(t/28));const iv=setInterval(()=>{c+=st;if(c>=t){c=t;clearInterval(iv);}el.textContent=c;},22);});}
@@ -800,9 +974,24 @@ const tb=document.getElementById("themeBtn");
 tb.onclick=()=>{const cur=document.documentElement.getAttribute("data-theme");const dark=cur==="dark"||(!cur&&matchMedia("(prefers-color-scheme:dark)").matches);document.documentElement.setAttribute("data-theme",dark?"light":"dark");try{localStorage.setItem("neev_theme",dark?"light":"dark");}catch(e){}render();};
 try{const th=localStorage.getItem("neev_theme");if(th)document.documentElement.setAttribute("data-theme",th);}catch(e){}
 
+/* language */
+function updateNav(){document.querySelectorAll("#nav button").forEach(b=>{const k=b.dataset.s;if(b.lastChild&&b.lastChild.nodeType===3)b.lastChild.nodeValue=t(NAVLBL[k]);});}
+function refreshLangUI(){
+  document.getElementById("langLbl").textContent=LANGLBL[LANG];
+  document.getElementById("langSheetTitle").textContent=t(UI.langChoose);
+  document.querySelectorAll(".langopt").forEach(o=>o.classList.toggle("on",o.dataset.l===LANG));
+}
+function setLang(l){LANG=l;try{localStorage.setItem("neev_lang",l);}catch(e){}refreshLangUI();updateNav();
+  document.getElementById("langsheet").classList.remove("open");
+  if(lessonEl.classList.contains("open"))renderStep();else render();}
+const langBtn=document.getElementById("langBtn"),langSheet=document.getElementById("langsheet");
+langBtn.onclick=()=>{refreshLangUI();langSheet.classList.add("open");};
+document.getElementById("langScrim").onclick=()=>langSheet.classList.remove("open");
+document.querySelectorAll(".langopt").forEach(o=>o.onclick=()=>setLang(o.dataset.l));
+
 /* PWA: register service worker (no-op on file:// or where unsupported) */
 if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("sw.js").catch(()=>{});});}
 
 /* boot */
-render();
+refreshLangUI();updateNav();render();
 </script>
