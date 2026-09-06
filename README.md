@@ -6,7 +6,7 @@ could genuinely be in this week, shows the tempting-but-wrong reflex, busts the 
 hands you a framework to reason the call yourself. It **never recommends a specific stock or fund** —
 it trains judgement, and you practise with virtual money on real market data.
 
-> Prototype status: **content + interactive app prototype**. Video is scripted but not yet produced.
+> Status: **all 9 modules · 52 lessons · fully trilingual (English / हिंदी / Hinglish)** in an interactive app. Video for Lesson 3 is scripted (see `content/`) but not yet produced.
 
 ---
 
@@ -42,17 +42,21 @@ Every lesson follows the same story shape so the method is consistent and repeat
 6. **Your call** — the redirect: depends on *your* horizon, liquidity, risk capacity — never a named product
 7. **Your move today** — one action with virtual money on real data + a reflection
 
-## The course (situation-led arc)
+## The course — all 9 modules built (52 lessons, fully trilingual)
 
-`get money → understand options → gauge your risk → make a plan → dodge costly mistakes → tax & paperwork → run it yourself`
+`get money → budget → clear debt → understand options → gauge your risk → make a plan → dodge mistakes → tax & paperwork → run it yourself`
 
-1. **Paisa aaya — ab kya?** (built, 6 lessons)
-2. Kahaan rakhein? Options samjho
-3. Kitna risk theek hai?
-4. Ab plan banao
-5. Galtiyan jo mehngi padti hain
-6. Tax, Fees aur Paperwork
-7. Sab jodo: portfolio chalao *(capstone)*
+Every module is written in full in **English, हिंदी, and Hinglish**, and unlocks when the previous one is complete.
+
+1. **Paisa aaya — ab kya?** (Foundations) — 6 lessons
+2. **Budgeting: paisa kahan jaata hai?** — 50-30-20, 40-30-30, needs vs wants, pay-yourself-first — 4
+3. **Loans & debt: sambhaalo, khatam karo** — good/bad debt, EMI/amortization, credit-card trap, avalanche vs snowball, prepayment, closing to NOC — 6
+4. **Kahaan rakhein? Options** — equity vs debt, one stock vs a basket, gold, fixed vs market-linked, direct vs managed, match type to goal — 6
+5. **Kitna risk theek hai?** — drawdowns, capacity vs tolerance, diversification, concentration risk, risk = horizon, sleep test — 6
+6. **Plan banao** — goal-based investing, lumpsum vs SIP, allocation, step-up, rebalancing, review cadence — 6
+7. **Galtiyan jo mehngi padti hain** — return chasing, timing, FOMO/herd, over-monitoring, scam red flags, panic selling — 6
+8. **Tax, fees aur paperwork** — capital gains, fees compounding, KYC/demat/folio, nominee, tax-saving trap, reading statements — 6
+9. **Sab jodo: chalao** *(capstone)* — write your plan, backtest, stress a crash, half-yearly review, squad, graduation — 6
 
 ## App features in the prototype
 
@@ -73,10 +77,13 @@ Every lesson follows the same story shape so the method is consistent and repeat
 
 ## Roadmap
 
+- [x] Write all 9 modules (52 lessons), fully trilingual + detailed, with Deep Dives
+- [x] Multi-module engine with progressive unlock; PWA / offline; language switch
+- [ ] Push to GitHub + enable Pages for a shareable, installable link
 - [ ] Wire the practical actions to a live data source (AMFI daily NAV flat file is the easy on-ramp)
-- [ ] Time-compression / historical backtest engine (Module 7)
-- [ ] Produce Module 1 videos from the storyboard (Manim + TTS + FFmpeg)
-- [ ] Write Modules 2–7 content
+- [ ] Build the time-compression / backtest + stress-test engine the capstone references
+- [ ] Produce Lesson 3 video from the storyboard (Manim + TTS + FFmpeg)
+- [ ] Reconcile `content/module-1.json` with the in-app trilingual content
 - [ ] Real Squad invites; server-side progress
 
 ---
