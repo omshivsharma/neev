@@ -431,6 +431,7 @@ const UI={
   courseSub:L("Every lesson starts with a real scene — then the framework to decide yourself.","हर पाठ एक असली सीन से शुरू — फिर वो फ्रेमवर्क जिससे आप खुद तय करें।","Har lesson ek asli scene se — phir framework jisse aap khud decide karo."),
   next:L("Next","अगला","Next"), lockedMore:L("more","और","more"),
   unlocksProto:L("lessons · unlocks in prototype","पाठ · प्रोटोटाइप में","lessons · unlocks in prototype"),
+  unlockPrev:L("Finish the previous module to unlock","पिछला मॉड्यूल पूरा करके अनलॉक करें","Pichhla module poora karke unlock karo"),
   toQuiz:L("Take the quiz →","क्विज़ लें →","Quiz karo →"),
   goOn:L("Continue →","आगे बढ़ें →","Aage badho →"),
   finishLes:L("Finish lesson ✓","पाठ पूरा करें ✓","Lesson poora karo ✓"),
@@ -645,9 +646,107 @@ const MODULE1={ id:"m1", n:1, title:L("You've got money — now what?","पै�
   reflect:L("Ever made a financial decision in FOMO? What happened?","कभी FOMO में कोई फाइनेंशियल फैसला लिया? क्या हुआ?","Kabhi FOMO mein koi financial decision liya? kya hua?")}
 ]};
 
+const MODULE2={ id:"m2", n:2, title:L("Budgeting: where does it all go?","बजटिंग: पैसा कहाँ जाता है?","Budgeting: paisa kahan jaata hai?"), theme:L("Handle your monthly cash flow before you invest.","इन्वेस्ट से पहले अपना मासिक कैश फ्लो संभालो।","Invest se pehle apna monthly cash flow sambhaalo."),
+ lessons:[
+ {id:"m2l1",title:L("Salary in, half gone in 10 days — where?","सैलरी आई, 10 दिन में आधी गायब — कहाँ?","Salary aayi, 10 din mein aadhi gayab — kahan?"),sub:L("Tracking · needs vs wants","ट्रैकिंग · नीड्स बनाम वॉन्ट्स","Tracking · needs vs wants"),mins:4,
+  beats:{
+   sit:L("Salary lands on the 1st, you're happy. Ten days later the balance is half gone and you can't say where.","1 तारीख को सैलरी आई, मन खुश। 10 दिन बाद बैलेंस आधा गायब, और याद ही नहीं कहाँ गया।","1 tareekh ko salary aayi, mann khush. 10 din baad balance aadha gayab, aur yaad hi nahi kahan gaya."),
+   myth:{lie:L("Budgeting means being stingy about everything.","बजट बनाना मतलब हर चीज़ पर कंजूसी।","Budget banana matlab har cheez pe kanjoosi."),truth:L("A budget isn't stinginess — it's awareness. It shows whether your money works for you or just leaks away.","बजट कंजूसी नहीं — अवेयरनेस है। यह दिखाता है कि पैसा आपके लिए काम कर रहा है या बस बह रहा है।","Budget kanjoosi nahi — awareness hai. Yeh dikhata hai ki paisa aapke liye kaam kar raha hai ya bas beh raha hai.")},
+   reflex:L("Not tracking, and guessing where it all went.","ट्रैक न करना, और अंदाज़ा लगाना कि पैसा कहाँ गया।","Track na karna, aur andaaza lagana ki paisa kahan gaya."),
+   q:L("Where does my money actually go?","मेरा पैसा असल में जाता कहाँ है?","Mera paisa asal mein jaata kahan hai?"),
+   fw:L("Sort every spend into three — <b>Needs</b> (rent, food, bills, transport), <b>Wants</b> (eating out, OTT, shopping), <b>Savings &amp; debt</b>. Visibility comes before control.","हर खर्च को तीन में बाँटो — <b>नीड्स</b> (किराया, खाना, बिल, सफर), <b>वॉन्ट्स</b> (बाहर खाना, OTT, शॉपिंग), <b>सेविंग्स और डेट</b>। कंट्रोल से पहले विज़िबिलिटी।","Har kharch ko teen mein baanto — <b>Needs</b> (rent, khaana, bill, safar), <b>Wants</b> (bahar khaana, OTT, shopping), <b>Savings &amp; debt</b>. Control se pehle visibility."),
+   call:L("Don't hunt for the 'right' ratio yet — first just learn your real pattern.","अभी 'सही' रेशियो मत ढूंढो — पहले बस अपना असली पैटर्न जानो।","Abhi 'sahi' ratio mat dhoondo — pehle bas apna asli pattern jaano.")
+  },
+  dd:{ex:[
+   L("Money rarely vanishes in one big splurge — it leaks through dozens of small, unnoticed spends: ₹40 chai twice a day, a ₹500 weekend meal, forgotten subscriptions. By month-end these add up to thousands. The first step isn't control, it's visibility: knowing where it goes.","पैसा एक बड़े खर्च में गायब नहीं होता — यह दर्जनों छोटे, अनदेखे खर्चों से रिसता है: दिन में दो बार ₹40 की चाय, ₹500 का वीकेंड खाना, भूली हुई सब्सक्रिप्शन। महीने के अंत तक ये हज़ारों बन जाते हैं। पहला कदम कंट्रोल नहीं, विज़िबिलिटी है।","Paisa ek bade kharch mein gayab nahi hota — yeh darjanon chhote, andekhe kharchon se risata hai: din mein do baar ₹40 ki chai, ₹500 ka weekend khaana, bhooli hui subscriptions. Mahine ke ant tak ye hazaaron ban jaate hain. Pehla kadam control nahi, visibility hai."),
+   L("Worked example — on a ₹40,000 take-home: say Needs come to ₹24,000 (60%), Wants ₹12,000 (30%), and Savings only ₹4,000 (10%). The scan itself reveals the gap — needs eating 60%, savings just 10% — before you change a thing. And the line blurs: a basic phone plan is a need, its premium tier a want; the goal is honesty, not a perfect label.","उदाहरण — ₹40,000 टेक-होम पर: मान लो नीड्स ₹24,000 (60%), वॉन्ट्स ₹12,000 (30%), और सेविंग्स सिर्फ ₹4,000 (10%)। स्कैन ही गैप दिखा देता है — नीड्स 60%, सेविंग्स 10% — कुछ बदलने से पहले।","Udaharan — ₹40,000 take-home pe: maan lo Needs ₹24,000 (60%), Wants ₹12,000 (30%), aur Savings sirf ₹4,000 (10%). Scan hi gap dikha deta hai — needs 60%, savings 10% — kuch badalne se pehle. Aur line dhundhli hoti hai: basic phone plan need hai, premium want; maqsad honesty hai, perfect label nahi.")],
+   faq:[
+    {q:L("Do I have to track every rupee?","क्या हर रुपया ट्रैक करना ज़रूरी है?","Kya har rupaya track karna zaroori hai?"),a:L("No — catch the big and recurring spends; that's where 80% of the leak is. After 30 days you'll sense it without writing.","नहीं — बड़े और बार-बार वाले खर्च पकड़ो; 80% रिसाव वहीं है। 30 दिन बाद बिना लिखे भी समझ आएगा।","Nahi — bade aur baar-baar wale kharche pakdo; 80% leak wahin hai. 30 din baad bina likhe bhi samajh aayega.")},
+    {q:L("How do I track cash spends?","कैश खर्च कैसे ट्रैक करूँ?","Cash kharche kaise track karun?"),a:L("30 seconds at day's end — just note the big cash spends. Direction matters more than perfection.","दिन के अंत में 30 सेकंड — बस बड़े कैश खर्च नोट करो। परफेक्शन से ज़्यादा दिशा मायने रखती है।","Din ke ant mein 30 second — bas bade cash kharche note karo. Perfection se zyada direction maayne rakhti hai.")}
+   ]},
+  terms:[{k:L("Cash flow","कैश फ्लो","Cash flow"),d:L("The money moving in (income) and out (expenses) each month.","हर महीने अंदर (इनकम) और बाहर (खर्च) जाता पैसा।","Har mahine andar (income) aur bahar (kharch) jaata paisa.")},{k:L("Discretionary spend","डिस्क्रेशनरी खर्च","Discretionary spend"),d:L("Spending fully in your control — the 'wants'.","पूरी तरह आपके कंट्रोल का खर्च — 'वॉन्ट्स'।","Poori tarah aapke control ka kharch — 'wants'.")}],
+  action:{h:L("Tag your 5 biggest spends","अपने 5 सबसे बड़े खर्च टैग करो","Apne 5 sabse bade kharche tag karo"),p:L("Enter last month's 5 biggest expenses and tag each Need or Want.","पिछले महीने के 5 सबसे बड़े खर्च डालो और हर एक को Need या Want टैग करो।","Pichhle mahine ke 5 sabse bade kharche daalo aur har ek ko Need ya Want tag karo."),data:L("Your real past expenses (user-entered).","आपके असली पिछले खर्च (यूज़र-डाला)।","Aapke asli pichhle kharche (user-entered).")},
+  quiz:[
+   {q:L("What is the FIRST step to fixing your spending?","खर्च सुधारने का पहला कदम क्या है?","Kharch sudhaarne ka pehla kadam kya hai?"),o:[L("Cut everything","सब काटो","Sab kaato"),L("See where it actually goes","देखो पैसा असल में कहाँ जाता है","Dekho paisa asal mein kahan jaata hai"),L("Earn more first","पहले ज़्यादा कमाओ","Pehle zyada kamao"),L("Open more accounts","और अकाउंट खोलो","Aur account kholo")],a:1,why:L("Visibility comes before control — you can't fix a leak you can't see.","कंट्रोल से पहले विज़िबिलिटी — जो रिसाव दिखे नहीं उसे ठीक नहीं कर सकते।","Control se pehle visibility — jo leak dikhe nahi use theek nahi kar sakte.")},
+   {q:L("Which is a 'need', not a 'want'?","कौन सा 'need' है, 'want' नहीं?","Kaunsa 'need' hai, 'want' nahi?"),o:[L("A premium OTT plan","प्रीमियम OTT प्लान","Premium OTT plan"),L("Rent","किराया","Kiraya"),L("Weekend dining out","वीकेंड बाहर खाना","Weekend bahar khaana"),L("A new gadget","नया गैजेट","Naya gadget")],a:1,why:L("Rent is essential; the others are discretionary wants you control.","किराया ज़रूरी है; बाकी आपके कंट्रोल के वॉन्ट्स हैं।","Kiraya zaroori hai; baaki aapke control ke wants hain.")}
+  ],
+  reflect:L("How many of your 'needs' turned out to be 'wants'?","आपके कितने 'needs' असल में 'wants' निकले?","Aapke kitne 'needs' asal mein 'wants' nikle?")},
+
+ {id:"m2l2",title:L("50-30-20: a simple frame","50-30-20: एक सरल ढाँचा","50-30-20: ek simple dhaancha"),sub:L("The classic budgeting rule, in depth","क्लासिक बजट रूल, गहराई से","The classic budgeting rule, in depth"),mins:4,
+  beats:{
+   sit:L("You now know where money goes. Next question: how much <i>should</i> go where? Calculating each thing feels tiring.","अब आप जानते हो पैसा कहाँ जाता है। अगला सवाल: कितना कहाँ जाना <i>चाहिए</i>? हर चीज़ calculate करना थकाऊ लगता है।","Ab aap jaante ho paisa kahan jaata hai. Agla sawaal: kitna kahan jaana <i>chahiye</i>? Har cheez calculate karna thakaane wala lagta hai."),
+   myth:{lie:L("Budgeting needs Excel and hours of planning.","बजटिंग के लिए Excel और घंटों की प्लानिंग चाहिए।","Budgeting ke liye Excel aur ghanton ki planning chahiye."),truth:L("A simple 3-part frame does 90% of the job. 50-30-20 is exactly that.","एक सरल 3-हिस्से का ढाँचा 90% काम कर देता है। 50-30-20 वही है।","Ek saral 3-hisse ka dhaancha 90% kaam kar deta hai. 50-30-20 wahi hai.")},
+   reflex:L("Over-complicating it, or giving up on budgeting entirely.","इसे ज़्यादा उलझाना, या बजटिंग छोड़ देना।","Ise zyada uljhaana, ya budgeting chhod dena."),
+   q:L("How much of my pay should go where?","मेरी सैलरी का कितना हिस्सा कहाँ जाए?","Meri salary ka kitna hissa kahan jaaye?"),
+   fw:L("<b>50%</b> Needs, <b>30%</b> Wants, <b>20%</b> Savings &amp; debt — of your <b>take-home</b> pay (not gross). Extra loan repayment counts in the 20%.","<b>50%</b> नीड्स, <b>30%</b> वॉन्ट्स, <b>20%</b> सेविंग्स और डेट — आपकी <b>टेक-होम</b> सैलरी का (ग्रॉस का नहीं)। एक्स्ट्रा लोन चुकाना 20% में गिना जाता है।","<b>50%</b> Needs, <b>30%</b> Wants, <b>20%</b> Savings &amp; debt — aapki <b>take-home</b> salary ka (gross ka nahi). Extra loan chukana 20% mein ginta hai."),
+   call:L("Adjust to your life — just make sure the 20% exists. We won't say where savings go, only that they must.","अपनी लाइफ से एडजस्ट करो — बस 20% मौजूद हो। हम नहीं कहते सेविंग्स कहाँ जाए, सिर्फ कि जाए।","Apni life se adjust karo — bas 20% maujood ho. Hum nahi kehte savings kahan jaaye, sirf ki jaaye.")
+  },
+  dd:{ex:[
+   L("50-30-20 splits your take-home into three simple buckets and gives instant clarity. Two things people get wrong: the split is on take-home (after tax/PF), not gross; and any loan repayment ABOVE the minimum counts in the 20% savings bucket, because clearing debt is also building your future.","50-30-20 आपकी टेक-होम को तीन सरल बकेट में बाँटता है और तुरंत क्लैरिटी देता है। दो चीज़ें लोग गलत समझते हैं: हिस्सा टेक-होम पर है, ग्रॉस पर नहीं; और मिनिमम से ऊपर की लोन रीपेमेंट 20% में गिनती है।","50-30-20 aapki take-home ko teen saral bucket mein baant-ta hai aur turant clarity deta hai. Do cheezein log galat samajhte hain: hissa take-home pe hai, gross pe nahi; aur minimum se upar ki loan repayment 20% mein ginti hai."),
+   L("Worked example — ₹50,000 take-home: Needs ₹25,000, Wants ₹15,000, Save &amp; debt ₹10,000. That ₹10,000/month is exactly the fuel compounding needs. India reality: on lower incomes needs often exceed 50% (rent + food dominate) — so 50-30-20 is a direction, not a law. If needs are 65%, don't panic; aim to trim wants and nudge savings from 10% toward 15%.","उदाहरण — ₹50,000 टेक-होम: नीड्स ₹25,000, वॉन्ट्स ₹15,000, सेव और डेट ₹10,000। वो ₹10,000/महीना ही कंपाउंडिंग का ईंधन है। भारत में कम इनकम पर नीड्स अक्सर 50% से ऊपर — तो यह दिशा है, कानून नहीं।","Udaharan — ₹50,000 take-home: Needs ₹25,000, Wants ₹15,000, Save & debt ₹10,000. Woh ₹10,000/mahina hi compounding ka eendhan hai. India mein kam income pe needs aksar 50% se upar — toh yeh direction hai, kanoon nahi.")],
+   faq:[
+    {q:L("My needs are over 50% — does the rule fail?","मेरी नीड्स 50% से ज़्यादा हैं — रूल फेल?","Meri needs 50% se zyada hain — rule fail?"),a:L("No — it's useful precisely because it shows your real situation. Higher needs just means focus on trimming wants so savings isn't zero.","नहीं — यह इसलिए काम का है कि आपकी असली situation दिखाता है। ज़्यादा नीड्स मतलब वॉन्ट्स घटाओ ताकि सेविंग्स शून्य न रहे।","Nahi — yeh isliye kaam ka hai ki aapki asli situation dikhaata hai. Zyada needs matlab wants ghatao taaki savings shoonya na rahe.")},
+    {q:L("Is EMI a need or a saving?","EMI need है या saving?","EMI need hai ya saving?"),a:L("The minimum EMI is a need (must-pay). Extra prepayment above it is the savings/debt bucket — your choice to build the future faster.","मिनिमम EMI need है (चुकाना ज़रूरी)। उसके ऊपर एक्स्ट्रा प्रीपेमेंट सेविंग्स/डेट बकेट है।","Minimum EMI need hai (chukana zaroori). Uske upar extra prepayment savings/debt bucket hai — aapki choice.")}
+   ]},
+  terms:[{k:L("Take-home pay","टेक-होम पे","Take-home pay"),d:L("Salary in hand after tax and deductions.","टैक्स और कटौती के बाद हाथ में आने वाली सैलरी।","Tax aur deductions ke baad haath mein aane wali salary.")},{k:L("Budget","बजट","Budget"),d:L("A plan for how much money goes into each bucket.","पैसा किस बकेट में कितना जाएगा उसका प्लान।","Paisa kis bucket mein kitna jaayega uska plan.")}],
+  action:{h:L("See your 50-30-20 targets","अपने 50-30-20 टारगेट देखो","Apne 50-30-20 targets dekho"),p:L("Enter your take-home; the app shows the rupee targets and compares them with your real spend.","अपनी टेक-होम डालो; ऐप रुपये के टारगेट दिखाएगा और आपके असली खर्च से तुलना करेगा।","Apni take-home daalo; app rupee targets dikhayega aur aapke asli kharch se compare karega."),data:L("Your take-home salary (user-entered).","आपकी टेक-होम सैलरी (यूज़र-डाला)।","Aapki take-home salary (user-entered).")},
+  quiz:[
+   {q:L("50-30-20 is applied to which figure?","50-30-20 किस राशि पर लगता है?","50-30-20 kis raashi pe lagta hai?"),o:[L("Gross salary","ग्रॉस सैलरी","Gross salary"),L("Take-home pay","टेक-होम पे","Take-home pay"),L("Annual bonus","सालाना बोनस","Saalaana bonus"),L("Total savings","कुल बचत","Kul bachat")],a:1,why:L("It splits your take-home (in-hand) pay, not gross.","यह टेक-होम (हाथ में) सैलरी बाँटता है, ग्रॉस नहीं।","Yeh take-home (haath mein) salary baant-ta hai, gross nahi.")},
+   {q:L("In 50-30-20, what does the 20% cover?","50-30-20 में 20% किसके लिए है?","50-30-20 mein 20% kiske liye hai?"),o:[L("More wants","और वॉन्ट्स","Aur wants"),L("Savings and extra debt payoff","सेविंग्स और एक्स्ट्रा लोन चुकाना","Savings aur extra loan chukana"),L("Rent only","सिर्फ किराया","Sirf kiraya"),L("Taxes","टैक्स","Tax")],a:1,why:L("The 20% is future-building: savings, investing, and paying debt above the minimum.","20% भविष्य बनाना है: सेविंग्स, इन्वेस्टिंग और मिनिमम से ऊपर लोन।","20% future banana hai: savings, investing aur minimum se upar loan.")}
+  ],
+  reflect:L("Which bucket is furthest from its 50-30-20 target for you?","आपके लिए कौन सा बकेट 50-30-20 टारगेट से सबसे दूर है?","Aapke liye kaunsa bucket 50-30-20 target se sabse door hai?")},
+
+ {id:"m2l3",title:L("40-30-30 and other variants","40-30-30 और बाकी वैरिएंट","40-30-30 aur baaki variants"),sub:L("Which split fits you?","कौन सी स्प्लिट आपके लिए?","Kaunsi split aapke liye?"),mins:4,
+  beats:{
+   sit:L("You tried 50-30-20 and feel you could save more — or someone said '40-30-30 is better'. Which is right?","आपने 50-30-20 आज़माया और लगता है ज़्यादा बचा सकते हो — या किसी ने कहा '40-30-30 बेहतर है'। कौन सा सही?","Aapne 50-30-20 aazmaya aur lagta hai zyada bacha sakte ho — ya kisi ne kaha '40-30-30 better hai'. Kaunsa sahi?"),
+   myth:{lie:L("There's one 'best' budgeting rule everyone should follow.","एक 'बेस्ट' बजट रूल है जो सबको फॉलो करना चाहिए।","Ek 'best' budgeting rule hai jo sabko follow karna chahiye."),truth:L("Rules are templates for different life stages. The best one is the one you can actually sustain.","रूल अलग लाइफ स्टेज के लिए टेम्पलेट हैं। बेस्ट वो जो आप सच में निभा सको।","Rules alag life stages ke liye templates hain. Best woh jo aap sach mein nibha sako.")},
+   reflex:L("Chasing the 'optimal' rule instead of a sustainable one.","निभने वाले के बजाय 'ऑप्टिमल' रूल का पीछा करना।","Nibhne wale ke bajaye 'optimal' rule ka peechha karna."),
+   q:L("Which split fits my situation?","कौन सी स्प्लिट मेरी situation में फिट है?","Kaunsi split meri situation mein fit hai?"),
+   fw:L("<b>40-30-30</b> = aggressive saver (low needs, big 30% to savings). Also <b>70-20-10</b> for beginners, <b>60-20-20</b> as a middle path. The pattern is constant: shrink living, grow the future.","<b>40-30-30</b> = आक्रामक सेवर (कम नीड्स, बड़ा 30% सेविंग्स)। शुरुआती के लिए <b>70-20-10</b>, बीच का रास्ता <b>60-20-20</b>। पैटर्न एक: लिविंग घटाओ, भविष्य बढ़ाओ।","<b>40-30-30</b> = aggressive saver (kam needs, bada 30% savings). Beginners ke liye <b>70-20-10</b>, beech ka rasta <b>60-20-20</b>. Pattern ek: living ghatao, future badhao."),
+   call:L("Whichever split you can keep up consistently is the best one for you.","जो भी स्प्लिट आप लगातार निभा सको, वही आपके लिए बेस्ट है।","Jo bhi split aap lagataar nibha sako, wahi aapke liye best hai.")
+  },
+  dd:{ex:[
+   L("40-30-30 puts a full 30% into savings and investing — great for those with low needs (living with family, no rent) who want to build wealth faster. More saved today means more compounding tomorrow. Other frames help you find your stage: 70-20-10 is realistic on a small salary; 60-20-20 is a middle ground.","40-30-30 पूरे 30% सेविंग्स और इन्वेस्टिंग को देता है — उनके लिए बढ़िया जिनकी नीड्स कम हैं (परिवार के साथ, बिना किराया) और तेज़ी से वेल्थ बनाना चाहते हैं। आज ज़्यादा बचत = कल ज़्यादा कंपाउंडिंग।","40-30-30 poore 30% savings aur investing ko deta hai — unke liye badhiya jinki needs kam hain (family ke saath, bina kiraya) aur tezi se wealth banana chahte hain. Aaj zyada bachat = kal zyada compounding."),
+   L("Worked example — ₹50,000: 50-30-20 saves ₹10,000/month; 40-30-30 saves ₹15,000. That extra ₹5,000/month, compounded over years, can become lakhs on its own — BUT only if 40% needs is genuinely liveable for you. An aggressive plan you break in 2 months is worse than a gentle one you keep for years.","उदाहरण — ₹50,000: 50-30-20 में ₹10,000/महीना बचत; 40-30-30 में ₹15,000। वो एक्स्ट्रा ₹5,000/महीना सालों में कंपाउंड होकर खुद लाखों बन सकता है — पर तभी जब 40% नीड्स सच में जीने लायक हो।","Udaharan — ₹50,000: 50-30-20 mein ₹10,000/mahina bachat; 40-30-30 mein ₹15,000. Woh extra ₹5,000/mahina saalon mein compound ho ke khud laakhon ban sakta hai — par tabhi jab 40% needs sach mein jeene layak ho.")],
+   faq:[
+    {q:L("I can't live on 40% needs — then?","मैं 40% नीड्स में जी नहीं सकता — तो?","Main 40% needs mein jee nahi sakta — toh?"),a:L("Then 40-30-30 isn't for you right now. Start at 50-30-20 or 70-20-10 — your stage will change over time.","तो 40-30-30 अभी आपके लिए नहीं। 50-30-20 या 70-20-10 से शुरू करो — स्टेज बदलेगी।","Toh 40-30-30 abhi aapke liye nahi. 50-30-20 ya 70-20-10 se shuru karo — stage badlegi.")},
+    {q:L("Do I re-check percentages daily?","क्या रोज़ percentages चेक करूँ?","Kya roz percentages check karun?"),a:L("No — set once, review once a month. Automation (next lesson) runs it for you.","नहीं — एक बार सेट, महीने में एक बार रिव्यू। ऑटोमेशन (अगला पाठ) इसे चला देता है।","Nahi — ek baar set, mahine mein ek baar review. Automation (agla lesson) ise chala deta hai.")}
+   ]},
+  terms:[{k:L("Savings rate","सेविंग्स रेट","Savings rate"),d:L("The share of income you save/invest — the biggest driver of wealth.","इनकम का वो हिस्सा जो आप बचाते/इन्वेस्ट करते हैं — वेल्थ का सबसे बड़ा ड्राइवर।","Income ka woh hissa jo aap bachate/invest karte ho — wealth ka sabse bada driver.")},{k:L("Lifestyle creep","लाइफस्टाइल क्रीप","Lifestyle creep"),d:L("Spending rising with income, so your savings rate never improves.","इनकम बढ़ते ही खर्च बढ़ना, जिससे सेविंग्स रेट नहीं सुधरता।","Income badhte hi kharch badhna, jisse savings rate nahi sudharta.")}],
+  action:{h:L("Compare three splits","तीन स्प्लिट तुलना करो","Teen splits compare karo"),p:L("See 50-30-20, 40-30-30 and 70-20-10 on your salary and pick the realistic one.","अपनी सैलरी पर 50-30-20, 40-30-30 और 70-20-10 देखो और realistic चुनो।","Apni salary pe 50-30-20, 40-30-30 aur 70-20-10 dekho aur realistic chuno."),data:L("Your take-home salary (user-entered).","आपकी टेक-होम सैलरी (यूज़र-डाला)।","Aapki take-home salary (user-entered).")},
+  quiz:[
+   {q:L("Which split fits an aggressive saver with low needs?","कम नीड्स वाले आक्रामक सेवर को कौन सी स्प्लिट सूट करती है?","Kam needs wale aggressive saver ko kaunsi split suit karti hai?"),o:[L("70-20-10","70-20-10","70-20-10"),L("40-30-30","40-30-30","40-30-30"),L("90-10-0","90-10-0","90-10-0"),L("Any is same","कोई भी बराबर","Koi bhi barabar")],a:1,why:L("40-30-30 routes a full 30% to savings — good when needs are genuinely low.","40-30-30 पूरे 30% को सेविंग्स देता है — जब नीड्स सच में कम हों।","40-30-30 poore 30% ko savings deta hai — jab needs sach mein kam hon.")},
+   {q:L("What makes a split the 'best' one for you?","कोई स्प्लिट आपके लिए 'बेस्ट' क्या बनाता है?","Koi split aapke liye 'best' kya banata hai?"),o:[L("The highest savings %","सबसे ज़्यादा सेविंग्स %","Sabse zyada savings %"),L("The one you can sustain","जो आप निभा सको","Jo aap nibha sako"),L("Whatever a friend uses","जो दोस्त इस्तेमाल करे","Jo dost istemal kare"),L("The newest trend","नया ट्रेंड","Naya trend")],a:1,why:L("A plan you keep for years beats an aggressive one you abandon in weeks.","सालों निभने वाला प्लान हफ्तों में छूटने वाले से बेहतर।","Saalon nibhne wala plan hafton mein chhootne wale se behtar.")}
+  ],
+  reflect:L("Which split can you sustain for 6 months without breaking?","कौन सी स्प्लिट आप 6 महीने बिना टूटे निभा सकते हो?","Kaunsi split aap 6 mahine bina toote nibha sakte ho?")},
+
+ {id:"m2l4",title:L("Pay yourself first","पहले खुद को दो","Pay yourself first"),sub:L("Automate savings before you can spend it","खर्च से पहले सेविंग्स ऑटोमेट करो","Kharch se pehle savings automate karo"),mins:4,
+  beats:{
+   sit:L("Every month you thought 'I'll save whatever's left' — and at month-end, nothing's left. Good intention, zero result.","हर महीने सोचा 'जो बचेगा बचा लूँगा' — और महीने के अंत में कुछ बचता ही नहीं। नीयत ठीक, नतीजा शून्य।","Har mahine socha 'jo bachega bacha lunga' — aur mahine ke ant mein kuch bachta hi nahi. Neeyat theek, natija zero."),
+   myth:{lie:L("Spend first, save whatever's left.","पहले खर्च, जो बचे वो बचत।","Pehle kharch, jo bache woh bachat."),truth:L("Flip it — save first, spend what's left. That's 'pay yourself first'.","उल्टा करो — पहले बचत, जो बचे उसमें खर्च। यही 'pay yourself first' है।","Ulta karo — pehle bachat, jo bache usme kharch. Yehi 'pay yourself first' hai.")},
+   reflex:L("Relying on willpower and month-end leftovers.","विलपावर और महीने के अंत के बचे पर भरोसा।","Willpower aur mahine ke ant ke bache pe bharosa."),
+   q:L("How do I make saving the default?","बचत को डिफ़ॉल्ट कैसे बनाऊँ?","Bachat ko default kaise banaun?"),
+   fw:L("Auto-move your savings the day salary lands, into another account or auto-invest. What's left is guilt-free to spend. Don't leave saving to willpower — make it a <b>default</b>.","सैलरी आते ही सेविंग्स ऑटोमैटिक अलग करो, दूसरे अकाउंट या ऑटो-इन्वेस्ट में। जो बचे वो बिना गिल्ट खर्च करने लायक। बचत को विलपावर पर मत छोड़ो — <b>डिफ़ॉल्ट</b> बनाओ।","Salary aate hi savings automatic alag karo, doosre account ya auto-invest mein. Jo bache woh bina guilt kharch karne layak. Bachat ko willpower pe mat chhodo — <b>default</b> banao."),
+   call:L("How much to auto-save = your chosen split. We won't name where — only that the transfer be automatic and on salary day.","कितना ऑटो-सेव = आपकी चुनी स्प्लिट। हम जगह नहीं बताते — सिर्फ कि ट्रांसफर ऑटोमैटिक और सैलरी के दिन हो।","Kitna auto-save = aapki chuni split. Hum jagah nahi bataate — sirf ki transfer automatic aur salary ke din ho.")
+  },
+  dd:{ex:[
+   L("Whatever money you see, you tend to spend. So the trick is simple: the day salary arrives, automatically move the savings portion out — before your brain counts it as spendable. Now the visible balance is meant for spending, guilt-free. Don't rely on willpower; make saving the default. On raises and bonuses, route a big chunk to savings FIRST, before lifestyle absorbs it.","जो पैसा दिखता है, वो खर्च हो जाता है। तो ट्रिक सरल: सैलरी आते ही सेविंग्स हिस्सा ऑटोमैटिक बाहर करो — इससे पहले कि दिमाग उसे खर्च लायक गिने। बढ़ोतरी और बोनस पर बड़ा हिस्सा पहले सेविंग्स में।","Jo paisa dikhta hai, woh kharch ho jaata hai. Toh trick saral: salary aate hi savings hissa automatic bahar karo — isse pehle ki dimaag use kharch layak gine. Badhotari aur bonus pe bada hissa pehle savings mein."),
+   L("Worked example — same ₹50,000. Spend-first: at month-end 'nothing left', savings ≈ ₹0–3,000, different every month. Pay-yourself-first: on Day 1, ₹10,000 auto-saved; you live on ₹40,000, savings guaranteed. Same income, same lifestyle — only the order changed. That order is the whole game. Pair it with zero-based thinking: give every rupee a job so none drifts idle.","उदाहरण — वही ₹50,000। स्पेंड-फर्स्ट: महीने के अंत 'कुछ नहीं बचा', सेविंग्स ≈ ₹0–3,000। पे-योरसेल्फ-फर्स्ट: दिन 1 पर ₹10,000 ऑटो-सेव; ₹40,000 पर जीना, सेविंग्स पक्की। सिर्फ क्रम बदला।","Udaharan — wahi ₹50,000. Spend-first: mahine ke ant 'kuch nahi bacha', savings ≈ ₹0–3,000. Pay-yourself-first: din 1 pe ₹10,000 auto-saved; ₹40,000 pe jeena, savings pakki. Sirf order badla — wahi poora khel.")],
+   faq:[
+    {q:L("My income is irregular (freelance) — then?","मेरी इनकम अनियमित है (फ्रीलांस) — तो?","Meri income irregular hai (freelance) — toh?"),a:L("Move a fixed % out the moment each payment lands, however small. The amount varies; the habit doesn't.","हर पेमेंट आते ही एक फिक्स्ड % अलग करो, चाहे छोटा। रकम बदले, आदत न टूटे।","Har payment aate hi ek fixed % alag karo, chahe chhota. Amount badle, aadat na toote.")},
+    {q:L("Emergency fund first or investing first?","इमरजेंसी फंड पहले या इन्वेस्टिंग?","Emergency fund pehle ya investing?"),a:L("Emergency buffer first, alongside clearing high-interest debt (next module), then the rest to investing. Auto-save can feed all three.","पहले इमरजेंसी बफर, साथ में हाई-इंटरेस्ट कर्ज़ (अगला मॉड्यूल), फिर बाकी इन्वेस्टिंग।","Pehle emergency buffer, saath mein high-interest karza (agla module), phir baaki investing.")}
+   ]},
+  terms:[{k:L("Pay yourself first","पहले खुद को दो","Pay yourself first"),d:L("Setting savings aside the moment income arrives, before spending.","इनकम आते ही खर्च से पहले बचत अलग करना।","Income aate hi kharch se pehle bachat alag karna.")},{k:L("Zero-based budget","ज़ीरो-बेस्ड बजट","Zero-based budget"),d:L("Giving every rupee a job in advance — nothing left 'unassigned'.","हर रुपये को पहले से एक काम देना — कुछ भी 'unassigned' नहीं।","Har rupee ko pehle se ek kaam dena — kuch bhi 'unassigned' nahi.")}],
+  action:{h:L("Set an auto-save","ऑटो-सेव सेट करो","Auto-save set karo"),p:L("Set a virtual 'auto-save on salary day' at your chosen % and see the 12-month total.","अपनी चुनी % पर वर्चुअल 'सैलरी-डे ऑटो-सेव' सेट करो और 12-महीने का टोटल देखो।","Apni chuni % pe virtual 'salary-day auto-save' set karo aur 12-mahine ka total dekho."),data:L("Your chosen savings % and salary (user-entered).","आपकी चुनी सेविंग्स % और सैलरी (यूज़र-डाला)।","Aapki chuni savings % aur salary (user-entered).")},
+  quiz:[
+   {q:L("What does 'pay yourself first' mean?","'pay yourself first' का मतलब?","'Pay yourself first' ka matlab?"),o:[L("Spend, then save leftovers","खर्च, फिर बचत","Kharch, phir bachat"),L("Save on salary day, then spend the rest","सैलरी-डे बचत, फिर खर्च","Salary-day bachat, phir kharch"),L("Pay all bills first","पहले सब बिल","Pehle sab bill"),L("Buy yourself gifts","खुद को गिफ्ट","Khud ko gift")],a:1,why:L("Move savings out the day pay lands; spend what remains, guilt-free.","सैलरी के दिन बचत अलग करो; जो बचे वो खर्च करो।","Salary ke din bachat alag karo; jo bache woh kharch karo.")},
+   {q:L("Why automate the transfer?","ट्रांसफर ऑटोमेट क्यों?","Transfer automate kyun?"),o:[L("Banks force it","बैंक मजबूर करते हैं","Bank majboor karte hain"),L("Money you see gets spent","जो पैसा दिखता है खर्च हो जाता है","Jo paisa dikhta hai kharch ho jaata hai"),L("It earns more interest","ज़्यादा ब्याज मिलता है","Zyada byaaj milta hai"),L("It avoids tax","टैक्स बचता है","Tax bachta hai")],a:1,why:L("Automation removes willpower from the loop — unseen money isn't spent.","ऑटोमेशन विलपावर हटाता है — जो न दिखे वो खर्च नहीं होता।","Automation willpower hataata hai — jo na dikhe woh kharch nahi hota.")}
+  ],
+  reflect:L("What stopped you from flipping the order until now?","अब तक आपको क्रम उलटने से क्या रोक रहा था?","Ab tak aapko order ulatne se kya rok raha tha?")}
+]};
+
 // locked future modules
 const LOCKED=[
- {n:2,title:L("Budgeting: where does it all go?","बजटिंग: पैसा कहाँ जाता है?","Budgeting: paisa kahan jaata hai?"),l:["50-30-20 rule","40-30-30 rule","Needs vs wants","Pay yourself first"]},
  {n:3,title:L("Loans & debt: handle and close","लोन और कर्ज़: संभालो, बंद करो","Loans & debt: sambhaalo, khatam karo"),l:["Good vs bad debt","How EMI works","Credit-card trap","Avalanche vs Snowball","Prepayment","Closing to NOC"]},
  {n:4,title:L("Where to put it? Options","कहाँ रखें? ऑप्शन","Kahaan rakhein? Options"),l:["Equity vs debt","One stock vs a basket","Gold's place","Fixed vs market-linked","Direct vs managed","Match type to goal"]},
  {n:5,title:L("How much risk is right for you?","आपके लिए कितना रिस्क सही?","Kitna risk theek hai?"),l:["Red screen — sell?","Capacity vs tolerance","Don't crowd one basket","Concentration risk","Risk = horizon","Sleep test"]},
@@ -656,6 +755,11 @@ const LOCKED=[
  {n:8,title:L("Tax, fees & paperwork","टैक्स, फीस और पेपरवर्क","Tax, fees aur paperwork"),l:["Capital gains","Fees compound too","KYC, demat, folio","Nominee","Tax-saving trap","Reading statements"]},
  {n:9,title:L("Put it together: run it","सब जोड़ो: चलाओ","Sab jodo: chalao"),l:["Write your plan","Backtest","Stress a crash","6-month review","Squad compare","Graduation"]}
 ];
+
+const MODULES=[MODULE1,MODULE2];
+function moduleUnlocked(mi){return mi===0?true:MODULES[mi-1].lessons.every(l=>S.done.includes(l.id));}
+function lessonLoc(id){for(let mi=0;mi<MODULES.length;mi++){const li=MODULES[mi].lessons.findIndex(l=>l.id===id);if(li>=0)return{mi,li,mod:MODULES[mi],les:MODULES[mi].lessons[li]};}return null;}
+function findLesson(id){const r=lessonLoc(id);return r?r.les:null;}
 
 const LEVELS=[{x:0,n:"Beej",e:"🌱"},{x:120,n:"Ankur",e:"🌿"},{x:300,n:"Paudha",e:"🪴"},{x:560,n:"Ped",e:"🌳"},{x:900,n:"Van",e:"🏞️"}];
 const BADGES=[
@@ -680,7 +784,7 @@ function bumpStreak(){const t=today();if(S.last===t)return;const y=new Date(Date
   S.days=[...new Set([...S.days,t])].slice(-30);save();}
 function levelOf(x){let L=LEVELS[0],i=0;for(let k=0;k<LEVELS.length;k++){if(x>=LEVELS[k].x){L=LEVELS[k];i=k;}}
   const next=LEVELS[i+1];return{L,i,next,pct:next?Math.min(1,(x-L.x)/(next.x-L.x)):1};}
-function nextLesson(){for(const les of MODULE1.lessons)if(!S.done.includes(les.id))return les;return null;}
+function nextLesson(){for(let mi=0;mi<MODULES.length;mi++){if(!moduleUnlocked(mi))break;for(const les of MODULES[mi].lessons)if(!S.done.includes(les.id))return les;}return null;}
 function award(id){if(!S.badges.includes(id)){S.badges.push(id);save();return true;}return false;}
 
 /* ---------------- ROUTER ---------------- */
@@ -693,7 +797,8 @@ function render(){({home:Home,learn:Learn,portfolio:Portfolio,squad:Squad,profil
 
 /* ---------------- SCREENS ---------------- */
 function Home(){
-  const nl=nextLesson(),lv=levelOf(S.xp),doneN=S.done.length,tot=MODULE1.lessons.length;
+  const nl=nextLesson(),lv=levelOf(S.xp),doneN=S.done.length,tot=MODULES.reduce((a,m)=>a+m.lessons.length,0);
+  const nloc=nl?lessonLoc(nl.id):null;
   const heroPct=Math.round(doneN/tot*100);
   view.innerHTML=`<div class="screen pad">
     <div class="greet">
@@ -702,7 +807,7 @@ function Home(){
       <div class="streakpill"><svg class="flame-anim" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2s5 4 5 9a5 5 0 0 1-10 0c0-1 .3-2 .8-2.8C8 10 9 11 9 11s-.5-4 3-9Z"/></svg><span id="hStreak">${S.streak}</span></div>
     </div>
     ${nl?`<div class="hero"><span class="blob"></span>
-      <div class="tag">${t(UI.modLesson)} ${MODULE1.n} · ${t(UI.lessonW)} ${MODULE1.lessons.indexOf(nl)+1}</div>
+      <div class="tag">${t(UI.modLesson)} ${nloc.mod.n} · ${t(UI.lessonW)} ${nloc.li+1}</div>
       <h2>${t(nl.title)}</h2><p>${t(nl.sub)} · ${nl.mins} min</p>
       <button class="go" onclick="openLesson('${nl.id}')">${t(UI.startToday)} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       <div class="miniprog"><i style="width:${heroPct}%"></i></div>
@@ -731,12 +836,21 @@ function Home(){
 }
 
 function Learn(){
-  const lessons=MODULE1.lessons.map((l,i)=>{
-    const done=S.done.includes(l.id), isNext=nextLesson()&&nextLesson().id===l.id;
-    return `<button class="lesscard ${done?'done':''} ${isNext?'next':''}" onclick="openLesson('${l.id}')">
-      <span class="ln">${done?'✓':i+1}</span>
-      <span class="lt"><span class="a">${t(l.title)}</span><span class="b">${t(l.sub)}</span></span>
-      ${isNext?`<span class="badge-mini">${t(UI.next)}</span>`:'<span class="chev">›</span>'}</button>`;}).join("");
+  const nl=nextLesson();
+  const built=MODULES.map((mod,mi)=>{
+    const unlocked=moduleUnlocked(mi);
+    const doneCount=mod.lessons.filter(l=>S.done.includes(l.id)).length;
+    const rows=mod.lessons.map((l,i)=>{
+      const done=S.done.includes(l.id), isNext=nl&&nl.id===l.id;
+      if(!unlocked)return `<div class="lesscard locked"><span class="ln">🔒</span><span class="lt"><span class="a">${t(l.title)}</span><span class="b">${t(l.sub)}</span></span></div>`;
+      return `<button class="lesscard ${done?'done':''} ${isNext?'next':''}" onclick="openLesson('${l.id}')">
+        <span class="ln">${done?'✓':i+1}</span>
+        <span class="lt"><span class="a">${t(l.title)}</span><span class="b">${t(l.sub)}</span></span>
+        ${isNext?`<span class="badge-mini">${t(UI.next)}</span>`:'<span class="chev">›</span>'}</button>`;}).join("");
+    return `<div class="modblock">
+      <div class="modhd ${unlocked?'':'locked'}"><span class="mn">${mod.n}</span><div><div class="mt">${t(mod.title)}</div><div class="ms">${unlocked?t(mod.theme):t(UI.unlockPrev)}</div></div><span class="mp">${unlocked?`${doneCount}/${mod.lessons.length}`:'🔒'}</span></div>
+      ${rows}
+    </div>`;}).join("");
   const locked=LOCKED.map(m=>`<div class="modblock">
     <div class="modhd locked"><span class="mn">${m.n}</span><div><div class="mt">${t(m.title)}</div><div class="ms">${m.l.length} ${t(UI.unlocksProto)}</div></div><span class="mp">🔒</span></div>
     ${m.l.slice(0,3).map(x=>`<div class="lesscard locked"><span class="ln">🔒</span><span class="lt"><span class="a">${x}</span></span></div>`).join("")}
@@ -745,10 +859,7 @@ function Learn(){
   view.innerHTML=`<div class="screen pad">
     <div class="eyebrow">${t(UI.theCourse)}</div><h1 class="h-title" style="font-size:1.7rem;margin:6px 0 4px">${t(UI.courseTitle)}</h1>
     <p class="dim" style="font-size:.9rem;margin:0 0 20px">${t(UI.courseSub)}</p>
-    <div class="modblock">
-      <div class="modhd"><span class="mn">${MODULE1.n}</span><div><div class="mt">${t(MODULE1.title)}</div><div class="ms">${t(MODULE1.theme)}</div></div><span class="mp">${S.done.length}/${MODULE1.lessons.length}</span></div>
-      ${lessons}
-    </div>
+    ${built}
     ${locked}
   </div>`;
 }
@@ -756,7 +867,7 @@ function Learn(){
 /* ---------- LESSON PLAYER ---------- */
 const lessonEl=document.getElementById("lesson"),lBody=document.getElementById("lBody"),lProg=document.getElementById("lProg"),lNext=document.getElementById("lNext");
 let CURL=null,step=0,quizState={},maxStep=0;
-window.openLesson=id=>{const l=MODULE1.lessons.find(x=>x.id===id);if(!l)return;CURL=l;step=0;quizState={};
+window.openLesson=id=>{const loc=lessonLoc(id);if(!loc||!moduleUnlocked(loc.mi))return;CURL=loc.les;step=0;quizState={};
   maxStep=3; // 0 story, 1 quiz, 2 action, 3 done
   lessonEl.classList.add("open");renderStep();};
 document.getElementById("lClose").onclick=()=>{lessonEl.classList.remove("open");};
@@ -777,7 +888,7 @@ function stepStory(){
        ${CURL.dd.faq?`<div class="ddfaqh">${t(UI.ddFaq)}</div>${CURL.dd.faq.map(f=>`<div class="ddfaq"><div class="fq">${t(f.q)}</div><div class="fa">${t(f.a)}</div></div>`).join("")}`:""}
      </div></details>`:"";
   lBody.innerHTML=`
-   <div class="eyebrow">${t(UI.modLesson)} ${MODULE1.n} · ${t(CURL.title)}</div>
+   <div class="eyebrow">${t(UI.modLesson)} ${(lessonLoc(CURL.id)||{mod:{n:1}}).mod.n} · ${t(CURL.title)}</div>
    <div style="height:12px"></div>
    ${beat('c-sit',{t:t(UI.beatSit),_d:.02},t(b.sit))}
    <div class="beat c-myth" style="animation-delay:.1s"><div class="bl"><span class="dot" style="background:currentColor"></span>${t(UI.beatMyth)}</div>
@@ -934,7 +1045,9 @@ function Profile(){
   const lv=levelOf(S.xp),circ=2*Math.PI*54,off=circ*(1-lv.pct);
   const arche=S.done.length>=6?t(UI.archThinker):S.done.length>=3?t(UI.archCurious):S.done.length>=1?t(UI.archStart):t(UI.archNew);
   const last7=[...Array(7)].map((_,i)=>{const d=new Date(Date.now()-(6-i)*864e5).toISOString().slice(0,10);return{on:S.days.includes(d),d:["S","M","T","W","T","F","S"][new Date(d).getDay()]};});
-  const m1pct=Math.round(S.done.length/MODULE1.lessons.length*100);
+  const masteryRows=MODULES.map(m=>{const dn=m.lessons.filter(l=>S.done.includes(l.id)).length,pct=Math.round(dn/m.lessons.length*100);
+    return `<div class="mrow"><div class="top"><span>${t(m.title)}</span><span class="mono">${pct}%</span></div><div class="mbar"><i style="width:0" data-w="${pct}"></i></div></div>`;}).join("")
+    +(LOCKED[0]?`<div class="mrow"><div class="top"><span class="faint">${t(LOCKED[0].title)}</span><span class="mono faint">${t(UI.locked)}</span></div><div class="mbar"><i style="width:0"></i></div></div>`:"");
   view.innerHTML=`<div class="screen pad">
     <div class="pcard">
       <div class="levelring"><svg width="130" height="130" viewBox="0 0 130 130"><circle cx="65" cy="65" r="54" fill="none" stroke="var(--surface-3)" stroke-width="10"/><circle cx="65" cy="65" r="54" fill="none" stroke="var(--accent)" stroke-width="10" stroke-linecap="round" stroke-dasharray="${circ}" stroke-dashoffset="${circ}" transform="rotate(-90 65 65)" id="lvRing"/></svg>
@@ -949,10 +1062,7 @@ function Profile(){
     <div class="badges">${BADGES.map(b=>{const u=S.badges.includes(b.id);return `<div class="bdg ${u?'unlocked':'locked'}"><div class="em">${b.em}</div><div class="bn">${t(BADGENAMES[b.id])}</div><div class="bd">${u?t(UI.unlocked):b.d}</div></div>`;}).join("")}</div>
 
     <div class="sect-h"><span class="t">${t(UI.conceptMastery)}</span></div>
-    <div class="card pad mastery">
-      <div class="mrow"><div class="top"><span>${t(MODULE1.title)}</span><span class="mono">${m1pct}%</span></div><div class="mbar"><i style="width:0" data-w="${m1pct}"></i></div></div>
-      <div class="mrow"><div class="top"><span class="faint">${t(LOCKED[0].title)}</span><span class="mono faint">${t(UI.locked)}</span></div><div class="mbar"><i style="width:0"></i></div></div>
-    </div>
+    <div class="card pad mastery">${masteryRows}</div>
     <button class="btn ghost" style="margin-top:16px" onclick="resetAll()">${t(UI.resetProg)}</button>
   </div>`;
   requestAnimationFrame(()=>{const r=document.getElementById("lvRing");if(r){r.style.transition="stroke-dashoffset 1.1s ease";r.style.strokeDashoffset=off;}document.querySelectorAll(".mbar i[data-w]").forEach(i=>i.style.width=i.dataset.w+"%");});
