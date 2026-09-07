@@ -6,7 +6,7 @@ could genuinely be in this week, shows the tempting-but-wrong reflex, busts the 
 hands you a framework to reason the call yourself. It **never recommends a specific stock or fund** —
 it trains judgement, and you practise with virtual money on real market data.
 
-> Status: **all 9 modules · 52 lessons · fully trilingual (English / हिंदी / Hinglish)** in an interactive app. Video for Lesson 3 is scripted (see `content/`) but not yet produced.
+> Status: **all 10 modules · 58 lessons · fully trilingual (English / हिंदी / Hinglish)** in an interactive app. Video for Lesson 3 is scripted (see `content/`) but not yet produced.
 
 ---
 
@@ -42,9 +42,9 @@ Every lesson follows the same story shape so the method is consistent and repeat
 6. **Your call** — the redirect: depends on *your* horizon, liquidity, risk capacity — never a named product
 7. **Your move today** — one action with virtual money on real data + a reflection
 
-## The course — all 9 modules built (52 lessons, fully trilingual)
+## The course — all 10 modules built (58 lessons, fully trilingual)
 
-`get money → budget → clear debt → understand options → gauge your risk → make a plan → dodge mistakes → tax & paperwork → run it yourself`
+`get money → budget → clear debt → understand options → gauge your risk → make a plan → dodge mistakes → tax & paperwork → the psychology of money → run it yourself`
 
 Every module is written in full in **English, हिंदी, and Hinglish**, and unlocks when the previous one is complete.
 
@@ -56,7 +56,8 @@ Every module is written in full in **English, हिंदी, and Hinglish**, a
 6. **Plan banao** — goal-based investing, lumpsum vs SIP, allocation, step-up, rebalancing, review cadence — 6
 7. **Galtiyan jo mehngi padti hain** — return chasing, timing, FOMO/herd, over-monitoring, scam red flags, panic selling — 6
 8. **Tax, fees aur paperwork** — capital gains, fees compounding, KYC/demat/folio, nominee, tax-saving trap, reading statements — 6
-9. **Sab jodo: chalao** *(capstone)* — write your plan, backtest, stress a crash, half-yearly review, squad, graduation — 6
+9. **Paise ka manovigyaan (The psychology of money)** — enough & the moving goalpost, wealth-you-don't-see, luck vs risk, money scripts, freedom as the best dividend, comparison vs contentment — 6
+10. **Sab jodo: chalao** *(capstone)* — write your plan, backtest, stress a crash, half-yearly review, squad, graduation — 6
 
 ## App features in the prototype
 
@@ -77,7 +78,7 @@ Every module is written in full in **English, हिंदी, and Hinglish**, a
 
 ## Roadmap
 
-- [x] Write all 9 modules (52 lessons), fully trilingual + detailed, with Deep Dives
+- [x] Write all 10 modules (58 lessons), fully trilingual + detailed, with Deep Dives — including a Psychology of Money module
 - [x] Multi-module engine with progressive unlock; PWA / offline; language switch
 - [ ] Push to GitHub + enable Pages for a shareable, installable link
 - [ ] Wire the practical actions to a live data source (AMFI daily NAV flat file is the easy on-ramp)
