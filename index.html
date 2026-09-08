@@ -494,7 +494,7 @@ const UI={
   rulesSub:L("Templates, not laws — adjust to your life.","टेम्पलेट, कानून नहीं — अपनी लाइफ से एडजस्ट।","Templates, not laws — apni life se adjust."),
   basicsTitle:L("The basics","बेसिक्स","The basics"),
   basicsSub:L("Tap any to open its lesson.","किसी को भी टैप कर पाठ खोलो।","Kisi ko bhi tap kar lesson kholo."),
-  liveNote:L("Simulated live movement for the demo; the hosted app can wire a real market API.","डेमो के लिए सिम्युलेटेड मूवमेंट; होस्टेड ऐप असली मार्केट API जोड़ सकता है।","Demo ke liye simulated movement; hosted app asli market API jod sakta hai."),
+  liveNote:L("Seeded with real levels (NIFTY 50 & 24K gold, Sep 2026); movement is simulated for the demo — the hosted app can wire a live market API.","असली स्तरों से सीड (निफ्टी 50 और 24K सोना, सित 2026); मूवमेंट डेमो के लिए सिम्युलेटेड — होस्टेड ऐप असली मार्केट API जोड़ सकता है।","Asli staron se seed (NIFTY 50 & 24K gold, Sep 2026); movement demo ke liye simulated — hosted app asli market API jod sakta hai."),
   yourBuckets:L("Your buckets","आपके बकेट","Aapke buckets"),
   pfHint:L("Fill these buckets from lesson actions — like Module 1's ₹10,000 split.","इन बकेट को पाठ के एक्शन से भरो — जैसे मॉड्यूल 1 का ₹10,000 बंटवारा।","Lessons ke actions se yeh buckets bharo — jaise Lesson 1 ka ₹10,000 batwara."),
   bkJald:L("Reach (safe)","रीच (सेफ)","Jald (safe)"), bkMid:L("Mid-term","मिड-टर्म","Mid-term"), bkLong:L("Long-term","लॉन्ग-टर्म","Long-term"),
@@ -2029,12 +2029,12 @@ const BADGES=[
 const FRIENDS=[{n:"Aarav",xp:640,s:11,c:"#5B54B8"},{n:"Priya",xp:520,s:8,c:"#0E8C6B"},{n:"Kabir",xp:300,s:4,c:"#C77E1A"},{n:"Neha",xp:210,s:6,c:"#C0492F"}];
 /* ---------------- NEAR-LIVE MARKET ---------------- */
 const MKT=[
- {id:"idx",nm:L("Broad index","ब्रॉड इंडेक्स","Broad index"),open:24318,val:24318,vol:.008,rate:false},
- {id:"gold",nm:L("Gold /g","सोना /g","Gold /g"),open:7240,val:7240,vol:.005,rate:false},
+ {id:"idx",nm:L("NIFTY 50","निफ्टी 50","NIFTY 50"),open:23779,val:23779,vol:.008,rate:false,lvl:true},
+ {id:"gold",nm:L("Gold 24K /g","सोना 24K /g","Gold 24K /g"),open:15414,val:15414,vol:.005,rate:false},
  {id:"fd",nm:L("Fixed / FD","फिक्स्ड / FD","Fixed / FD"),val:7.1,rate:true,note:L("steady","स्थिर","steady")},
  {id:"sav",nm:L("Savings","सेविंग्स","Savings"),val:3.0,rate:true,note:L("idle","idle","idle")}
 ];
-function mktFmt(m){return m.rate?m.val.toFixed(1)+"%":"₹"+Math.round(m.val).toLocaleString("en-IN");}
+function mktFmt(m){return m.rate?m.val.toFixed(1)+"%":(m.lvl?"":"₹")+Math.round(m.val).toLocaleString("en-IN");}
 function mktDelta(m){if(m.rate)return{txt:t(m.note),up:2};const p=(m.val-m.open)/m.open*100;return{txt:(p>=0?"+":"")+p.toFixed(2)+"%",up:p>=0?1:0};}
 function mktTick(){MKT.forEach(m=>{if(m.rate)return;m.val*=1+(Math.random()-.47)*m.vol;const lim=.04;if(m.val>m.open*(1+lim))m.val=m.open*(1+lim);if(m.val<m.open*(1-lim))m.val=m.open*(1-lim);});}
 function idxFactor(){return MKT[0].val/MKT[0].open;}
