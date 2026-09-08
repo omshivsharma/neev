@@ -290,6 +290,22 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 .mkt .nm{font-size:.72rem;color:var(--ink-faint);font-weight:700}.mkt .pr{font-family:"Space Mono",monospace;font-weight:700;margin-top:3px}
 .mkt .dl{font-size:.72rem;font-weight:700;margin-top:2px}.up{color:var(--accent)}.down{color:var(--warn)}
 .sample-note{font-size:.7rem;color:var(--ink-faint);margin-top:2px}
+.mkt .pr{transition:color .3s}
+.livechip{display:inline-flex;align-items:center;gap:5px;font-family:"Space Mono",monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.livedot{width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block;animation:livep 1.6s ease-in-out infinite}
+@keyframes livep{0%,100%{opacity:1}50%{opacity:.3}}
+.mktcta{display:flex;gap:8px}.mktcta .btn{flex:1;padding:11px;font-size:.85rem}
+.rulegrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.rulec{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px;box-shadow:var(--shadow-s)}
+.rulec .rr{font-family:"Space Mono",monospace;font-weight:700;color:var(--accent-deep);font-size:1rem;letter-spacing:-.01em}
+.rulec .rt{font-weight:700;font-size:.82rem;margin:2px 0 4px}
+.rulec .rd{font-size:.75rem;color:var(--ink-soft);line-height:1.5}
+.basicgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.basicc{text-align:left;background:var(--surface-2);border:1px solid var(--line);border-radius:13px;padding:12px;box-shadow:var(--shadow-s);transition:transform .15s,border-color .2s}
+.basicc:active{transform:scale(.97)}.basicc:hover{border-color:var(--accent)}
+.basicc .bt{display:block;font-weight:700;font-size:.85rem;color:var(--accent-deep)}
+.basicc .bd{display:block;font-size:.74rem;color:var(--ink-soft);margin-top:3px;line-height:1.45}
+@media(max-width:360px){.rulegrid,.basicgrid{grid-template-columns:1fr}}
 
 /* ===== SQUAD ===== */
 .challenge{background:linear-gradient(140deg,var(--violet),#7C75D6);color:#fff;border-radius:20px;padding:18px;margin-bottom:16px;box-shadow:var(--shadow-m);position:relative;overflow:hidden}
@@ -470,6 +486,15 @@ const UI={
   pfLabel:L("Virtual portfolio","वर्चुअल पोर्टफोलियो","Virtual portfolio"), pfPractice:L("practice money","अभ्यास का पैसा","practice money"),
   todayMkt:L("Today's market","आज का मार्केट","Aaj ka market"),
   sampleNote:L("Sample values for the prototype — the live app fetches real AMFI/exchange data.","प्रोटोटाइप के लिए सैंपल वैल्यू — असली ऐप AMFI/एक्सचेंज डेटा लाता है।","Sample values — live app real AMFI/exchange data laata hai."),
+  marketNow:L("Market now","अभी का मार्केट","Abhi ka market"),
+  liveDemo:L("live · demo","लाइव · डेमो","live · demo"),
+  openPortfolio:L("Open portfolio","पोर्टफोलियो खोलो","Portfolio kholo"),
+  trySim:L("Try simulator","सिम्युलेटर आज़माओ","Simulator aazmao"),
+  rulesTitle:L("Rules of thumb","थंब रूल","Rules of thumb"),
+  rulesSub:L("Templates, not laws — adjust to your life.","टेम्पलेट, कानून नहीं — अपनी लाइफ से एडजस्ट।","Templates, not laws — apni life se adjust."),
+  basicsTitle:L("The basics","बेसिक्स","The basics"),
+  basicsSub:L("Tap any to open its lesson.","किसी को भी टैप कर पाठ खोलो।","Kisi ko bhi tap kar lesson kholo."),
+  liveNote:L("Simulated live movement for the demo; the hosted app can wire a real market API.","डेमो के लिए सिम्युलेटेड मूवमेंट; होस्टेड ऐप असली मार्केट API जोड़ सकता है।","Demo ke liye simulated movement; hosted app asli market API jod sakta hai."),
   yourBuckets:L("Your buckets","आपके बकेट","Aapke buckets"),
   pfHint:L("Fill these buckets from lesson actions — like Module 1's ₹10,000 split.","इन बकेट को पाठ के एक्शन से भरो — जैसे मॉड्यूल 1 का ₹10,000 बंटवारा।","Lessons ke actions se yeh buckets bharo — jaise Lesson 1 ka ₹10,000 batwara."),
   bkJald:L("Reach (safe)","रीच (सेफ)","Jald (safe)"), bkMid:L("Mid-term","मिड-टर्म","Mid-term"), bkLong:L("Long-term","लॉन्ग-टर्म","Long-term"),
@@ -1966,7 +1991,41 @@ const BADGES=[
  {id:"m1",em:"🏰",n:"Neev Rakhi",d:"Module 1 done"}
 ];
 const FRIENDS=[{n:"Aarav",xp:640,s:11,c:"#5B54B8"},{n:"Priya",xp:520,s:8,c:"#0E8C6B"},{n:"Kabir",xp:300,s:4,c:"#C77E1A"},{n:"Neha",xp:210,s:6,c:"#C0492F"}];
-const MARKET=[{nm:"Broad Index",pr:"24,318",dl:"+0.6%",up:1},{nm:"Fixed rate",pr:"7.1%",dl:"steady",up:0},{nm:"Gold /g",pr:"7,240",dl:"+0.2%",up:1},{nm:"Savings",pr:"3.0%",dl:"idle",up:0}];
+/* ---------------- NEAR-LIVE MARKET ---------------- */
+const MKT=[
+ {id:"idx",nm:L("Broad index","ब्रॉड इंडेक्स","Broad index"),open:24318,val:24318,vol:.008,rate:false},
+ {id:"gold",nm:L("Gold /g","सोना /g","Gold /g"),open:7240,val:7240,vol:.005,rate:false},
+ {id:"fd",nm:L("Fixed / FD","फिक्स्ड / FD","Fixed / FD"),val:7.1,rate:true,note:L("steady","स्थिर","steady")},
+ {id:"sav",nm:L("Savings","सेविंग्स","Savings"),val:3.0,rate:true,note:L("idle","idle","idle")}
+];
+function mktFmt(m){return m.rate?m.val.toFixed(1)+"%":"₹"+Math.round(m.val).toLocaleString("en-IN");}
+function mktDelta(m){if(m.rate)return{txt:t(m.note),up:2};const p=(m.val-m.open)/m.open*100;return{txt:(p>=0?"+":"")+p.toFixed(2)+"%",up:p>=0?1:0};}
+function mktTick(){MKT.forEach(m=>{if(m.rate)return;m.val*=1+(Math.random()-.47)*m.vol;const lim=.04;if(m.val>m.open*(1+lim))m.val=m.open*(1+lim);if(m.val<m.open*(1-lim))m.val=m.open*(1-lim);});}
+function idxFactor(){return MKT[0].val/MKT[0].open;}
+function pfLiveTotal(){const b=S.buckets;return b.jald+b.mid+Math.round(b.long*idxFactor());}
+function mktStripHTML(){return MKT.map(m=>{const d=mktDelta(m);return `<div class="mkt" data-mkt="${m.id}"><div class="nm">${t(m.nm)}</div><div class="pr">${mktFmt(m)}</div><div class="dl ${d.up===1?'up':d.up===0?'down':''}">${d.txt}</div></div>`;}).join("");}
+function paintMkt(){document.querySelectorAll("[data-mkt]").forEach(el=>{const m=MKT.find(x=>x.id===el.dataset.mkt);if(!m)return;const d=mktDelta(m);const pr=el.querySelector(".pr"),dl=el.querySelector(".dl");if(pr)pr.textContent=mktFmt(m);if(dl){dl.textContent=d.txt;dl.className="dl "+(d.up===1?"up":d.up===0?"down":"");}});const pv=document.getElementById("pfValue");if(pv)pv.textContent=short(pfLiveTotal());}
+function startTicker(){if(window._nvTick)return;window._nvTick=setInterval(()=>{mktTick();paintMkt();},3000);}
+
+/* rules of thumb + basics reference (shown on Home) */
+const RULES=[
+ {r:"50·30·20",t:L("Classic budget","क्लासिक बजट","Classic budget"),d:L("Needs 50% · Wants 30% · Save/debt 20% of take-home. A starting template — if needs run higher, trim wants and lift savings.","नीड्स 50% · वॉन्ट्स 30% · सेव/डेट 20% (टेक-होम का)। टेम्पलेट — नीड्स ज़्यादा हों तो वॉन्ट्स घटाओ, सेविंग्स बढ़ाओ।","Needs 50% · Wants 30% · Save/debt 20% (take-home ka). Template — needs zyada hon toh wants ghatao, savings badhao.")},
+ {r:"40·30·30",t:L("Aggressive saver","आक्रामक सेवर","Aggressive saver"),d:L("Needs 40% · Wants 30% · Save/invest 30% — only if 40% needs is genuinely liveable (low/no rent).","नीड्स 40% · वॉन्ट्स 30% · सेव/इन्वेस्ट 30% — तभी जब 40% नीड्स सच में जीने लायक (कम/बिना किराया)।","Needs 40% · Wants 30% · Save/invest 30% — tabhi jab 40% needs jeene layak (kam/bina kiraya).")},
+ {r:"3–6×",t:L("Emergency fund","इमरजेंसी फंड","Emergency fund"),d:L("3–6 months of essential spend, safe & liquid, before investing. More if income is irregular.","3–6 महीने का ज़रूरी खर्च, सेफ और लिक्विड, इन्वेस्ट से पहले। इनकम अनियमित तो ज़्यादा।","3–6 mahine ka zaroori kharch, safe & liquid, invest se pehle. Income irregular toh zyada.")},
+ {r:"72 ÷ r",t:L("Rule of 72","रूल ऑफ 72","Rule of 72"),d:L("72 ÷ return% ≈ years to double. At 12%, ~6 years. A mental check, not a promise.","72 ÷ रिटर्न% ≈ डबल होने के साल। 12% पर ~6 साल। मेंटल चेक, वादा नहीं।","72 ÷ return% ≈ double hone ke saal. 12% par ~6 saal. Mental check, vaada nahi.")},
+ {r:"20·4·10",t:L("Buying a vehicle","गाड़ी खरीदना","Gaadi khareedna"),d:L("20% down · loan ≤ 4 years · all vehicle costs ≤ 10% of income.","20% डाउन · लोन ≤ 4 साल · सारे गाड़ी खर्च ≤ इनकम का 10%।","20% down · loan ≤ 4 saal · saare gaadi kharch ≤ income ka 10%.")},
+ {r:"≤ 40%",t:L("EMI ceiling","EMI सीमा","EMI seema"),d:L("Keep total EMIs under ~40% of take-home; lenders watch this too.","कुल EMI ~40% टेक-होम से कम रखो; लेंडर भी देखते हैं।","Kul EMI ~40% take-home se kam rakho; lender bhi dekhte hain.")},
+ {r:"Avalanche",t:L("Debt payoff","कर्ज़ चुकाना","Karza chukana"),d:L("Extra on the highest-interest loan first = least total interest. (Snowball = smallest first, for motivation.)","एक्स्ट्रा सबसे ऊँचे-ब्याज लोन पर पहले = कम कुल ब्याज। (स्नोबॉल = सबसे छोटा पहले, मोटिवेशन।)","Extra sabse ooncha-interest loan pe pehle = kam kul interest. (Snowball = sabse chhota pehle, motivation.)")},
+ {r:"Pay 1st",t:L("Savings mindset","बचत माइंडसेट","Bachat mindset"),d:L("Auto-move savings the day salary lands; spend what's left, not the reverse.","सैलरी के दिन बचत ऑटो-अलग करो; जो बचे वो खर्च, उल्टा नहीं।","Salary ke din bachat auto-alag karo; jo bache woh kharch, ulta nahi.")}
+];
+const BASICS=[
+ {id:"m1l1",t:L("When do I need it?","कब चाहिए?","Kab chahiye?"),d:L("The first question — horizon decides all.","पहला सवाल — होराइज़न सब तय करता है।","Pehla sawaal — horizon sab tay karta hai.")},
+ {id:"m1l2",t:L("Cushion first","कुशन पहले","Cushion pehle"),d:L("Emergency fund before investing.","इन्वेस्ट से पहले इमरजेंसी फंड।","Invest se pehle emergency fund.")},
+ {id:"m1l3",t:L("Inflation bites idle cash","इन्फ्लेशन idle कैश खाता है","Inflation idle cash khaata hai"),d:L("Idle money quietly loses buying power.","idle पैसा चुपचाप बाइंग पावर खोता है।","Idle paisa chupchaap buying power khota hai.")},
+ {id:"m1l4",t:L("Compounding = time","कंपाउंडिंग = टाइम","Compounding = time"),d:L("Return on return; time is the big lever.","रिटर्न पर रिटर्न; टाइम सबसे बड़ा लीवर।","Return pe return; time sabse bada lever.")},
+ {id:"m1l5",t:L("Match risk to horizon","रिस्क को होराइज़न से","Risk ko horizon se"),d:L("Longer time can bear more bumps.","ज़्यादा समय ज़्यादा बंप झेल सकता।","Zyada samay zyada bump jhel sakta.")},
+ {id:"m1l6",t:L("Spot red flags","रेड फ्लैग पहचानो","Red flag pehchaano"),d:L("Guaranteed-high + urgency = scam.","गारंटीड-हाई + अर्जेंसी = स्कैम।","Guaranteed-high + urgency = scam.")}
+];
 
 /* ---------------- STATE ---------------- */
 const DEFAULT={xp:0,done:[],myths:0,streak:0,longest:0,last:null,days:[],badges:[],simUsed:false,buckets:{jald:40000,mid:25000,long:35000}};
@@ -2014,6 +2073,24 @@ function Home(){
       <div class="stat"><div class="n" data-count="${S.longest}">0</div><div class="l">${t(UI.bestStreak)}</div></div>
     </div>
 
+    <div class="sect-h"><span class="t">${t(UI.marketNow)}</span><span class="livechip"><span class="livedot"></span>${t(UI.liveDemo)}</span></div>
+    <div class="card pad">
+      <div class="mktrow">${mktStripHTML()}</div>
+      <div class="sample-note" style="margin:8px 0 12px">${t(UI.liveNote)}</div>
+      <div class="mktcta">
+        <button class="btn" onclick="go('portfolio')">${t(UI.openPortfolio)} →</button>
+        <button class="btn ghost" onclick="go('sim')">${t(UI.trySim)} →</button>
+      </div>
+    </div>
+
+    <div class="sect-h"><span class="t">${t(UI.rulesTitle)}</span></div>
+    <p class="dim" style="font-size:.82rem;margin:-6px 0 12px">${t(UI.rulesSub)}</p>
+    <div class="rulegrid">${RULES.map(x=>`<div class="rulec"><div class="rr">${x.r}</div><div class="rt">${t(x.t)}</div><div class="rd">${t(x.d)}</div></div>`).join("")}</div>
+
+    <div class="sect-h"><span class="t">${t(UI.basicsTitle)}</span><span class="a" onclick="go('learn')">${t(UI.seeAll)}</span></div>
+    <p class="dim" style="font-size:.82rem;margin:-6px 0 12px">${t(UI.basicsSub)}</p>
+    <div class="basicgrid">${BASICS.map(b=>`<button class="basicc" onclick="openLesson('${b.id}')"><span class="bt">${t(b.t)}</span><span class="bd">${t(b.d)}</span></button>`).join("")}</div>
+
     <div class="sect-h"><span class="t">${t(UI.forToday)}</span><span class="a" onclick="go('learn')">${t(UI.seeAll)}</span></div>
     <button class="dailycard" onclick="go('sim')">
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19h16M6 15l4-4 3 3 5-6"/></svg></span>
@@ -2027,7 +2104,7 @@ function Home(){
       <span class="chev">›</span>
     </button>
   </div>`;
-  countUp();
+  countUp();paintMkt();startTicker();
 }
 
 function Learn(){
@@ -2213,15 +2290,16 @@ function Portfolio(){
   let off=0;const circ=2*Math.PI*42;
   const arcs=segs.map(([n,v,c])=>{const frac=v/total,dash=`${frac*circ} ${circ}`,o=off;off-=frac*circ;return `<circle cx="60" cy="60" r="42" fill="none" stroke="${c}" stroke-width="16" stroke-dasharray="${dash}" stroke-dashoffset="${o}" transform="rotate(-90 60 60)"/>`;}).join("");
   view.innerHTML=`<div class="screen pad">
-    <div class="pf-top"><span class="blob"></span><div class="lb">${t(UI.pfLabel)}</div><div class="val">${short(total)}</div><div class="chg"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 15l6-6 6 6"/></svg> ${t(UI.pfPractice)}</div></div>
-    <div class="sect-h"><span class="t">${t(UI.todayMkt)}</span><span class="a">sample</span></div>
-    <div class="mktrow">${MARKET.map(m=>`<div class="mkt"><div class="nm">${m.nm}</div><div class="pr">${m.pr}</div><div class="dl ${m.up?'up':''}">${m.dl}</div></div>`).join("")}</div>
-    <div class="sample-note">${t(UI.sampleNote)}</div>
+    <div class="pf-top"><span class="blob"></span><div class="lb">${t(UI.pfLabel)}</div><div class="val"><span id="pfValue">${short(pfLiveTotal())}</span></div><div class="chg"><span class="livedot" style="background:#fff"></span> ${t(UI.liveDemo)} · ${t(UI.pfPractice)}</div></div>
+    <div class="sect-h"><span class="t">${t(UI.todayMkt)}</span><span class="livechip"><span class="livedot"></span>${t(UI.liveDemo)}</span></div>
+    <div class="mktrow">${mktStripHTML()}</div>
+    <div class="sample-note">${t(UI.liveNote)}</div>
     <div class="sect-h"><span class="t">${t(UI.yourBuckets)}</span></div>
     <div class="card pad"><div class="donut-wrap"><svg width="120" height="120" viewBox="0 0 120 120">${arcs}<circle cx="60" cy="60" r="30" fill="var(--surface)"/></svg>
       <div style="flex:1">${segs.map(([n,v,c])=>`<div class="bucket"><span class="sw" style="background:${c}"></span><span class="bt"><span class="a">${n}</span><span class="b">${Math.round(v/total*100)}% ${t(UI.ofPot)}</span></span><span class="amt">${short(v)}</span></div>`).join("")}</div></div></div>
     <p class="faint" style="font-size:.78rem;text-align:center;margin-top:14px">${t(UI.pfHint)}</p>
   </div>`;
+  paintMkt();startTicker();
 }
 
 /* ---------- SQUAD ---------- */
