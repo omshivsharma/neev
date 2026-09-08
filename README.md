@@ -8,6 +8,8 @@ it trains judgement, and you practise with virtual money on real market data.
 
 > Status: **all 10 modules · 58 lessons · fully trilingual (English / हिंदी / Hinglish)** in an interactive app. Video for Lesson 3 is scripted (see `content/`) but not yet produced.
 
+> **▶ Live app (installable):** https://omshivsharma.github.io/neev/ — open on your phone and "Add to Home Screen". It updates automatically whenever this repo is pushed.
+
 ---
 
 ## What's in this folder
@@ -80,7 +82,7 @@ Every module is written in full in **English, हिंदी, and Hinglish**, a
 
 - [x] Write all 10 modules (58 lessons), fully trilingual + detailed, with Deep Dives — including a Psychology of Money module
 - [x] Multi-module engine with progressive unlock; PWA / offline; language switch
-- [ ] Push to GitHub + enable Pages for a shareable, installable link
+- [x] Push to GitHub + enable Pages for a shareable, installable link — **live at https://omshivsharma.github.io/neev/**
 - [ ] Wire the practical actions to a live data source (AMFI daily NAV flat file is the easy on-ramp)
 - [ ] Build the time-compression / backtest + stress-test engine the capstone references
 - [ ] Produce Lesson 3 video from the storyboard (Manim + TTS + FFmpeg)
