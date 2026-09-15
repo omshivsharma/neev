@@ -188,6 +188,17 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .mythbox .truth svg{width:16px;height:16px;color:var(--accent);flex:none;margin-top:3px}
 .q-scene{background:var(--surface-2);border-left:3px solid var(--gold);border-radius:0 12px 12px 0;padding:13px 15px;font-size:.96rem}
 .fw-box{background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:14px}
+.choosewrap{background:var(--surface-2);border:1px solid var(--line);border-radius:16px;padding:15px;margin-top:2px}
+.choosewrap .chhook{font-family:"Space Mono",monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:7px;display:flex;align-items:center;gap:7px}
+.choosewrap .chhook .dot{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.choosewrap .chq{font-weight:700;font-size:.98rem;margin-bottom:12px;line-height:1.4}
+.choosewrap .opt{margin-bottom:9px}
+.choosewrap .opt.picked{border-color:var(--accent);background:var(--accent-wash)}
+.choosewrap .opt.picked .k{background:var(--accent);color:#fff}
+.choosewrap .opt.dim{opacity:.45}
+.chreact{font-size:.86rem;color:var(--ink-soft);background:var(--accent-wash);border-radius:12px;padding:12px 14px;margin-top:4px;display:none;line-height:1.55}
+.chreact.show{display:block;animation:beatIn .4s forwards}
+.chreact b{color:var(--accent-deep)}
 .termrow{display:flex;flex-direction:column;gap:8px;margin-top:16px}
 .trm{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:.83rem}
 .trm b{color:var(--accent-deep)}
@@ -467,6 +478,8 @@ const UI={
   youGot:L("You understood","आपने समझ लिया","Aapne samajh liya"),
   streakWord:L("streak","स्ट्रीक","streak"),
   beatSit:L("Situation","सिचुएशन","Situation"), beatMyth:L("Myth","मिथक","Myth"),
+  chooseHook:L("What would you do?","आप क्या करेंगे?","Aap kya karoge?"),
+  chooseHint:L("Tap your instinct to keep going — there's no wrong answer.","आगे बढ़ने को अपनी सहज पसंद टैप करो — कोई गलत जवाब नहीं।","Aage badhne ko apni instinct tap karo — koi galat jawaab nahi."),
   beatReflex:L("The reflex","आम रिफ्लेक्स","The reflex"), beatQ:L("The real question","असली सवाल","Asli sawaal"),
   beatFw:L("Framework","फ्रेमवर्क","Framework"), beatCall:L("Your call","आपका फैसला","Your call"),
   taxNote:L("Tax note:","टैक्स नोट:","Tax note:"),
@@ -527,7 +540,13 @@ const MODULE1={ id:"m1", n:1, title:L("You've got money — now what?","पै�
  lessons:[
  {id:"m1l1",title:L("₹10,000 landed — spend, save, or grow?","₹10,000 आए — खर्च, बचाओ, या बढ़ाओ?","₹10,000 aaye — kharch, bachao, ya badhao?"),sub:L("The spend / save / invest fork","खर्च/बचत/निवेश का चौराहा","The spend / save / invest fork"),mins:3,
   beats:{
-   sit:L("<b>₹10,000</b> suddenly land in your account — a bonus, or a freelance payment. You're happy, and a sale notification is already staring at you.","आपके खाते में अचानक <b>₹10,000</b> आ गए — बोनस या फ्रीलांस पेमेंट। मन खुश, और सामने एक सेल का नोटिफिकेशन।","Account mein achanak <b>₹10,000</b> aaye — bonus ya freelance ka payment. Dil khush, aur saamne ek sale ka notification."),
+   sit:L("It's an ordinary Tuesday when your phone buzzes: <b>₹10,000</b> has just landed in your account — a bonus, or that freelance payment you'd half-forgotten. For a second it feels like free money. Right on cue a shopping app flashes 'sale ends tonight', a friend pings about a 'hot' stock, and your bank balance quietly invites it to just sit there. Three little tugs — and one decision that's yours.","एक आम मंगलवार, और आपका फोन बजता है: खाते में अभी-अभी <b>₹10,000</b> आए — बोनस, या वो फ्रीलांस पेमेंट जो आप लगभग भूल चुके थे। पल भर को यह 'फ्री का पैसा' लगता है। तभी एक शॉपिंग ऐप चमकाता है 'सेल आज रात खत्म', एक दोस्त किसी 'हॉट' स्टॉक का मैसेज करता है, और बैंक बैलेंस चुपचाप कहता है बस पड़ा रहने दो। तीन खिंचाव — और एक फैसला, जो आपका है।","Ek aam Tuesday, aur aapka phone bajta hai: account mein abhi-abhi <b>₹10,000</b> aaye — bonus, ya woh freelance payment jo aap lagbhag bhool chuke the. Pal bhar ko yeh 'free ka paisa' lagta hai. Tabhi ek shopping app chamkaata hai 'sale aaj raat khatam', ek dost kisi 'hot' stock ka message karta hai, aur bank balance chupchaap kehta hai bas pada rehne do. Teen khinchaav — aur ek faisla, jo aapka hai."),
+   choose:{q:L("₹10,000 is in your hand right now. What's your honest first move?","₹10,000 अभी आपके हाथ में है। सच बताओ, पहला कदम क्या?","₹10,000 abhi aapke haath mein hai. Sach bolo, pehla kadam kya?"),opts:[
+    {k:L("Treat myself — I earned this","खुद को ट्रीट दूँ — मैंने कमाया है","Khud ko treat doon — maine kamaya hai"),r:L("Totally human — that 'sale ends tonight' is loud, and you <i>did</i> earn it. Hold that thought; the lesson only asks you to decide it on purpose, not on autopilot.","बिल्कुल इंसानी — 'सेल आज रात' की आवाज़ तेज़ है, और कमाया तो आपने ही है। बस इसे सोच-समझकर तय करो, ऑटोपायलट पर नहीं।","Bilkul insaani — 'sale aaj raat' ki aawaaz tez hai, aur kamaya toh aapne hi hai. Bas ise soch-samajhkar tay karo, autopilot pe nahi.")},
+    {k:L("Put it all into a stock before I spend it","खर्च से पहले पूरा किसी स्टॉक में डाल दूँ","Kharch se pehle poora kisi stock mein daal doon"),r:L("Bold — you're protecting it from yourself. But notice you jumped straight to 'where'. This lesson says a quieter question comes first.","बोल्ड — आप इसे खुद से बचा रहे हो। पर ध्यान दो, आप सीधे 'कहाँ' पर कूद गए। यह पाठ कहता है एक शांत सवाल पहले आता है।","Bold — aap ise khud se bacha rahe ho. Par dhyaan do, aap seedhe 'kahan' pe kood gaye. Yeh lesson kehta hai ek shaant sawaal pehle aata hai.")},
+    {k:L("Just leave it in my bank for now","फिलहाल बैंक में ही पड़ा रहने दूँ","Filhaal bank mein hi pada rehne doon"),r:L("Safe and very common — no bad bet can touch it. But money sitting idle has its own quiet leak, and we'll meet it in a couple of lessons.","सेफ और बहुत आम — कोई बुरा दांव इसे छू नहीं सकता। पर idle पड़ा पैसा अपना एक चुपचाप रिसाव रखता है, जो कुछ पाठ बाद मिलेगा।","Safe aur bahut aam — koi bura daanv ise chhoo nahi sakta. Par idle pada paisa apna ek chupchaap risaav rakhta hai, jo kuch lessons baad milega.")},
+    {k:L("Split it — some reachable, some for later","बाँट दूँ — कुछ रीचेबल, कुछ बाद के लिए","Baant doon — kuch reachable, kuch baad ke liye"),r:L("Interesting — you're already thinking in buckets. That instinct is exactly the skill this whole lesson is about to sharpen.","दिलचस्प — आप पहले से बकेट में सोच रहे हो। यही सहज समझ वो हुनर है जिसे यह पूरा पाठ निखारने वाला है।","Dilchasp — aap pehle se bucket mein soch rahe ho. Yahi instinct woh hunar hai jise yeh poora lesson nikhaarne wala hai.")}
+   ]},
    myth:{lie:L("Investing money the moment it arrives is always the smart move.","पैसा आते ही तुरंत 'इन्वेस्ट' कर देना ही समझदारी है।","Paisa aate hi turant 'invest' kar dena hi samajhdari hai."),truth:L("The first question isn't 'where' — it's 'when do I need it'. Cushion first, growth later.","पहला सवाल 'कहाँ' नहीं — 'कब चाहिए' है। कुशन पहले, ग्रोथ बाद में।","Pehla sawaal 'kahan' nahi — 'kab chahiye' hai. Cushion pehle, growth baad mein.")},
    reflex:L("Either spend it right away, or dump it somewhere on a friend's word without thinking.","या तो तुरंत खर्च कर दो, या किसी दोस्त के कहने पर बिना सोचे कहीं डाल दो।","Ya toh turant kharch kar do, ya kisi dost ke kehne pe bina soche kahin daal do."),
    q:L("<b>When</b> do I need this money?","मुझे यह पैसा <b>कब</b> चाहिए?","Is paise ko mujhe <b>kab</b> chahiye?"),
@@ -2189,28 +2208,53 @@ lNext.onclick=()=>{
 };
 function beat(cls,label,html){return `<div class="beat ${cls}" style="animation-delay:${label._d||0}s"><div class="bl"><span class="dot" style="background:currentColor"></span>${label.t}</div><div class="bd">${html}</div></div>`;}
 function stepStory(){
+  window._chose=false;
   const b=CURL.beats;
   const dd=CURL.dd?`<details class="deepdive" open><summary><span class="ddi">📖</span>${t(UI.deepDive)}<span class="ddc">▸</span></summary>
      <div class="ddbody">
        ${(CURL.dd.ex||[]).map(p=>`<p>${t(p)}</p>`).join("")}
        ${CURL.dd.faq?`<div class="ddfaqh">${t(UI.ddFaq)}</div>${CURL.dd.faq.map(f=>`<div class="ddfaq"><div class="fq">${t(f.q)}</div><div class="fa">${t(f.a)}</div></div>`).join("")}`:""}
      </div></details>`:"";
+  const hasChoose=!!(b.choose&&b.choose.opts&&b.choose.opts.length);
+  const chooseHTML=hasChoose?`
+   <div class="beat" style="animation-delay:.08s"><div class="choosewrap" id="choosewrap">
+     <div class="chhook"><span class="dot"></span>${t(UI.chooseHook)}</div>
+     <div class="chq">${t(b.choose.q)}</div>
+     ${b.choose.opts.map((o,i)=>`<button class="opt" onclick="chooseOpt(${i})"><span class="k">${i+1}</span><span>${t(o.k)}</span></button>`).join("")}
+     <div class="chreact" id="chreact"></div>
+     <div class="sample-note" id="chhint" style="margin-top:8px">${t(UI.chooseHint)}</div>
+   </div></div>`:"";
+  // everything from the myth onward — hidden until a choice is made (when choose exists)
+  const rest=`
+   <div class="beat c-myth" style="animation-delay:.04s"><div class="bl"><span class="dot" style="background:currentColor"></span>${t(UI.beatMyth)}</div>
+     <div class="mythbox"><div class="lie">${t(b.myth.lie)}</div><div class="truth"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>${t(b.myth.truth)}</span></div></div></div>
+   ${beat('c-reflex',{t:t(UI.beatReflex),_d:.1},t(b.reflex))}
+   <div class="beat c-q" style="animation-delay:.16s"><div class="bl"><span class="dot" style="background:currentColor"></span>${t(UI.beatQ)}</div><div class="q-scene">${t(b.q)}</div></div>
+   <div class="beat c-fw" style="animation-delay:.22s"><div class="bl"><span class="dot" style="background:currentColor"></span>${t(UI.beatFw)}</div><div class="fw-box bd">${t(b.fw)}</div></div>
+   ${beat('c-call',{t:t(UI.beatCall),_d:.28},t(b.call))}
+   <div class="beat" style="animation-delay:.34s">${dd}</div>
+   <div class="termrow beat" style="animation-delay:.4s">${CURL.terms.map(x=>`<div class="trm"><b>${t(x.k)}:</b> ${t(x.d)}</div>`).join("")}</div>
+   ${CURL.tax?`<div class="beat" style="animation-delay:.46s"><div class="bendnote" style="margin-top:14px"><b>${t(UI.taxNote)}</b> ${t(CURL.tax)}</div></div>`:""}`;
   lBody.innerHTML=`
    <div class="eyebrow">${t(UI.modLesson)} ${(lessonLoc(CURL.id)||{mod:{n:1}}).mod.n} · ${t(CURL.title)}</div>
    <div style="height:12px"></div>
    ${beat('c-sit',{t:t(UI.beatSit),_d:.02},t(b.sit))}
-   <div class="beat c-myth" style="animation-delay:.1s"><div class="bl"><span class="dot" style="background:currentColor"></span>${t(UI.beatMyth)}</div>
-     <div class="mythbox"><div class="lie">${t(b.myth.lie)}</div><div class="truth"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>${t(b.myth.truth)}</span></div></div></div>
-   ${beat('c-reflex',{t:t(UI.beatReflex),_d:.16},t(b.reflex))}
-   <div class="beat c-q" style="animation-delay:.22s"><div class="bl"><span class="dot" style="background:currentColor"></span>${t(UI.beatQ)}</div><div class="q-scene">${t(b.q)}</div></div>
-   <div class="beat c-fw" style="animation-delay:.28s"><div class="bl"><span class="dot" style="background:currentColor"></span>${t(UI.beatFw)}</div><div class="fw-box bd">${t(b.fw)}</div></div>
-   ${beat('c-call',{t:t(UI.beatCall),_d:.34},t(b.call))}
-   <div class="beat" style="animation-delay:.4s">${dd}</div>
-   <div class="termrow beat" style="animation-delay:.46s">${CURL.terms.map(x=>`<div class="trm"><b>${t(x.k)}:</b> ${t(x.d)}</div>`).join("")}</div>
-   ${CURL.tax?`<div class="beat" style="animation-delay:.52s"><div class="bendnote" style="margin-top:14px"><b>${t(UI.taxNote)}</b> ${t(CURL.tax)}</div></div>`:""}
+   ${chooseHTML}
+   ${hasChoose?`<div id="revealBlock" hidden>${rest}</div>`:rest}
   `;
-  lNext.textContent=t(UI.toQuiz);lNext.disabled=false;
+  lNext.textContent=t(UI.toQuiz);
+  lNext.disabled=hasChoose; // must pick an instinct before continuing
 }
+window.chooseOpt=(oi)=>{
+  if(window._chose)return;window._chose=true;
+  const opts=document.querySelectorAll("#choosewrap .opt");
+  opts.forEach((btn,i)=>{btn.disabled=true;btn.classList.add(i===oi?"picked":"dim");});
+  const r=document.getElementById("chreact");if(r){r.innerHTML=t(CURL.beats.choose.opts[oi].r);r.classList.add("show");}
+  const hint=document.getElementById("chhint");if(hint)hint.style.display="none";
+  const rb=document.getElementById("revealBlock");if(rb)rb.hidden=false;
+  lNext.disabled=false;
+  setTimeout(()=>{if(r)r.scrollIntoView({behavior:"smooth",block:"nearest"});},90);
+};
 function stepQuiz(){
   lBody.innerHTML=`<div class="eyebrow">${t(UI.quickCheck)}</div><h2 class="h-title" style="font-size:1.3rem;margin:8px 0 18px">${t(UI.checkTitle)}</h2><div class="quizwrap">${
    CURL.quiz.map((q,qi)=>`<div class="q"><div class="qq"><span class="qn">Q${qi+1}</span>${t(q.q)}</div>
