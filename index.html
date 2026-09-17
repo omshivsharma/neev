@@ -2741,7 +2741,19 @@ document.getElementById("langScrim").onclick=()=>langSheet.classList.remove("ope
 document.querySelectorAll(".langopt").forEach(o=>o.onclick=()=>setLang(o.dataset.l));
 
 /* PWA: register service worker (no-op on file:// or where unsupported) */
-if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("sw.js").catch(()=>{});});}
+if("serviceWorker" in navigator){
+  // auto-reload once when a new service worker takes control (fresh deploy)
+  let _swReloaded=false;
+  navigator.serviceWorker.addEventListener("controllerchange",()=>{
+    if(_swReloaded)return;_swReloaded=true;location.reload();
+  });
+  window.addEventListener("load",()=>{
+    navigator.serviceWorker.register("sw.js").then(reg=>{
+      reg.update();                          // check for a newer worker now
+      setInterval(()=>reg.update(),60*60*1000); // and hourly while open
+    }).catch(()=>{});
+  });
+}
 
 /* boot */
 refreshLangUI();updateNav();render();
